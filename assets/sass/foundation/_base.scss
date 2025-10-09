@@ -1,0 +1,71 @@
+@use '../global' as *;
+
+html {
+  // 375~767まではSPデザインのリキッドレイアウト 375pxで10px
+  font-size: calc(10 / 375 * 100vw);
+  overflow-x: hidden;
+
+  // breakpoint以上 〜 ($pc-inner-width - 1px)までがPCデザインでリキッドレイアウト ビューポートpc-inner-sumで10px
+  @media screen and (max-width: #{px($pc-inner-width) - 1px}) and (min-width: #{px($breakpoint)}) {
+    font-size: calc(10 / #{$pc-inner-width} * 100vw); 
+  }
+
+  // $pc-inner-width以上は10px
+  @media screen and (min-width: #{px($pc-inner-width)}) {
+    font-size: 10px;
+  }
+}
+
+body {
+  font-family: $font-jp;
+  color: $color-text;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  overflow-x: hidden;
+
+  &.locked {
+    overflow: hidden;
+  }
+}
+:where(section) {
+  padding-block: 6rem;
+}
+
+:where(main section:first-child) {
+  padding-top: calc(var(--header-height) + 2rem);
+
+  @include mq {
+    padding-top: calc(var(--header-height) + 1.6rem);
+  }
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+a {
+  color: inherit;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+dt {
+  font-weight: normal;
+}
+
+small {
+  font-size: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  a[href^="tel:"] {
+    cursor: default;
+    pointer-events: none;
+  }
+}

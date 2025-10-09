@@ -1,0 +1,19 @@
+@use "../global" as *;
+@use "sass:map";
+
+.l-inner {
+  width: min(37.5rem, 100%);
+  padding-inline: 1.5rem;
+  margin-inline: auto;
+}
+
+.l-inner {
+  padding-inline: 1.5rem;
+  margin-inline: auto;
+
+  @include mq(tab) {
+    width: min(124rem, 100%);
+    padding-inline: 2rem;
+  }
+}
+

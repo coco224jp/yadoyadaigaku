@@ -1,0 +1,61 @@
+@use "../global" as *;
+@use "sass:map";
+
+.c-card {
+  border-radius: 0.8rem;
+  overflow: hidden;
+  border: 1px solid #E0DFE2;
+
+  &__link{
+    display: grid;
+    grid-template-rows: 14rem auto;
+  }
+  &__txt-wrap {
+    order: 2;
+    padding: 2rem 2rem 2.5rem;
+    background: #fff;
+  }
+  &__img {
+    order: 1;
+
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__ttl-en {
+    font-family: var(--font-en);
+    font-size: 1.2rem;
+    line-height: 1;
+    letter-spacing: 0.03em;
+    font-weight: 600;
+  }
+  &__ttl-jp {
+    display: grid;
+    grid-template-columns: max-content 0.8rem;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.7rem;
+    line-height: normal;
+    font-weight: bold;
+    margin-top: 0.4rem;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      aspect-ratio: 1 / 1;
+      background: var(--color-accent);
+      border-radius: 50%;
+    }
+  }
+  &__txt {
+    line-height: 1.5;
+    margin-bottom: var(--leading-trim);
+    margin-top: calc(var(--leading-trim) + 1.5rem);
+
+    @include mq {
+      margin-top: calc(var(--leading-trim) + 2.4rem);
+    }
+  }
+}

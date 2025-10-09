@@ -1,0 +1,99 @@
+@use "../global" as *;
+@use "sass:map";
+
+.c-voice-card {
+  background: #fff;
+  padding: 2.55rem 2.55rem 2.975rem;
+  background: #fff;
+  border-radius: 0.68rem;
+
+  @include mq {
+    width: 38.5rem;
+    padding: 3rem 3rem 3.6rem;
+    border-radius: 0.8rem;
+  }
+
+  &.swiper-slide-active {
+    @include mq {
+      width: 45.5rem;
+      min-height: 31rem;
+      padding: 3.6rem 3.6rem 4.5rem;
+      border-radius: 1rem;  
+    }
+  }
+
+  &__ttl{
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.6;
+
+    @include mq {
+      font-size: 1.3rem;
+    }
+    .c-voice-card__ttl.swiper-slide-active & {
+      @include mq {
+        font-size: 1.56rem;
+        font-weight: bold;
+      }
+    }
+
+  }
+  &__txt{
+    position: relative;
+    font-size: 1.4rem;
+    margin-top: 2.125rem;
+    line-height: 1.6;
+    padding-inline: 1.7rem;
+    text-align: justify;
+
+    @include mq {
+      margin-top: 2.5rem; 
+      font-size: 1.5rem;
+      line-height: 1.6;
+    }
+    .c-voice-card__ttl.swiper-slide-active & {
+      @include mq {
+        font-size: 1.8rem;
+        margin-top: 3rem;
+        padding-inline: 2.4rem;
+      }
+    }
+
+
+    &::before,
+    &::after {
+      position: absolute;
+      display: inline-block;
+      font-family: var(--font-udpGothic);
+      font-size: 4.76rem;
+      line-height: 1;
+      color: var(--color-accent-opacity05);
+
+      @include mq {
+        font-size: 5.6rem;
+      }
+
+      .c-voice-card__ttl.swiper-slide-active & {
+        @include mq {
+          font-size: 6.72rem;
+        }
+      }
+    }
+
+
+
+    &::before {
+      content: '“';
+      left: 0;
+      top: 0;
+      transform: translate(-0.3em, -0.15em);
+    }
+
+    &::after {
+      content: '”';
+      top: 100%;
+      right: 0;
+      transform: translate(0.2em, -0.15em);
+    }
+  }
+}

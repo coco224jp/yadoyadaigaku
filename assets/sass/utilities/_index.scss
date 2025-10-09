@@ -1,0 +1,38 @@
+@use "../global" as *;
+
+.bg-light {
+  background: var(--bg-color-light);
+}
+.bg-dark {
+  background: var(--bg-color-deep);
+}
+.only-sp {
+  @include mq {
+    display: none;
+  }
+}
+.only-pc {
+  display: none;
+
+  @include mq {
+    display: block;
+  }
+}
+
+.text-highlight {
+  text-decoration: underline;
+  -webkit-text-decoration-color: rgba(255, 34, 51, 0.2);
+  text-decoration-color: rgba(255, 34, 51, 0.2);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.2em;
+}
+
+// .overflow-left {
+//   margin-left: calc(50% - 50vw);
+// }
+// .overflow-right {
+//   margin-right: calc(50% - 50vw);
+// }
+// .overflow-bothside {
+//   margin-inline: calc(50% - 50vw);
+// }

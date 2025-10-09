@@ -1,0 +1,79 @@
+@use "../global" as *;
+@use "sass:map";
+
+.c-swiper-controls {
+  display: grid;
+  grid-template-columns: 6rem 1fr 6rem;
+  // justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  margin-top: 4rem;
+
+  @include mq {
+    grid-template-columns: 6rem max-content 6rem;
+    justify-content: center;
+    gap: 0 7.4rem;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    position: static; /* ← absoluteを無効化して通常フローに戻す */
+    margin-top: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .swiper-pagination {
+    position: static;
+  }
+  .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
+  .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0;
+  }
+
+  &__btn {
+    width: 6rem;
+    height: 3.6rem;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100vmax;
+    box-shadow: 0px 2px 5px 0px #CECACD40;
+    border: 1px solid #E0DFE2;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 2rem;
+      background: var(--color-accent);
+      mask: url("../images/common/icon-arrow-next.svg") no-repeat center center / cover;
+    }
+
+    &.prev {
+      &::before {
+        rotate: 180deg;
+      }
+    }
+  }
+  .swiper-pagination-bullet {
+    // background-color: #E0DFE2;
+    background-color: grey;
+
+    width: 0.8rem;
+    height: 0.8rem;
+    margin: 0;
+
+    & + .swiper-pagination-bullet {
+      margin-left: 1.2rem !important;
+    }
+
+    &.swiper-pagination-bullet-active{
+      background-color: var(--color-accent);
+    }
+
+  }
+}

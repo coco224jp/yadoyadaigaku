@@ -1,0 +1,16 @@
+@use "../global" as *;
+@use "sass:map";
+
+.c-voice-card-swiper {
+    margin-inline: calc(50% - 50vw);
+
+    @include mq(1440) {
+      margin-inline: -12rem;
+    }
+  
+  &__wrapper {
+    @include mq() {
+      align-items: center;
+    }
+  }
+}
