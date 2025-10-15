@@ -1,0 +1,250 @@
+@use "../global" as *;
+@use "sass:map";
+
+.p-service-introSec {
+
+  .single-service & {
+    padding-block: 6.5rem 5.5rem;
+
+    @include mq {
+      padding-block: 13rem 11rem;
+    }
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2rem 0;
+
+    @include mq {
+      display: grid;
+      grid-template-columns: 59rem 1fr;
+      gap: 0 6rem;
+      align-items: center;
+    }
+  }
+
+  &__ttl {
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 1.6;
+
+    @include mq {
+      font-size: 3.2rem;
+    }
+  }
+
+  &__txt {
+    font-size: 1.6rem;
+    line-height: 2;
+
+    .p-service-introSec__ttl + & {
+      margin-top: 2.8rem;
+
+      @include mq {
+        margin-top: 5.6rem;
+      }
+    }
+  }
+
+  &__img {
+    border-radius: 0.8rem;
+    overflow: hidden;
+
+    > img {
+      width: 100%;
+    }
+  }
+}
+
+.p-service-cards {
+  &__card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem 0;
+
+    @include mq {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .c-card__link {
+    @include mq {
+      grid-template-rows: 24rem auto;
+    }
+  }
+  .c-card__txt-wrap {
+    @include mq {
+      padding: 2.4rem 3.2rem 4rem;
+    }
+  }
+  .c-card__ttl-jp {
+    @include mq {
+      font-size: 2.2rem;
+    }
+  }
+
+}
+
+.p-service-features{
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem 0;
+    counter-reset: card 0;
+
+    @include mq {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 2rem;
+    }
+  }
+
+  &__item {
+    padding: 2rem;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0.8rem;
+
+    @include mq {
+      padding: 4rem;
+    }
+
+    &::before {
+      content: "0" counter(card);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      counter-increment: card 1;
+      align-items: center;
+      width: 7.2rem;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 1rem solid var(--color-logo);
+      font-family: var(--font-en);
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+  }
+
+  &__item-ttl {
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-top: 2.4rem;
+    text-align: center;
+
+    @include mq {
+      font-size: 2rem;
+    }
+  }
+
+  &__item-txt {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    margin-top: 3.2rem;
+  }
+}
+
+.p-service-products {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem 0;
+
+    @include mq {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0 2.5rem;
+    }
+  }
+
+  &__item {
+    overflow: hidden;
+
+    @include mq {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 4;
+    }
+  }
+
+  &__item-link {
+    display: grid;
+
+    @include mq {
+      grid-template-rows: subgrid;
+      grid-row: span 4;
+    }
+  }
+
+  &__item-img {
+    order: 1;
+    border-radius: 0.8rem 0.8rem 0 0;
+    overflow: hidden;
+
+    > img {
+      width: 100%;
+      aspect-ratio: 268 / 125;
+      object-fit: cover;
+
+      @include mq {
+        aspect-ratio: 588 / 249;
+      }
+    }
+  }
+
+  &__item-body {
+    padding: 1.6rem;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem 0;
+    border: 1px solid #E0DFE2;
+    border-top: none;
+    border-radius: 0 0 0.8rem 0.8rem;
+    overflow: hidden;
+
+    @include mq {
+      padding: 3.2rem;
+      display: grid;
+      gap: 2.4rem 0;
+      grid-template-rows: subgrid;
+      grid-row: span 3;  
+    }
+  }
+
+  &__item-ttl {
+    display: grid;
+    grid-template-columns: 1fr 0.8rem;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: normal;
+    gap: 0 1.6rem;
+    text-align: justify;
+
+    &::after {
+      content: "";
+      display: inline-block;
+      aspect-ratio: 1 / 1;
+      background: var(--color-accent);
+      border-radius: 50%;
+    }
+  }
+
+  &__item-txt {
+    line-height: 1.5;
+  }
+
+  &__date {
+    font-family: var(--font-en);
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+}
