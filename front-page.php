@@ -7,18 +7,18 @@
 <main>
   <section class="p-front-mv bg-light">
     <div class="l-inner">
-      <div id="js-front-mv-swiper" class="p-front-mv__swiper swiper">
+      <div id="js-front-mv-swiper" class="p-front-mv__swiper c-overflow-swiper __sp-overflow-left-none swiper">
         <ul class="p-front-mv__swiper-wrapper swiper-wrapper">
-
+          <!-- スライド最低11枚必要 -->
           <li class="p-front-mv__swiper-slide swiper-slide">
             <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
                   <span class="p-front-mv__swiper-slide-date-info">
-                    <span class="p-front-mv__swiper-slide-date-wrap">
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
                       <span class="month">2</span>
                       <span class="date">3</span>
-                    </span>
+                    </time>
                     <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
                   </span><!-- /.p-front-mv__swiper-slide-date-info -->
                   <span class="p-front-mv__swiper-slide-txt">
@@ -36,10 +36,10 @@
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
                   <span class="p-front-mv__swiper-slide-date-info">
-                    <span class="p-front-mv__swiper-slide-date-wrap">
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-07-15">
                       <span class="month">7</span>
                       <span class="date">15</span>
-                    </span>
+                    </time>
                     <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
                   </span><!-- /.p-front-mv__swiper-slide-date-info -->
                   <span class="p-front-mv__swiper-slide-txt">
@@ -57,10 +57,10 @@
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
                 <span class="p-front-mv__swiper-slide-date-info">
-                  <span class="p-front-mv__swiper-slide-date-wrap">
+                  <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-07-29">
                     <span class="month">7</span>
                     <span class="date">29</span>
-                  </span>
+                  </time>
                   <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
                 </span><!-- /.p-front-mv__swiper-slide-date-info -->
 
@@ -79,10 +79,10 @@
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
                   <span class="p-front-mv__swiper-slide-date-info">
-                    <span class="p-front-mv__swiper-slide-date-wrap">
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
                       <span class="month">2</span>
                       <span class="date">3</span>
-                    </span>
+                    </time>
                     <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
                   </span><!-- /.p-front-mv__swiper-slide-date-info -->
                   <span class="p-front-mv__swiper-slide-txt">
@@ -100,10 +100,10 @@
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
                   <span class="p-front-mv__swiper-slide-date-info">
-                    <span class="p-front-mv__swiper-slide-date-wrap">
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
                       <span class="month">2</span>
                       <span class="date">3</span>
-                    </span>
+                    </time>
                     <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
                   </span><!-- /.p-front-mv__swiper-slide-date-info -->
                   <span class="p-front-mv__swiper-slide-txt">
@@ -121,10 +121,10 @@
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
                   <span class="p-front-mv__swiper-slide-date-info">
-                    <span class="p-front-mv__swiper-slide-date-wrap">
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
                       <span class="month">2</span>
                       <span class="date">3</span>
-                    </span>
+                    </time>
                     <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
                   </span><!-- /.p-front-mv__swiper-slide-date-info -->
                   <span class="p-front-mv__swiper-slide-txt">
@@ -142,10 +142,10 @@
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
                   <span class="p-front-mv__swiper-slide-date-info">
-                    <span class="p-front-mv__swiper-slide-date-wrap">
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
                       <span class="month">2</span>
                       <span class="date">3</span>
-                    </span>
+                    </time>
                     <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
                   </span><!-- /.p-front-mv__swiper-slide-date-info -->
                   <span class="p-front-mv__swiper-slide-txt">
@@ -163,10 +163,10 @@
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
                   <span class="p-front-mv__swiper-slide-date-info">
-                    <span class="p-front-mv__swiper-slide-date-wrap">
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
                       <span class="month">2</span>
                       <span class="date">3</span>
-                    </span>
+                    </time>
                     <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
                   </span><!-- /.p-front-mv__swiper-slide-date-info -->
                   <span class="p-front-mv__swiper-slide-txt">
@@ -184,10 +184,52 @@
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
                   <span class="p-front-mv__swiper-slide-date-info">
-                    <span class="p-front-mv__swiper-slide-date-wrap">
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
                       <span class="month">2</span>
                       <span class="date">3</span>
-                    </span>
+                    </time>
+                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
+                  </span><!-- /.p-front-mv__swiper-slide-date-info -->
+                  <span class="p-front-mv__swiper-slide-txt">
+                  【宿屋塾 #199】@ZOOM｜「なぜ、あの地域にはラグジュラリー旅行者が訪れるのか　～富裕層インバウンドのマーケティング戦略」
+                  </span>
+                </p>
+              </div>
+              <figure class="p-front-mv__swiper-slide-img">
+                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="mv">
+              </figure>
+            </a>
+          </li>
+          <li class="p-front-mv__swiper-slide swiper-slide">
+            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
+              <div class="p-front-mv__swiper-slide-body">
+                <p class="p-front-mv__swiper-slide-title">
+                  <span class="p-front-mv__swiper-slide-date-info">
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
+                      <span class="month">2</span>
+                      <span class="date">3</span>
+                    </time>
+                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
+                  </span><!-- /.p-front-mv__swiper-slide-date-info -->
+                  <span class="p-front-mv__swiper-slide-txt">
+                  【宿屋塾 #199】@ZOOM｜「なぜ、あの地域にはラグジュラリー旅行者が訪れるのか　～富裕層インバウンドのマーケティング戦略」
+                  </span>
+                </p>
+              </div>
+              <figure class="p-front-mv__swiper-slide-img">
+                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="mv">
+              </figure>
+            </a>
+          </li>
+          <li class="p-front-mv__swiper-slide swiper-slide">
+            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
+              <div class="p-front-mv__swiper-slide-body">
+                <p class="p-front-mv__swiper-slide-title">
+                  <span class="p-front-mv__swiper-slide-date-info">
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
+                      <span class="month">2</span>
+                      <span class="date">3</span>
+                    </time>
                     <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
                   </span><!-- /.p-front-mv__swiper-slide-date-info -->
                   <span class="p-front-mv__swiper-slide-txt">
@@ -208,13 +250,13 @@
 
   <section class="p-front-feature">
     <div class="l-inner">
-      <h2 class="p-front-ttl">
+      <h2 class="p-front-ttl" data-aos="fade">
         <span class="p-front-ttl__en">Feature</span>
         <span class="p-front-ttl__ja">宿屋大学の特徴</span>
       </h2>
       <ul class="p-front-feature__card-list">
 
-        <li class="p-front-feature__card">
+        <li class="p-front-feature__card" data-aos="fade-up" data-aos-delay="200">
           <figure class="p-front-feature__card-img">
             <img src="<?php echo $theme_uri; ?>/assets/images/front/front-feature01.svg" alt="">
           </figure>
@@ -222,7 +264,7 @@
           特化したビジネススクール</h3>
           <p class="p-front-feature__card-txt">テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
         </li>
-        <li class="p-front-feature__card">
+        <li class="p-front-feature__card" data-aos="fade-up" data-aos-delay="600">
           <figure class="p-front-feature__card-img">
             <img src="<?php echo $theme_uri; ?>/assets/images/front/front-feature02.svg" alt="">
           </figure>
@@ -230,7 +272,7 @@
           特化した<span class="text-highlight">ビジネススクール</span></h3>
           <p class="p-front-feature__card-txt">テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
         </li>
-        <li class="p-front-feature__card">
+        <li class="p-front-feature__card" data-aos="fade-up" data-aos-delay="1000">
           <figure class="p-front-feature__card-img">
             <img src="<?php echo $theme_uri; ?>/assets/images/front/front-feature03.svg" alt="">
           </figure>
@@ -240,7 +282,7 @@
         </li>
       </ul>
 
-      <div class="c-btn __pc-right">
+      <div class="c-btn __pc-right" data-aos="fade" data-aos-delay="1300">
         <a href="" class="c-btn__link">宿屋塾のビジョン</a>
       </div>
 
@@ -249,14 +291,14 @@
 
   <section class="p-front-service bg-light">
     <div class="l-inner">
-      <h2 class="p-front-ttl">
+      <h2 class="p-front-ttl" data-aos="fade">
         <span class="p-front-ttl__en">service</span>
         <span class="p-front-ttl__ja">宿屋塾のサービス</span>
       </h2>
-      <p class="p-front-service__intro-txt">宿屋塾では、宿泊産業のビジネス力を高めるためのサービスを提供しています。</p>
+      <p class="p-front-service__intro-txt" data-aos="fade">宿屋塾では、宿泊産業のビジネス力を高めるためのサービスを提供しています。</p>
       <ul class="p-front-service__list">
 
-        <li class="c-card">
+        <li class="c-card" data-aos="fade-up" data-aos-delay="600">
           <a href="" class="c-card__link">
             <div class="c-card__txt-wrap">
               <h3 class="c-card__ttl">
@@ -269,7 +311,7 @@
             </figure>
           </a>
         </li>
-        <li class="c-card">
+        <li class="c-card" data-aos="fade-up" data-aos-delay="1000">
           <a href="" class="c-card__link">
             <div class="c-card__txt-wrap">
               <h3 class="c-card__ttl">
@@ -282,7 +324,7 @@
             </figure>
           </a>
         </li>
-        <li class="c-card">
+        <li class="c-card" data-aos="fade-up" data-aos-delay="1400">
           <a href="" class="c-card__link">
             <div class="c-card__txt-wrap">
               <h3 class="c-card__ttl">
@@ -295,7 +337,7 @@
             </figure>
           </a>
         </li>
-        <li class="c-card">
+        <li class="c-card" data-aos="fade-up" data-aos-delay="1800">
           <a href="" class="c-card__link">
             <div class="c-card__txt-wrap">
               <h3 class="c-card__ttl">
@@ -310,7 +352,7 @@
         </li>
 
       </ul>
-      <div class="c-btn __pc-right">
+      <div class="c-btn __pc-right" data-aos="fade">
         <a href="" class="c-btn__link">サービス一覧をみる</a>
       </div>
     </div><!-- ./-inner -->
@@ -319,16 +361,16 @@
   <section class="p-front-industry-news">
       <div class="p-front-industry-news__inner">
         <div class="p-front-industry-news__ttl-wrap bg-light">
-          <h2 class="p-front-industry-news__ttl">
+          <h2 class="p-front-industry-news__ttl" data-aos="fade">
             <span class="p-front-industry-news__ttl-en">News</span>
             <span class="p-front-industry-news__ttl-ja">宿泊業界最新ニュース</span>
           </h2>
         </div>
-        <div id="js-front-industry-news-swiper" class="p-front-industry-news__list-wrap swiper">
+        <div id="js-front-industry-news-swiper" class="p-front-industry-news__swiper c-overflow-swiper swiper" data-aos="fade">
           <ul class="p-front-industry-news__list swiper-wrapper">
             <li class="p-front-industry-news__item swiper-slide">
               <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date">2025.06.27</time>
+                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.27</time>
                 <h3 class="p-front-industry-news__item-ttl">
                   タイトルが4行以上のサンプルTBSテレビ、旅行業に本格参入、インバウンド富裕層向け旅行を提供、海外で人気番組「SASUKE」など紹介
                 </h3>
@@ -336,7 +378,7 @@
             </li>
             <li class="p-front-industry-news__item swiper-slide">
               <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date">2025.06.27</time>
+                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.27</time>
                 <h3 class="p-front-industry-news__item-ttl">
                 TBSテレビ、旅行業に本格参入、インバウンド富裕層向け旅行を提供、海外で人気番組「SASUKE」など紹介
                 </h3>
@@ -344,7 +386,7 @@
             </li>
             <li class="p-front-industry-news__item swiper-slide">
               <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date">2025.06.27</time>
+                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.27</time>
                 <h3 class="p-front-industry-news__item-ttl">
                 TBSテレビ、旅行業に本格参入、インバウンド富裕層向け旅行を提供、海外で人気番組「SASUKE」など紹介
                 </h3>
@@ -352,7 +394,7 @@
             </li>
             <li class="p-front-industry-news__item swiper-slide">
               <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date">2025.06.24</time>
+                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.24</time>
                 <h3 class="p-front-industry-news__item-ttl">
                 IHG日本法人CEO｢大阪に高級ホテル検討｣　IR視野に出店攻勢
                 </h3>
@@ -360,7 +402,7 @@
             </li>
             <li class="p-front-industry-news__item swiper-slide">
               <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date">2025.06.23</time>
+                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
                 <h3 class="p-front-industry-news__item-ttl">
                 2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
                 </h3>
@@ -368,7 +410,7 @@
             </li>
             <li class="p-front-industry-news__item swiper-slide">
               <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date">2025.06.23</time>
+                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.23</time>
                 <h3 class="p-front-industry-news__item-ttl">
                 2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
                 </h3>
@@ -376,7 +418,7 @@
             </li>
             <li class="p-front-industry-news__item swiper-slide">
               <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date">2025.06.23</time>
+                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
                 <h3 class="p-front-industry-news__item-ttl">
                 2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
                 </h3>
@@ -384,7 +426,39 @@
             </li>
             <li class="p-front-industry-news__item swiper-slide">
               <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date">2025.06.23</time>
+                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
+                <h3 class="p-front-industry-news__item-ttl">
+                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
+                </h3>
+              </a>
+            </li>
+            <li class="p-front-industry-news__item swiper-slide">
+              <a href="" class="p-front-industry-news__item-link">
+                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
+                <h3 class="p-front-industry-news__item-ttl">
+                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
+                </h3>
+              </a>
+            </li>
+            <li class="p-front-industry-news__item swiper-slide">
+              <a href="" class="p-front-industry-news__item-link">
+                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.23</time>
+                <h3 class="p-front-industry-news__item-ttl">
+                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
+                </h3>
+              </a>
+            </li>
+            <li class="p-front-industry-news__item swiper-slide">
+              <a href="" class="p-front-industry-news__item-link">
+                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
+                <h3 class="p-front-industry-news__item-ttl">
+                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
+                </h3>
+              </a>
+            </li>
+            <li class="p-front-industry-news__item swiper-slide">
+              <a href="" class="p-front-industry-news__item-link">
+                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
                 <h3 class="p-front-industry-news__item-ttl">
                 2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
                 </h3>
@@ -400,21 +474,19 @@
 
   <section class="p-front-knowledge">
     <div class="l-inner">
-      <h2 class="p-front-ttl">
+      <h2 class="p-front-ttl" data-aos="fade">
         <span class="p-front-ttl__en">Knowledge</span>
         <span class="p-front-ttl__ja">ホテルマネジメントの教科書</span>
       </h2>
-      <div id="js-front-knowledge-swiper" class="p-front-knowledge__swiper swiper">
+      <div id="js-front-knowledge-swiper" class="c-overflow-swiper __pc-overflow-left-none swiper" data-aos="fade">
         <ul class="p-front-knowledge__swiper-wrapper swiper-wrapper">
 
           <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__link">
+            <a href="" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
                 <span class="c-thumbnail-card__cat">カテゴリ</span>
                 <h3 class="c-thumbnail-card__ttl">次世代のハウスキーピングマネジャーに必要な３つの重要な能力の高め方～清掃会社と二人三脚で『客室を完璧に仕上げる』技術</h3>
-                <p class="c-thumbnail-card__date">
-                  <time datetime="2025-05-01">2025.5</time>-<time datetime="2026-03-31">2026.3</time>
-                </p>
+                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>             
               </div>
               <figure class="c-thumbnail-card__img">
                 <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="">
@@ -423,13 +495,11 @@
           </li>
 
           <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__link">
+            <a href="" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
                 <span class="c-thumbnail-card__cat">カテゴリ</span>
                 <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <p class="c-thumbnail-card__date">
-                  <time datetime="2025-05-01">2025.5</time>-<time datetime="2026-03-31">2026.3</time>
-                </p>              
+                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>                          
               </div>
               <figure class="c-thumbnail-card__img">
                 <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="">
@@ -437,13 +507,11 @@
             </a>
           </li>
           <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__link">
+            <a href="" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
                 <span class="c-thumbnail-card__cat">カテゴリ</span>
                 <h3 class="c-thumbnail-card__ttl">次世代のハウスキーピングマネジャーに必要な３つの重要な能力の高め方～清掃会社と二人三脚で『客室を完璧に仕上げる』技術</h3>
-                <p class="c-thumbnail-card__date">
-                  <time datetime="2025-05-01">2025.5</time>-<time datetime="2026-03-31">2026.3</time>
-                </p>              
+                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>                        
               </div>
               <figure class="c-thumbnail-card__img">
                 <img src="<?php echo $theme_uri; ?>/assets/images/front/front-knowledge03.jpg" alt="">
@@ -451,13 +519,59 @@
             </a>
           </li>
           <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__link">
+            <a href="" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
                 <span class="c-thumbnail-card__cat">カテゴリ</span>
                 <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <p class="c-thumbnail-card__date">
-                  <time datetime="2025-05-01">2025.5</time>-<time datetime="2026-03-31">2026.3</time>
-                </p>             
+                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>                       
+              </div>
+              <figure class="c-thumbnail-card__img">
+                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv01.jpg" alt="">
+              </figure>
+            </a>
+          </li>
+          <li class="c-thumbnail-card swiper-slide">
+            <a href="" class="c-thumbnail-card__inner">
+              <div class="c-thumbnail-card__body">
+                <span class="c-thumbnail-card__cat">カテゴリ</span>
+                <h3 class="c-thumbnail-card__ttl">次世代のハウスキーピングマネジャーに必要な３つの重要な能力の高め方～清掃会社と二人三脚で『客室を完璧に仕上げる』技術</h3>
+                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>                      
+              </div>
+              <figure class="c-thumbnail-card__img">
+                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-knowledge03.jpg" alt="">
+              </figure>
+            </a>
+          </li>
+          <li class="c-thumbnail-card swiper-slide">
+            <a href="" class="c-thumbnail-card__inner">
+              <div class="c-thumbnail-card__body">
+                <span class="c-thumbnail-card__cat">カテゴリ</span>
+                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
+                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>             
+              </div>
+              <figure class="c-thumbnail-card__img">
+                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv01.jpg" alt="">
+              </figure>
+            </a>
+          </li>
+          <li class="c-thumbnail-card swiper-slide">
+            <a href="" class="c-thumbnail-card__inner">
+              <div class="c-thumbnail-card__body">
+                <span class="c-thumbnail-card__cat">カテゴリ</span>
+                <h3 class="c-thumbnail-card__ttl">次世代のハウスキーピングマネジャーに必要な３つの重要な能力の高め方～清掃会社と二人三脚で『客室を完璧に仕上げる』技術</h3>
+                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>                       
+              </div>
+              <figure class="c-thumbnail-card__img">
+                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-knowledge03.jpg" alt="">
+              </figure>
+            </a>
+          </li>
+          <li class="c-thumbnail-card swiper-slide">
+            <a href="" class="c-thumbnail-card__inner">
+              <div class="c-thumbnail-card__body">
+                <span class="c-thumbnail-card__cat">カテゴリ</span>
+                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
+                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>             
               </div>
               <figure class="c-thumbnail-card__img">
                 <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv01.jpg" alt="">
@@ -468,10 +582,10 @@
         </ul>
       </div><!-- .p-front-knowledge__swiper -->
 
-      <div class="c-swiper-controls">
-        <div class="swiper-button-prev c-swiper-controls__btn prev"></div>
+      <div class="c-swiper-controls" data-aos="fade">
+        <div class="swiper-button-prev c-arrow-btn prev"></div>
         <div class="swiper-pagination"></div>
-        <div class="swiper-button-next c-swiper-controls__btn next"></div>
+        <div class="swiper-button-next c-arrow-btn next"></div>
       </div>  
 
     </div>
@@ -479,11 +593,11 @@
 
   <section class="p-front-voices bg-dark">
     <div class="l-inner">
-      <h2 class="p-front-ttl">
+      <h2 class="p-front-ttl" data-aos="fade">
         <span class="p-front-ttl__en">Voices</span>
         <span class="p-front-ttl__ja">お客様からの声</span>
       </h2>
-      <div id="js-voice-card-swiper" class="c-voice-card-swiper swiper">
+      <div id="js-voice-card-swiper" class="c-voice-card-swiper swiper" data-aos="fade">
         <ul class="c-voice-card-swiper__wrapper swiper-wrapper">
           <li class="c-voice-card swiper-slide">
               <h3 class="c-voice-card__ttl">旅館経営者 / 50代</h3>
@@ -513,28 +627,40 @@
               <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
               <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
           </li>
+          <li class="c-voice-card swiper-slide">
+              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
+              <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
+          </li>
+          <li class="c-voice-card swiper-slide">
+              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
+              <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
+          </li>
+          <li class="c-voice-card swiper-slide">
+              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
+              <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
+          </li>
         </ul>
       </div>
 
-      <div id="js-voice-card-swiper-controls" class="c-swiper-controls">
-        <div class="swiper-button-prev c-swiper-controls__btn prev"></div>
+      <div id="js-voice-card-swiper-controls" class="c-swiper-controls" data-aos="fade">
+        <div class="swiper-button-prev c-arrow-btn prev"></div>
         <div class="swiper-pagination"></div>
-        <div class="swiper-button-next c-swiper-controls__btn next"></div>
+        <div class="swiper-button-next c-arrow-btn next"></div>
       </div>
     </div>
   </section>
 
   <section class="p-front-news">
     <div class="l-inner">
-      <h2 class="p-front-ttl">
+      <h2 class="p-front-ttl" data-aos="fade">
         <span class="p-front-ttl__en">information</span>
         <span class="p-front-ttl__ja">お知らせ</span>
       </h2>
       
-      <ul class="p-front-news__list">
+      <ul class="p-front-news__list" data-aos="fade">
         <li class="p-front-news__item">
           <a href="" class="p-front-news__item-link">
-            <time class="p-front-news__item-date">2025.03.06</time>
+            <time class="p-front-news__item-date" datetime="2025-03-06">2025.03.06</time>
             <h3 class="p-front-news__item-ttl">流通科学大学主催「キャリアアップセミナー　ホテル・旅館」に宿屋大学 代表の近藤寛和が登壇しました</h3>
           </a>
         </li>
@@ -563,7 +689,7 @@
           </a>
         </li>
       </ul>
-      <div class="c-btn __pc-right">
+      <div class="c-btn __pc-right" data-aos="fade">
         <a href="" class="c-btn__link">お知らせ一覧へ</a>
       </div>
     </div>
