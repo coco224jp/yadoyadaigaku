@@ -1,0 +1,16 @@
+@use "../global" as *;
+@use "sass:map";
+
+.c-category {
+  display: inline-block;
+  background: var(--color-text);
+  font-size: 1.1rem;
+  color: #fff;
+  line-height: 1;
+  font-weight: bold;
+  padding: 0.3rem 0.6rem;
+
+  @include mq {
+    padding: 0.6rem 1.2rem;
+  }
+}

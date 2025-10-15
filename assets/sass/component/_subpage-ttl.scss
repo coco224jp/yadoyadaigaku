@@ -1,0 +1,22 @@
+@use "../global" as *;
+@use "sass:map";
+
+.c-subpage-ttl {
+  font-size: 2rem;
+  line-height: 1.4;
+  font-weight: bold;
+  margin-top: var(--leading-trim);
+  margin-bottom: calc(var(--leading-trim) + 4rem);
+
+  @include mq {
+    font-size: 2.8rem;
+  }
+
+  &.__small{
+    font-size: 2.2rem;
+
+    @include mq {
+      font-size: 2.5rem;
+    }
+  }
+}

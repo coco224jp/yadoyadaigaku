@@ -1,0 +1,18 @@
+@use "../global" as *;
+@use "sass:map";
+
+.c-overflow-swiper {
+  margin-inline: calc(50% - 50vw);
+
+  &.__sp-overflow-left-none {
+    @media screen and (max-width: 767px) {
+      margin-left: 0;
+    }
+  }
+  
+  &.__pc-overflow-left-none {
+    @include mq {
+      margin-left: 0;
+    }
+  }
+}

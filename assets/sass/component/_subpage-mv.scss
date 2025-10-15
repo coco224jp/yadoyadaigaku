@@ -1,0 +1,54 @@
+@use "../global" as *;
+@use "sass:map";
+
+.c-subpage-mv {
+  height: 30rem;
+  padding-block: 14.7rem 0;
+  background-color: var(--bg-color-light);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  background: no-repeat center center / cover;
+  
+  @include mq {
+    height: 34rem;
+    padding-top: 17rem;  
+  }
+
+  &.singular {
+    background: url('../images/common/singular-common-mv_sp.jpg') no-repeat center center / cover;
+    color: #fff;
+    
+    @include mq {
+      background-image: url('../images/common/singular-common-mv.jpg');
+    }
+  }
+  &.archive {
+    background-color: var(--bg-color-light);
+  }
+
+  &__ttl {
+    text-align: center;
+    font-weight: bold;
+  }
+  &__ttl-en {
+    font-family: var(--font-en);
+    font-size: 1.4rem;
+    line-height: 1;
+    display: block;
+  }
+  &__ttl-ja {
+    display: block;
+    margin-top: calc(var(--leading-trim) + 2rem);
+    margin-bottom: var(--leading-trim);
+    font-size: 3.2rem;
+    letter-spacing: 0.05em;
+    
+
+    @include mq {
+      font-size: 3.6rem;
+    }
+  }
+
+
+}

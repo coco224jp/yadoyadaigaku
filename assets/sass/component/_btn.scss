@@ -32,12 +32,13 @@
       aspect-ratio: 1 / 1;
       background: var(--color-accent);
       border-radius: 50%;
+      transition: translate 0.3s;
       
     }
 
     .c-btn.__bg-gold & {
       background-color: var(--color-accent);
-      border: 1px solid #B5944F;
+      border-color: #B5944F;
       color: #fff;
 
       &::after {
@@ -50,5 +51,37 @@
       line-height: normal;
     }
 
+    .c-btn.__height-short & {
+      padding-block: 1.15rem;
+      line-height: normal;
+    }
+
+    .c-btn.__disabled & {
+      background: #D2D2D2;
+      border-color: #CBCBCB;
+      color: #fff;
+      pointer-events: none;
+      cursor: default;
+
+      &::after {
+        background: #fff;
+      }
+    }
+
+    .c-btn.__large & {
+      padding-block: 2.65rem;
+      min-width: 28rem;
+      gap: 0 0.8rem;
+
+      @include mq {
+        min-width: 31.9rem;
+      }
+    }
+
+    @include hover {
+      &:not(.__disabled .c-btn__link):hover::after {
+        translate: 100% 0;
+      }
+    }
   }
 }

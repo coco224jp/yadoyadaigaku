@@ -3,9 +3,13 @@
 
 .c-thumbnail-card {
 
-  &__link{
+  &__inner{
     display: grid;
     gap: 1.2rem 0;
+
+    @include mq {
+      gap: 2rem 0;
+    }
   }
 
   &__body{
@@ -13,12 +17,8 @@
   }
   &__img{
     order: 1;
-    border-radius: 0.46rem;
+    border-radius: 0.8rem;
     overflow: hidden;
-
-    @include mq {
-      border-radius: 0.88rem;
-    }
 
     > img {
       width: 100%;
@@ -34,22 +34,30 @@
     line-height: 1;
     font-weight: bold;
     width: fit-content;
-    padding: 0.3rem 0.6rem;
+    padding: 0.3rem 0.625rem;
     border-radius: 100vmax;
 
     @include mq {
       font-size: 1.1rem; 
+      padding: 0.6rem 1.2rem;
     }
   }
   &__ttl{
     font-size: 1.3rem;
     font-weight: bold;
     line-height: 1.5;
-    margin-top: 0.8rem;
 
     @include mq {
       font-size: 1.6rem;
       line-height: 1.4; 
+    }
+
+    .c-thumbnail-card__cat + &{
+      margin-top: 0.8rem;
+
+      @include mq {
+        margin-top: 1rem;
+      }
     }
   }
   &__date{
