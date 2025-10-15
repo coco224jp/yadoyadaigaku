@@ -14,14 +14,9 @@
 
   &__swiper {
     margin-top: 1.5rem;
-    margin-right: calc(50% - 50vw);
 
     @include mq() {
       margin-top: 2.5rem;
-      margin-left: calc(50% - 50vw);
-    }
-    @include mq(1440) {
-      margin-inline: -12rem;
     }
   }
 
@@ -495,19 +490,13 @@
 
   @include mq {
     padding-bottom: 0;
-  }
-
-  @include mq (1440){
-    background-color: var(--bg-color-light);
+    background: var(--bg-color-light);
   }
 
   &__inner {
-    @include mq() {
-      max-width: 144rem;
+    @include mq {
+      width: min(144rem, 100%);
       margin-inline: auto;
-    }
-    @include mq (1440){
-      background-color: #fff;
     }
   }
 
@@ -549,9 +538,10 @@
     margin-left: 1.2rem;
   }
 
-  &__list-wrap {
+  &__swiper {
     @include mq() {
       position: relative;
+      background: #fff;
       border-top: 1px solid #E0DFE2;
       border-bottom: 1px solid #E0DFE2;
     }
@@ -581,7 +571,6 @@
 
     @include mq() {
       width: 30rem;
-      // min-height: 11.9rem;
       background-image: linear-gradient(
         to bottom,               /* 下方向へ破線を伸ばす */
         rgba(0, 0, 0, 0.2), 
@@ -594,6 +583,7 @@
       background-repeat: repeat-y;  /* 縦方向にリピート */
     }
   }
+
   &__item-link {
     display: block;
     padding: 2rem 1.5rem;
@@ -631,6 +621,7 @@
       }
     }
   }
+
   &__item-date {
     font-family: var(--font-en);
     font-size: 1.3rem;
@@ -668,7 +659,7 @@
         align-items: center;
         row-gap: 1rem;
         border-radius: 1.6rem 0 0 1.6rem;
-        z-index: map-get($layers, front-industry-news-btn);
+        z-index: map.get($layers, front-industry-news-btn);
   
   
         &::after {
@@ -676,7 +667,6 @@
         }
       }  
     }
-
   }
 }
 
@@ -690,20 +680,11 @@
     padding-top: 6rem;
   }
 
-  &__swiper {
-    margin-inline: calc(50% - 50vw);
+  .c-thumbnail-card__img {
+    border-radius: 0.46rem;
 
-    @include mq() {
-      margin-left: 0;
-    }
-
-    @include mq(1440){
-      margin-right: -12rem;
-    }
-  }
-
-  &__swiper-wrapper {
-    @include mq() {
+    @include mq {
+      border-radius: 0.88rem;
     }
   }
 }
