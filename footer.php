@@ -66,54 +66,33 @@
     <nav class="l-footer__nav">
       <div class="l-footer__nav-list-wrap">
         <span class="l-footer__nav-list-ttl">サービス</span>
-        <ul class="l-footer__nav-list">
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">研修サービス</a>
-          </li>
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">業務支援</a>
-          </li>
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">ホテル経営者向け講演</a>
-          </li>
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">よろず相談</a>
-          </li>
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">メディアサービス</a>
-          </li>
-        </ul>
-      </div><!-- ./l-footer__nav-list-wrap -->
+        <?php
+          wp_nav_menu( array( 
+            'theme_location' => 'footer-menu',
+            'container' => false, 
+            'menu_class' => 'l-footer__nav-list', 
+          ) ); 
+        ?>
+      </div>
       <div class="l-footer__nav-list-wrap">
         <span class="l-footer__nav-list-ttl">会社概要</span>
-        <ul class="l-footer__nav-list">
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">宿屋塾とは</a>
-          </li>
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">代表プロフィール</a>
-          </li>
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">スタッフ紹介</a>
-          </li>
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">会社概要・アクセス</a>
-          </li>
-        </ul>
-      </div><!-- ./l-footer__nav-list-wrap -->
+        <?php
+          wp_nav_menu( array( 
+            'theme_location' => 'footer-menu2',
+            'container' => false, 
+            'menu_class' => 'l-footer__nav-list', 
+          ) ); 
+        ?>
+      </div>
       <div class="l-footer__nav-list-wrap">
-        <ul class="l-footer__nav-list __txt-bold">
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">セミナー</a>
-          </li>
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">宿屋業界ニュース</a>
-          </li>
-          <li class="l-footer__nav-list-item">
-            <a href="#" class="l-footer__nav-list-link">お知らせ</a>
-          </li>
-        </ul>
-      </div><!-- ./l-footer__nav-list-wrap -->
+        <?php
+          wp_nav_menu( array( 
+            'theme_location' => 'footer-menu3',
+            'container' => false, 
+            'menu_class' => 'l-footer__nav-list __txt-bold',
+          ) ); 
+        ?>
+      </div>
     </nav>
   </div><!-- ./l-inner -->
   <div class="l-footer__copyright">
