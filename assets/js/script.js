@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+  AOS.init({
+    duration: 800,
+    once: true
+  });
+
   const burger = document.getElementById('js-header-burger');
   const burgerText = document.getElementById('js-header-burger-text');
   const navMenu = document.getElementById('js-header-menu');
@@ -9,10 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
     navMenu.classList.toggle('active');
 
     if(navMenu.classList.contains('active')) {
-      body.classList.add('locked');
+      body.classList.add('is-fixed');
       burgerText.textContent = '閉じる';
     } else {
-      body.classList.remove('locked');
+      body.classList.remove('is-fixed');
       burgerText.textContent = 'メニュー';
       
     }
@@ -42,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     breakpoints: {
       768: {
         centeredSlides: true,
+        initialSlide: 1,
       },
     },
 
@@ -50,14 +56,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const paginationBullets = document.querySelectorAll(
           ".p-pagination-progress-circle .swiper-pagination-bullet"
         );
+
+        let activeIndex =  '';
+
+        if(window.innerWidth >= 768) {
+          activeIndex = 1;
+        } else {
+          activeIndex = 0;
+        }
   
-        const firstBullet = paginationBullets[0];
-        firstBullet.classList.add("active-first", "swiper-pagination-bullet-active");
-  
-        document
-          .querySelector(".p-pagination-progress-circle .swiper-pagination-bullet:nth-child(1)")
-          .classList.add("active-first");
-  
+        const activeBullet = paginationBullets[activeIndex];
+        if (activeBullet) {
+          activeBullet.classList.add("active-first", "swiper-pagination-bullet-active");
+        }
+    
         paginationBullets.forEach((el) => {
             el.innerHTML = `
               <svg class="p-pagination-progress-circle__svg" width="19.5" height="19.5" viewBox="0 0 19.5 19.5">
@@ -108,50 +120,52 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeBullet = document.querySelector(".swiper-pagination-bullet-active");
     activeBullet.classList.add("slide-change-active");
   });
+  // frontMvSwiperここまで
 
-  
-  let frontSwiper2 = null;
+  let frontIndustryNewsSwiper = null;
 
-  function initFrontNewsSwiper() {
+  function initFrontIndustryNewsSwiper() {
     if (window.innerWidth >= 768) {
-      if (!frontSwiper2) { // 未初期化のときだけ実行
-        frontSwiper2 = new Swiper('#js-front-industry-news-swiper', {
+      if (!frontIndustryNewsSwiper) { // 未初期化のときだけ実行
+        frontIndustryNewsSwiper = new Swiper('#js-front-industry-news-swiper', {
           slidesPerView: 'auto',
           loopAdditionalSlides: 5,
           loop: true,
           speed: 2000,
-          // autoplay: {
-          //   delay: 1500,
-          // },
+          autoplay: {
+            delay: 1500,
+          },
         });
       }
     } else {
-      if (frontSwiper2) { // 768px未満なら破棄
-        frontSwiper2.destroy(true, true);
-        frontSwiper2 = null;
+      if (frontIndustryNewsSwiper) { // 768px未満なら破棄
+        frontIndustryNewsSwiper.destroy(true, true);
+        frontIndustryNewsSwiper = null;
       }
     }
   }
   
   // 初回実行
-  initFrontNewsSwiper();
+  initFrontIndustryNewsSwiper();
   
   // リサイズ対応
-  window.addEventListener('resize', initFrontNewsSwiper);
+  window.addEventListener('resize', initFrontIndustryNewsSwiper);
 
-  const frontSwiper3 = new Swiper('#js-front-knowledge-swiper', {
+  const frontNowledgeSwiper = new Swiper('#js-front-knowledge-swiper', {
     slidesPerView: '1.375',
     spaceBetween: rem * 1.6,
     centeredSlides: true,
-    loopAdditionalSlides: 2,
-    loop: true,
-    speed: 2000,
+    initialSlide: 1,
+    speed: 1000,
+    // autoplay: {
+    //   delay: 2500,
+    // },
     navigation: {
-      nextEl: '.p-front-knowledge .swiper-button-next',
-      prevEl: '.p-front-knowledge .swiper-button-prev',
+      nextEl: '.p-front-knowledge .c-swiper-controls .swiper-button-next',
+      prevEl: '.p-front-knowledge .c-swiper-controls .swiper-button-prev',
     },
     pagination: {
-      el: '.p-front-knowledge .swiper-pagination',
+      el: '.p-front-knowledge .c-swiper-controls .swiper-pagination',
       clickable: true,
     },
     breakpoints: {
@@ -161,43 +175,62 @@ document.addEventListener('DOMContentLoaded', function() {
         spaceBetween: rem * 2,
         centeredSlides: false,
       },
-    }
+    },
+    on: {
+      init: function (swiper) {
+        swiper.slideTo(swiper.params.initialSlide, 0, false);
+      },
+    },
   });
 
-  const voiceCardSwiper = new Swiper('#js-voice-card-swiper', {
-    slidesPerView: '1.38',
-    spaceBetween: rem * 1.6,
-    centeredSlides: true,
-    loopAdditionalSlides: 2,
-    loop: true,
-    speed: 2000,
-    navigation: {
-      nextEl: '#js-voice-card-swiper-controls .swiper-button-next',
-      prevEl: '#js-voice-card-swiper-controls .swiper-button-prev',
-    },
-    pagination: {
-      el: '#js-voice-card-swiper-controls .swiper-pagination',
-      clickable: true,
-    },
-    breakpoints: {
-      // when window width is >= 320px
-      768: {
-        slidesPerView: 'auto',
-        spaceBetween: rem * 2,
+  const voiceCardSwiperEl = document.getElementById('js-voice-card-swiper');
+  if (voiceCardSwiperEl) {
+    const voiceCardSwiper = new Swiper(voiceCardSwiperEl, {
+      slidesPerView: '1.38',
+      spaceBetween: rem * 1.6,
+      centeredSlides: true,
+      initialSlide: 1,
+      // loopAdditionalSlides: 2,
+      // loop: true,
+      speed: 1500,
+      autoplay: {
+        delay: 3500,
       },
-    }
-  });
+      navigation: {
+        nextEl: '#js-voice-card-swiper-controls .swiper-button-next',
+        prevEl: '#js-voice-card-swiper-controls .swiper-button-prev',
+      },
+      pagination: {
+        el: '#js-voice-card-swiper-controls .swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        // when window width is >= 320px
+        768: {
+          slidesPerView: 'auto',
+          spaceBetween: rem * 2,
+        },
+      },
+      on: {
+        init: function (swiper) {
+          swiper.slideTo(swiper.params.initialSlide, 0, false);
+        },
+      },
+
+    });
+  }
 
   const productSwiper = new Swiper('#js-product-swiper', {
     slidesPerView: '1.375',
-    loopAdditionalSlides: 6,
-    loop: true,
     speed: 2000,
     spaceBetween: rem * 1.6,
-    autoplay: {
-      delay: 1500,
-      // disableOnInteraction: false
-    },
+    centeredSlides: true,
+    initialSlide: 1,
+
+    // autoplay: {
+    //   delay: 1500,
+    //   // disableOnInteraction: false
+    // },
     navigation: {
       nextEl: '#js-product-swiper-controls .swiper-button-next',
       prevEl: '#js-product-swiper-controls .swiper-button-prev',
@@ -207,20 +240,15 @@ document.addEventListener('DOMContentLoaded', function() {
       clickable: true,
       spaceBetween: rem * 1.56,
     },
-          breakpoints: {
-      // when window width is >= 768px
-      768: {
-        slidesPerView: 3.4,
-        spaceBetween: rem * 2,
-        centeredSlides: false,
-      },
-    },
     breakpoints: {
       // when window width is >= 768px
       768: {
         slidesPerView: 3.3,
         spaceBetween: rem * 2,
         centeredSlides: false,
+        centeredSlides: false,
+        initialSlide: 0,
+   
       },
     }
   });
