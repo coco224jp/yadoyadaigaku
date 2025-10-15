@@ -1,0 +1,31 @@
+@use "../global" as *;
+@use "../foundation" as *;
+@use "../layout" as *;
+@use "../component" as *;
+@use "../utilities" as *;
+@use "sass:map";
+
+:root {
+  --breakpoint: 768px;
+  --sp-camp: 375px;
+  --pc-inner-sum: 1200px;
+  --font-base: "Montserrat", "Noto Sans JP", sans-serif;
+  --font-udpGothic: "BIZ UDPGothic", sans-serif;
+  --font-en: "Montserrat", sans-serif;
+  --color-text: #3B3B3B;
+  --color-text-sub: #222222;
+  --bg-color-deep: #F7F2E9;
+  --bg-color-light: #FAF8F5;
+  --color-logo: #F0907A;
+  --color-logo-opacity05: #F0907A80;
+  --color-accent: #C18E24;
+  --color-accent-opacity05: #C18E2480;
+  --color-accent-light: #C18E2480;
+  --header-height: #{rclamp(5, 6.5)};
+
+  --leading-trim: calc((1em - 1lh) / 2);
+
+  @supports not (top: 1lh) {
+    --leading-trim: 0px;
+  }
+}
