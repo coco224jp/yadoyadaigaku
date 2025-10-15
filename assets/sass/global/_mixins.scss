@@ -3,7 +3,7 @@
 
 @mixin mq($breakpoint: tab) {
   @if map.has-key($breakpoints, $breakpoint) {
-    @media #{map.get($breakpoints, $breakpoint)} {
+    @media screen and #{map.get($breakpoints, $breakpoint)} {
       @content;
     }
   }
