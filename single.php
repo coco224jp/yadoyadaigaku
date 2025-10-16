@@ -20,7 +20,7 @@
             $tags = get_the_tags();
             if($tags):
               foreach($tags as $tag):
-                echo '<span class="u-term">' . $tag->name . '</span>';
+                echo '<span class="u-term">' . esc_html( $tag->name ) . '</span>';
               endforeach;
             endif;
           ?>
@@ -56,7 +56,7 @@
           <div class="p-blog-single__navi prev">
             <a class="p-blog-single__navi-link" href="<?php echo get_permalink($prev_post->ID); ?>">
               <span class="p-blog-single__navi-txt">前の記事</span>
-              <span class="p-blog-single__navi-ttl"><?php echo get_the_title($prev_post->ID); ?></span>
+              <span class="p-blog-single__navi-ttl"><?php echo esc_html( get_the_title($prev_post->ID) ); ?></span>
             </a>
           </div>
           <?php 
@@ -66,7 +66,7 @@
           <div class="p-blog-single__navi next">
             <a class="p-blog-single__navi-link " href="<?php echo get_permalink($next_post->ID); ?>">
               <span class="p-blog-single__navi-txt">次の記事</span>
-              <span class="p-blog-single__navi-ttl"><?php echo get_the_title($next_post->ID); ?></span>
+              <span class="p-blog-single__navi-ttl"><?php echo esc_html( get_the_title($next_post->ID) ); ?></span>
             </a>
           </div>
           <?php 

@@ -2,7 +2,7 @@
   $theme_uri = get_template_directory_uri();
 
   $queried_object = get_queried_object();
-  $ttl_jp = get_the_title( $queried_object->ID );
+  $ttl_jp = esc_html( get_the_title( $queried_object->ID ) );
   $ttl_en = '';
   
   if(str_contains($ttl_jp, 'スクール') || str_contains($ttl_jp, 'オープン')) {

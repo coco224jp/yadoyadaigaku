@@ -7,7 +7,7 @@
   
   if ( $terms && ! is_wp_error( $terms ) ) {
     foreach ( $terms as $term ) {
-      $ttl_jp = $term->name;
+      $ttl_jp = esc_html( $term->name );
     }
   }
 
