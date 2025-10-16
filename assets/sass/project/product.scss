@@ -67,10 +67,13 @@
   }
 }
 
-.p-product-added-info {
-  margin-top: 1.2rem;
-  font-size: 1.4rem;
-  line-height: 1.2;
+.p-product-card {
+  &__info {
+    display: block;
+    padding-top: 1.2rem;
+    font-size: 1.4rem;
+    line-height: 1.2;
+  }
 
   &__instructor {
     display: block;
@@ -80,13 +83,13 @@
   &__subttl {
     margin-top: 1.2rem;
   }
-}
 
-.p-product-double-btn {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-  gap: 0 2rem;
+  &__double-btn {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 0 2rem;
+  }  
 }
 
 .p-load-more {

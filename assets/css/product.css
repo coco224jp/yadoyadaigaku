@@ -60,20 +60,20 @@
   aspect-ratio: 387/241;
 }
 
-.p-product-added-info {
-  margin-top: 1.2rem;
+.p-product-card__info {
+  display: block;
+  padding-top: 1.2rem;
   font-size: 1.4rem;
   line-height: 1.2;
 }
-.p-product-added-info__instructor {
+.p-product-card__instructor {
   display: block;
   font-weight: bold;
 }
-.p-product-added-info__subttl {
+.p-product-card__subttl {
   margin-top: 1.2rem;
 }
-
-.p-product-double-btn {
+.p-product-card__double-btn {
   margin-top: 2rem;
   display: flex;
   justify-content: center;

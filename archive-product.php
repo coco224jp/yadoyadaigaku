@@ -153,7 +153,7 @@
         各業界のスペシャリストをお招きして開催しているオープン講座です。2,000年に始まり、過去の500回以上開催している宿泊ビジネス・観光業に関する講演会。基本月一回、平日の18時～19時30分に開講しています。
       </p>
       <ul class="p-product-open__list">
-        <li>
+        <li class="p-product-card">
           <div class="c-thumbnail-card">
             <a href="" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
@@ -166,16 +166,16 @@
               </figure>
             </a>
           </div>
-          <div class="p-product-added-info">
-            <span class="p-product-added-info__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-added-info__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </div>
-          <div class="p-product-double-btn">
+          <a class="p-product-card__info">
+            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
+            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
+          </a>
+          <div class="p-product-card__double-btn">
             <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
             <div class="c-btn __height-short __bg-gold"><a href="" class="c-btn__link">お申し込み</a></div>
           </div>
         </li>
-        <li>
+        <li class="p-product-card">
           <div class="c-thumbnail-card">
             <a href="" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
@@ -188,16 +188,16 @@
               </figure>
             </a>
           </div>
-          <div class="p-product-added-info">
-            <span class="p-product-added-info__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-added-info__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </div>
-          <div class="p-product-double-btn">
+          <a class="p-product-card__info">
+            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
+            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
+          </a>
+          <div class="p-product-card__double-btn">
             <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
             <div class="c-btn __height-short __bg-gold"><a href="" class="c-btn__link">お申し込み</a></div>
           </div>
         </li>
-        <li>
+        <li class="p-product-card">
           <div class="c-thumbnail-card">
             <a href="" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
@@ -210,16 +210,16 @@
               </figure>
             </a>
           </div>
-          <div class="p-product-added-info">
-            <span class="p-product-added-info__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-added-info__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </div>
-          <div class="p-product-double-btn">
+          <a class="p-product-card__info">
+            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
+            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
+          </a>
+          <div class="p-product-card__double-btn">
             <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
             <div class="c-btn __height-short __disabled"><a href="" class="c-btn__link">お申し込み</a></div>
           </div>
         </li>
-        <li>
+        <li class="p-product-card">
           <div class="c-thumbnail-card">
             <a href="" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
@@ -232,16 +232,16 @@
               </figure>
             </a>
           </div>
-          <div class="p-product-added-info">
-            <span class="p-product-added-info__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-added-info__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </div>
-          <div class="p-product-double-btn">
+          <a class="p-product-card__info">
+            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
+            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
+          </a>
+          <div class="p-product-card__double-btn">
             <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
             <div class="c-btn __height-short __bg-gold"><a href="" class="c-btn__link">お申し込み</a></div>
           </div>
         </li>
-        <li>
+        <li class="p-product-card">
           <div class="c-thumbnail-card">
             <a href="" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
@@ -254,16 +254,16 @@
               </figure>
             </a>
           </div>
-          <div class="p-product-added-info">
-            <span class="p-product-added-info__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-added-info__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </div>
-          <div class="p-product-double-btn">
+          <a class="p-product-card__info">
+            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
+            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
+          </a>
+          <div class="p-product-card__double-btn">
             <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
             <div class="c-btn __height-short __bg-gold"><a href="" class="c-btn__link">お申し込み</a></div>
           </div>
         </li>
-        <li>
+        <li class="p-product-card">
           <div class="c-thumbnail-card">
             <a href="" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
@@ -276,11 +276,11 @@
               </figure>
             </a>
           </div>
-          <div class="p-product-added-info">
-            <span class="p-product-added-info__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-added-info__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </div>
-          <div class="p-product-double-btn">
+          <a class="p-product-card__info">
+            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
+            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
+          </a>
+          <div class="p-product-card__double-btn">
             <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
             <div class="c-btn __height-short __bg-gold"><a href="" class="c-btn__link">お申し込み</a></div>
           </div>
