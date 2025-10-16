@@ -97,6 +97,7 @@
   add_action('init', 'change_post_object_label');
   add_action('admin_menu', 'change_post_menu_label');
 
+  // ホテルマネジメントの教科書一覧ページのページネーションのカスタマイズ
   add_filter( 'paginate_links_output', function( $output ) {
     // 前へボタンが無い場合に追加
     if ( strpos( $output, 'class="prev page-numbers' ) === false ) {
