@@ -595,6 +595,21 @@
     border-radius: 0.88rem;
   }
 }
+@media screen and (width <= 767px) {
+  .p-front-knowledge .c-thumbnail-card__ttl {
+    font-size: 1.3rem;
+  }
+}
+@media screen and (width >= 768px) {
+  .p-front-knowledge .c-thumbnail-card__ttl {
+    line-height: 1.5;
+  }
+}
+@media screen and (width <= 767px) {
+  .p-front-knowledge .c-thumbnail-card__date {
+    font-size: 1rem;
+  }
+}
 
 @media screen and (width >= 768px) {
   .p-front-news .p-front-ttl {

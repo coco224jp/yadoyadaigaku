@@ -204,9 +204,6 @@
     display: block;
     font-size: 1.3rem;
     line-height: 1.5;
-    // height: 3lh;
-    // text-overflow: ellipsis;
-    // overflow: hidden;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -680,11 +677,28 @@
     padding-top: 6rem;
   }
 
-  .c-thumbnail-card__img {
-    border-radius: 0.46rem;
+  .c-thumbnail-card {
+    &__img {
+      border-radius: 0.46rem;
 
-    @include mq {
-      border-radius: 0.88rem;
+      @include mq {
+        border-radius: 0.88rem;
+      }
+    }
+
+    &__ttl {
+      @include mq(sp) {
+        font-size: 1.3rem;
+      }
+      @include mq {
+        line-height: 1.5;
+      }
+    }
+
+    &__date{
+      @include mq(sp) {
+        font-size: 1rem;
+      }
     }
   }
 }
