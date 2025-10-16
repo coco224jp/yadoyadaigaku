@@ -292,6 +292,7 @@
     line-height: 1.5;
     padding: 0 0 1rem 1.3rem;
     position: relative;
+    @include navItemHoverStyle();
 
     &::before {
       content: '';
@@ -303,6 +304,11 @@
       position: absolute;
       top: 0.85rem;
       left: 0.2rem;
+      transition: background 0.3s;
+    }
+
+    &:hover::before {
+      background: var(--color-accent);
     }
   }  
 

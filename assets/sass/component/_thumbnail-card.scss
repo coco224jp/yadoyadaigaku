@@ -43,12 +43,11 @@
     }
   }
   &__ttl{
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-weight: bold;
-    line-height: 1.5;
+    line-height: 1.4;
 
     @include mq {
-      font-size: 1.6rem;
       line-height: 1.4; 
     }
 
@@ -60,15 +59,15 @@
       }
     }
   }
+
   &__date{
+    margin-top: 0.6rem;
     font-family: var(--font-en);
-    margin-top: 0.62rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     line-height: 1;
 
     @include mq {
-       font-size: 1.2rem;
-       margin-top: 1.2rem;
+      margin-top: 1.2rem;
     }
   }
 

@@ -106,7 +106,8 @@
     border-bottom: 1px solid #0000001F;
     font-size: 2rem;
     font-weight: bold;
-    color: $color-text-sub;
+    @include navItemHoverStyle($color-text-sub);
+
 
     @include mq {
       padding: 0.5rem;

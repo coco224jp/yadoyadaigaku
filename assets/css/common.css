@@ -539,7 +539,20 @@ small {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1215686275);
   font-size: 2rem;
   font-weight: bold;
-  color: #222222;
+  color: transparent;
+  background: linear-gradient(to right, var(--color-accent) 50%, #222222 50%) 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 200% 100%;
+  transition: background-position 0.35s;
+}
+@media (any-hover: hover) {
+  .l-header .menu-item > a:hover {
+    background-position: 0 100%;
+  }
+}
+.l-header .menu-item > a:focus-visible {
+  background-position: 0 100%;
 }
 @media screen and (width >= 768px) {
   .l-header .menu-item > a {
@@ -949,6 +962,20 @@ small {
   line-height: 1.5;
   padding: 0 0 1rem 1.3rem;
   position: relative;
+  color: transparent;
+  background: linear-gradient(to right, var(--color-accent) 50%, var(--color-text) 50%) 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 200% 100%;
+  transition: background-position 0.35s;
+}
+@media (any-hover: hover) {
+  .l-footer .menu-item > a:hover {
+    background-position: 0 100%;
+  }
+}
+.l-footer .menu-item > a:focus-visible {
+  background-position: 0 100%;
 }
 .l-footer .menu-item > a::before {
   content: "";
@@ -960,6 +987,10 @@ small {
   position: absolute;
   top: 0.85rem;
   left: 0.2rem;
+  transition: background 0.3s;
+}
+.l-footer .menu-item > a:hover::before {
+  background: var(--color-accent);
 }
 .l-footer .l-footer__nav-list.__txt-bold .menu-item + .menu-item {
   margin-top: 1.6rem;
@@ -1008,6 +1039,169 @@ small {
   .l-inner.__small {
     width: min(104rem, 100%);
   }
+}
+
+.l-wp-block-content {
+  margin-top: 4rem;
+}
+.l-wp-block-content *:not(li, .wp-block-column) + *:not(li, .wp-block-column) {
+  margin-top: calc(var(--leading-trim) + 4rem);
+  margin-bottom: var(--leading-trim);
+}
+.l-wp-block-content :where(.wp-block-columns.is-layout-flex) {
+  gap: 2rem;
+}
+.l-wp-block-content h2 {
+  font-size: 2.1rem;
+  font-weight: bold;
+}
+@media screen and (width >= 768px) {
+  .l-wp-block-content h2 {
+    font-size: 2.4rem;
+  }
+}
+.l-wp-block-content p {
+  line-height: 1.7;
+}
+.l-wp-block-content a {
+  line-height: inherit;
+  color: #0B75FF;
+  text-decoration: underline;
+}
+.l-wp-block-content a[target=_blank] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0 0.4rem;
+}
+.l-wp-block-content a[target=_blank]::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  aspect-ratio: 12/9.6;
+  background: url("../images/common/icon-window.svg") no-repeat center center/contain;
+}
+.l-wp-block-content .wp-block-button__link {
+  display: inline-grid;
+  min-width: 12.7rem;
+  padding: 1.8rem 3.2rem;
+  grid-template-columns: auto 0.8rem;
+  gap: 0 1.6rem;
+  align-items: center;
+  border-radius: 100vmax;
+  box-shadow: 0px 2px 5px 0px rgba(206, 202, 205, 0.2509803922);
+  border: 1px solid #E0DFE2;
+  font-family: var(--font-sub);
+  line-height: 1;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--color-text);
+  background: #fff;
+  text-decoration: none;
+}
+.l-wp-block-content .wp-block-button__link::after {
+  content: "";
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: var(--color-accent);
+  border-radius: 50%;
+  transition: translate 0.3s;
+}
+@media (any-hover: hover) and (min-width: 768px) {
+  .l-wp-block-content .wp-block-button__link:hover::after {
+    translate: 100% 0;
+  }
+}
+.l-wp-block-content .wp-block-image {
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+.l-wp-block-content .wp-block-image img {
+  width: 100%;
+  height: 100%;
+  max-width: initial;
+  object-fit: cover;
+}
+.l-wp-block-content li {
+  line-height: 1.7;
+  margin-block: var(--leading-trim);
+  position: relative;
+}
+.l-wp-block-content li + li {
+  margin-top: calc(var(--leading-trim) + 2rem);
+}
+.l-wp-block-content ul li {
+  padding-left: 1.6rem;
+}
+.l-wp-block-content ul li::before {
+  content: "";
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  background: var(--color-accent);
+  border-radius: 50%;
+  position: absolute;
+  left: 0.2rem;
+  top: 0.5lh;
+  transform: translateY(-50%);
+}
+.l-wp-block-content ol {
+  counter-reset: list-num;
+}
+.l-wp-block-content ol li {
+  padding-left: 1.8rem;
+  counter-increment: list-num;
+}
+.l-wp-block-content ol li::before {
+  content: counter(list-num) ".";
+  font-family: var(--font-en);
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--color-accent);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0.5lh;
+}
+.l-wp-block-content .wp-block-table {
+  overflow-x: auto;
+}
+.l-wp-block-content .wp-block-table table {
+  line-height: 1.3;
+  table-layout: fixed;
+  min-width: 60rem;
+}
+.l-wp-block-content .wp-block-table table:has(td:nth-child(3)) {
+  min-width: 90rem;
+}
+.l-wp-block-content .wp-block-table table:has(td:nth-child(4)) {
+  min-width: 120rem;
+}
+.l-wp-block-content .wp-block-table table:has(td:nth-child(5)) {
+  min-width: 150rem;
+}
+@media screen and (width >= 768px) {
+  .l-wp-block-content .wp-block-table table {
+    min-width: 100%;
+  }
+}
+.l-wp-block-content .wp-block-table tr td {
+  border-color: #D9D9D9;
+  padding: 1.725rem 3.2rem;
+  text-align: center;
+  min-width: 30rem;
+}
+.l-wp-block-content tr:first-child td {
+  background: var(--bg-color-deep);
+  border: none;
+}
+.l-wp-block-content .wp-block-embed-youtube .wp-block-embed__wrapper {
+  aspect-ratio: 1000/575;
+}
+.l-wp-block-content .wp-block-embed-youtube iframe {
+  width: 100%;
+  height: 100%;
 }
 
 .c-btn {
@@ -1213,13 +1407,12 @@ small {
   }
 }
 .c-thumbnail-card__ttl {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-weight: bold;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 @media screen and (width >= 768px) {
   .c-thumbnail-card__ttl {
-    font-size: 1.6rem;
     line-height: 1.4;
   }
 }
@@ -1232,14 +1425,13 @@ small {
   }
 }
 .c-thumbnail-card__date {
+  margin-top: 0.6rem;
   font-family: var(--font-en);
-  margin-top: 0.62rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   line-height: 1;
 }
 @media screen and (width >= 768px) {
   .c-thumbnail-card__date {
-    font-size: 1.2rem;
     margin-top: 1.2rem;
   }
 }
@@ -1586,7 +1778,7 @@ small {
 :root {
   --breakpoint: 768px;
   --sp-camp: 375px;
-  --pc-inner-sum: 1200px;
+  --pc-inner-width: 1240px;
   --font-base: "Montserrat", "Noto Sans JP", sans-serif;
   --font-udpGothic: "BIZ UDPGothic", sans-serif;
   --font-en: "Montserrat", sans-serif;

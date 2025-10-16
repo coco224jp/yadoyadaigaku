@@ -5,7 +5,7 @@ html {
   font-size: calc(10 / 375 * 100vw);
   overflow-x: hidden;
 
-  // breakpoint以上 〜 ($pc-inner-width - 1px)までがPCデザインでリキッドレイアウト ビューポートpc-inner-sumで10px
+  // breakpoint(768) 〜 ($pc-inner-width(1240) - 1px)までがPCデザインでリキッドレイアウト ビューポートpc-inner-sumで10px
   @media screen and (max-width: #{px($pc-inner-width) - 1px}) and (min-width: #{px($breakpoint)}) {
     font-size: calc(10 / #{$pc-inner-width} * 100vw); 
   }

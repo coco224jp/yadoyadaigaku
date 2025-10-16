@@ -25,39 +25,20 @@
   @return calc($arg * 1px);
 }
 
+@mixin navItemHoverStyle($textColor: var(--color-text), $hoveredTextColor: var(--color-accent)) {
+  color: transparent;
+  background: linear-gradient(to right, $hoveredTextColor 50%, $textColor 50%) 100%;
+  background-clip: text;
+  background-size: 200% 100%;
+  transition: background-position 0.35s;
 
-// @function rclamp($min, $max, $minViewport: 375, $maxViewport: 1440) {
-//   // vw単位でのスケールを計算
-//   $vwScale: calc(($max - $min) / ($maxViewport - $minViewport));
-  
-//   // 基準となる最小値からのオフセットを計算
-//   $baseOffset: $min - $minViewport * $vwScale;
-  
-//   // px → rem（1rem = 10px）に変換
-//   $minRem: calc($min / 10);
-//   $maxRem: calc($max / 10);
-//   $baseOffsetRem: calc($baseOffset / 10);
-  
-//   // vwスケールを調整（rem換算）
-//   $vwScaleRem: $vwScale * 100;
-  
-//   @return clamp(#{$minRem}rem, #{$baseOffsetRem}rem + #{$vwScaleRem}vw, #{$maxRem}rem);
-// }
+  &:hover {
+    @media (any-hover: hover) {
+      background-position: 0 100%;
+    }
+  }
 
-// @mixin menuHoverStyle($textColor: $color-font, $hoveredTextColor: $color-accent-dark) {
-//   color: transparent;
-//   background: linear-gradient(to right, $hoveredTextColor 50%, $textColor 50%) 100%;
-//   background-clip: text;
-//   background-size: 200% 100%;
-//   transition: background-position 0.35s;
-
-//   &:hover {
-//     @media (any-hover: hover) {
-//       background-position: 0 100%;
-//     }
-//   }
-
-//   &:focus-visible {
-//     background-position: 0 100%;
-//   }
-// }
+  &:focus-visible {
+    background-position: 0 100%;
+  }
+}
