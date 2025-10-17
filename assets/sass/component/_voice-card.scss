@@ -3,8 +3,8 @@
 
 .c-voice-card {
   background: #fff;
+  width: 26.8rem;
   padding: 2.55rem 2.55rem 2.975rem;
-  background: #fff;
   border-radius: 0.68rem;
 
   @include mq {
@@ -30,15 +30,14 @@
     @include mq {
       font-size: 1.3rem;
     }
-    .c-voice-card__ttl.swiper-slide-active & {
+    .swiper-slide-active & {
       @include mq {
         font-size: 1.56rem;
-        font-weight: bold;
       }
     }
 
   }
-  &__txt{
+  &__txt-wrap{
     position: relative;
     font-size: 1.4rem;
     margin-top: 2.125rem;
@@ -51,7 +50,8 @@
       font-size: 1.5rem;
       line-height: 1.6;
     }
-    .c-voice-card__ttl.swiper-slide-active & {
+
+    .swiper-slide-active & {
       @include mq {
         font-size: 1.8rem;
         margin-top: 3rem;
