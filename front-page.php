@@ -7,241 +7,70 @@
 <main>
   <section class="p-front-mv bg-light">
     <div class="l-inner">
-      <div id="js-front-mv-swiper" class="p-front-mv__swiper c-overflow-swiper __sp-overflow-left-none swiper">
+      <div id="js-front-mv-swiper" class="p-front-mv__swiper c-overflow-swiper swiper">
         <ul class="p-front-mv__swiper-wrapper swiper-wrapper">
           <!-- スライド最低11枚必要 -->
-          <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
-              <div class="p-front-mv__swiper-slide-body">
-                <p class="p-front-mv__swiper-slide-title">
-                  <span class="p-front-mv__swiper-slide-date-info">
-                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
-                      <span class="month">2</span>
-                      <span class="date">3</span>
-                    </time>
-                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
-                  </span><!-- /.p-front-mv__swiper-slide-date-info -->
-                  <span class="p-front-mv__swiper-slide-txt">
-                    @ハイブリッド｜人の心が動くトレンドのつくり方～敏腕編集長に学ぶ、アイデア発想からブーム創出まで
-                  </span>
-                </p>
-              </div>
-              <figure class="p-front-mv__swiper-slide-img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv01.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
-              <div class="p-front-mv__swiper-slide-body">
-                <p class="p-front-mv__swiper-slide-title">
-                  <span class="p-front-mv__swiper-slide-date-info">
-                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-07-15">
-                      <span class="month">7</span>
-                      <span class="date">15</span>
-                    </time>
-                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
-                  </span><!-- /.p-front-mv__swiper-slide-date-info -->
-                  <span class="p-front-mv__swiper-slide-txt">
-                    【宿屋塾 #199】@ZOOM｜「なぜ、あの地域にはラグジュラリー旅行者が訪れるのか　～富裕層インバウンドのマーケティング戦略」
-                  </span>
-                </p>
-              </div>
-              <figure class="p-front-mv__swiper-slide-img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="mv">
-              </figure>
-            </a>
-          </li>
-          <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
-              <div class="p-front-mv__swiper-slide-body">
-                <p class="p-front-mv__swiper-slide-title">
-                <span class="p-front-mv__swiper-slide-date-info">
-                  <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-07-29">
-                    <span class="month">7</span>
-                    <span class="date">29</span>
-                  </time>
-                  <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
-                </span><!-- /.p-front-mv__swiper-slide-date-info -->
+           <?php
+            $mv_args = [
+              'post_type' => 'product',
+              'posts_per_page' => -1,
+              'post_status' => 'publish',
+              'orderby' => 'date',
+              'order' => 'DESC',
+            ];
 
-                  <span class="p-front-mv__swiper-slide-txt">
-                  【宿屋塾 #199】@ZOOM｜「なぜ、あの地域にはラグジュラリー旅行者が訪れるのか　～富裕層インバウンドのマーケティング戦略」
-                  </span>
-                </p>
-              </div>
-              <figure class="p-front-mv__swiper-slide-img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv03.jpg" alt="mv">
-              </figure>
-            </a>
-          </li>
+            $mv_query = new WP_Query($mv_args);
+
+            while($mv_query->have_posts()): $mv_query->the_post();
+
+            $date =  esc_html(get_the_date('j'));
+            $month = esc_html(get_the_date('n'));
+            $mv_terms = get_the_terms(get_the_ID(), 'product-cat');
+            $mv_term_name = '';
+
+            if($mv_terms):
+              foreach($mv_terms as $mv_term):
+                if($mv_term->slug !== 'uncategorized'):
+                  $mv_term_name = $mv_term->name;
+                  break;
+                endif;
+              endforeach;
+            endif;
+           ?>
           <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
+            <a href="<?php the_permalink(); ?>" class="p-front-mv__swiper-slide-link">
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
                   <span class="p-front-mv__swiper-slide-date-info">
-                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
-                      <span class="month">2</span>
-                      <span class="date">3</span>
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="<?php echo esc_attr( get_the_date('Y-m-d') ); ?>">
+                      <span class="month <?php echo ($month >= 10) ? 'double' : ''; ?>">
+                        <?php echo $month; ?>
+                      </span>
+                      <span class="date <?php echo ($date >= 10) ? 'double' : ''; ?>">
+                        <?php echo $date; ?>
+                      </span>
                     </time>
-                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
+                    <span class="p-front-mv__swiper-slide-date-txt"><?php echo esc_html( get_the_date('l') ); ?></span>
                   </span><!-- /.p-front-mv__swiper-slide-date-info -->
-                  <span class="p-front-mv__swiper-slide-txt">
-                    @ハイブリッド｜人の心が動くトレンドのつくり方～敏腕編集長に学ぶ、アイデア発想からブーム創出まで
-                  </span>
+                  <span class="p-front-mv__swiper-slide-txt"><?php the_title(); ?></span>
                 </p>
               </div>
+              <?php if(has_post_thumbnail()): ?>
               <figure class="p-front-mv__swiper-slide-img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv01.jpg" alt="">
+              <?php 
+                the_post_thumbnail('full'); 
+                if($mv_term_name !== ''):
+                  echo '<span class="p-front-mv__swiper-slide__cat">' . $mv_term_name . '</span>';
+                endif;
+              ?>
               </figure>
+              <?php endif; ?>
             </a>
           </li>
-          <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
-              <div class="p-front-mv__swiper-slide-body">
-                <p class="p-front-mv__swiper-slide-title">
-                  <span class="p-front-mv__swiper-slide-date-info">
-                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
-                      <span class="month">2</span>
-                      <span class="date">3</span>
-                    </time>
-                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
-                  </span><!-- /.p-front-mv__swiper-slide-date-info -->
-                  <span class="p-front-mv__swiper-slide-txt">
-                  【宿屋塾 #199】@ZOOM｜「なぜ、あの地域にはラグジュラリー旅行者が訪れるのか　～富裕層インバウンドのマーケティング戦略」
-                  </span>
-                </p>
-              </div>
-              <figure class="p-front-mv__swiper-slide-img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="mv">
-              </figure>
-            </a>
-          </li>
-          <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
-              <div class="p-front-mv__swiper-slide-body">
-                <p class="p-front-mv__swiper-slide-title">
-                  <span class="p-front-mv__swiper-slide-date-info">
-                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
-                      <span class="month">2</span>
-                      <span class="date">3</span>
-                    </time>
-                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
-                  </span><!-- /.p-front-mv__swiper-slide-date-info -->
-                  <span class="p-front-mv__swiper-slide-txt">
-                  【宿屋塾 #199】@ZOOM｜「なぜ、あの地域にはラグジュラリー旅行者が訪れるのか　～富裕層インバウンドのマーケティング戦略」
-                  </span>
-                </p>
-              </div>
-              <figure class="p-front-mv__swiper-slide-img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="mv">
-              </figure>
-            </a>
-          </li>
-          <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
-              <div class="p-front-mv__swiper-slide-body">
-                <p class="p-front-mv__swiper-slide-title">
-                  <span class="p-front-mv__swiper-slide-date-info">
-                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
-                      <span class="month">2</span>
-                      <span class="date">3</span>
-                    </time>
-                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
-                  </span><!-- /.p-front-mv__swiper-slide-date-info -->
-                  <span class="p-front-mv__swiper-slide-txt">
-                  【宿屋塾 #199】@ZOOM｜「なぜ、あの地域にはラグジュラリー旅行者が訪れるのか　～富裕層インバウンドのマーケティング戦略」
-                  </span>
-                </p>
-              </div>
-              <figure class="p-front-mv__swiper-slide-img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="mv">
-              </figure>
-            </a>
-          </li>
-          <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
-              <div class="p-front-mv__swiper-slide-body">
-                <p class="p-front-mv__swiper-slide-title">
-                  <span class="p-front-mv__swiper-slide-date-info">
-                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
-                      <span class="month">2</span>
-                      <span class="date">3</span>
-                    </time>
-                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
-                  </span><!-- /.p-front-mv__swiper-slide-date-info -->
-                  <span class="p-front-mv__swiper-slide-txt">
-                  【宿屋塾 #199】@ZOOM｜「なぜ、あの地域にはラグジュラリー旅行者が訪れるのか　～富裕層インバウンドのマーケティング戦略」
-                  </span>
-                </p>
-              </div>
-              <figure class="p-front-mv__swiper-slide-img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="mv">
-              </figure>
-            </a>
-          </li>
-          <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
-              <div class="p-front-mv__swiper-slide-body">
-                <p class="p-front-mv__swiper-slide-title">
-                  <span class="p-front-mv__swiper-slide-date-info">
-                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
-                      <span class="month">2</span>
-                      <span class="date">3</span>
-                    </time>
-                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
-                  </span><!-- /.p-front-mv__swiper-slide-date-info -->
-                  <span class="p-front-mv__swiper-slide-txt">
-                  【宿屋塾 #199】@ZOOM｜「なぜ、あの地域にはラグジュラリー旅行者が訪れるのか　～富裕層インバウンドのマーケティング戦略」
-                  </span>
-                </p>
-              </div>
-              <figure class="p-front-mv__swiper-slide-img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="mv">
-              </figure>
-            </a>
-          </li>
-          <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
-              <div class="p-front-mv__swiper-slide-body">
-                <p class="p-front-mv__swiper-slide-title">
-                  <span class="p-front-mv__swiper-slide-date-info">
-                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
-                      <span class="month">2</span>
-                      <span class="date">3</span>
-                    </time>
-                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
-                  </span><!-- /.p-front-mv__swiper-slide-date-info -->
-                  <span class="p-front-mv__swiper-slide-txt">
-                  【宿屋塾 #199】@ZOOM｜「なぜ、あの地域にはラグジュラリー旅行者が訪れるのか　～富裕層インバウンドのマーケティング戦略」
-                  </span>
-                </p>
-              </div>
-              <figure class="p-front-mv__swiper-slide-img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="mv">
-              </figure>
-            </a>
-          </li>
-          <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php echo home_url('/'); ?>" class="p-front-mv__swiper-slide-link">
-              <div class="p-front-mv__swiper-slide-body">
-                <p class="p-front-mv__swiper-slide-title">
-                  <span class="p-front-mv__swiper-slide-date-info">
-                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="2025-02-03">
-                      <span class="month">2</span>
-                      <span class="date">3</span>
-                    </time>
-                    <span class="p-front-mv__swiper-slide-date-txt">火曜日</span>
-                  </span><!-- /.p-front-mv__swiper-slide-date-info -->
-                  <span class="p-front-mv__swiper-slide-txt">
-                  【宿屋塾 #199】@ZOOM｜「なぜ、あの地域にはラグジュラリー旅行者が訪れるのか　～富裕層インバウンドのマーケティング戦略」
-                  </span>
-                </p>
-              </div>
-              <figure class="p-front-mv__swiper-slide-img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="mv">
-              </figure>
-            </a>
-          </li>
+          <?php
+            endwhile;
+            wp_reset_postdata();
+          ?>
         </ul><!-- /.p-front-mv__swiper-wrapper -->
       </div><!-- /.p-front-mv__swiper -->
       <div class="swiper-pagination p-pagination-progress-circle"></div>
@@ -256,15 +85,31 @@
       </h2>
       <ul class="p-front-feature__card-list">
 
-        <li class="p-front-feature__card" data-aos="fade-up" data-aos-delay="200">
+      <?php
+        $front_feature_index = 0;
+
+        if(have_rows('front_features')):while(have_rows('front_features')):
+          the_row();
+
+          $front_feature_icon = get_sub_field('front_feature_icon');
+          $front_feature_ttl = get_sub_field('front_feature_ttl');
+          $front_feature_ttl = preg_replace('/\{(.+?)\}/', '<span class="text-highlight">$1</span>', $front_feature_ttl);
+          $front_feature_txt = get_sub_field('front_feature_txt');
+      ?>
+        <li class="p-front-feature__card" data-aos="fade-up" data-aos-delay="<?php echo $front_feature_index * 300; ?>">
+          <?php if($front_feature_icon): ?>
           <figure class="p-front-feature__card-img">
-            <img src="<?php echo $theme_uri; ?>/assets/images/front/front-feature01.svg" alt="">
+            <img src="<?php echo $front_feature_icon['url']; ?>" alt="<?php echo $front_feature_icon['alt']; ?>" width="<?php echo $front_feature_icon['width']; ?>" height="<?php echo $front_feature_icon['height']; ?>">
           </figure>
-          <h3 class="p-front-feature__card-ttl"><span class="text-highlight">ホテルマネジメント</span>に<br>
-          特化したビジネススクール</h3>
-          <p class="p-front-feature__card-txt">テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
+          <?php endif; ?>
+          <h3 class="p-front-feature__card-ttl"><?php echo $front_feature_ttl; ?></h3>
+          <p class="p-front-feature__card-txt"><?php echo $front_feature_txt; ?></p>
         </li>
-        <li class="p-front-feature__card" data-aos="fade-up" data-aos-delay="600">
+      <?php
+        $front_feature_index++;
+        endwhile; endif;
+      ?>
+        <!-- <li class="p-front-feature__card" data-aos="fade-up" data-aos-delay="600">
           <figure class="p-front-feature__card-img">
             <img src="<?php echo $theme_uri; ?>/assets/images/front/front-feature02.svg" alt="">
           </figure>
@@ -279,13 +124,11 @@
           <h3 class="p-front-feature__card-ttl"><span class="text-highlight">ホテルマネジメント</span>に<br>
           特化したビジネススクール</h3>
           <p class="p-front-feature__card-txt">テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
-        </li>
+        </li> -->
       </ul>
-
       <div class="c-btn __pc-right" data-aos="fade" data-aos-delay="1300">
         <a href="" class="c-btn__link">宿屋塾のビジョン</a>
       </div>
-
     </div><!-- ./-inner -->
   </section>
 
@@ -297,65 +140,46 @@
       </h2>
       <p class="p-front-service__intro-txt" data-aos="fade">宿屋塾では、宿泊産業のビジネス力を高めるためのサービスを提供しています。</p>
       <ul class="p-front-service__list">
+      <?php
+        $service_args = [
+          'post_type' => 'service',
+          'posts_per_page' => 5,
+          'post_status' => 'publish',
+          'orderby' => 'date',
+          'order' => 'DESC',
+        ];
 
-        <li class="c-card" data-aos="fade-up" data-aos-delay="600">
-          <a href="" class="c-card__link">
+        $service_query = new WP_Query($service_args);
+        $front_service_index = 0;
+
+        while($service_query->have_posts()): 
+          $service_query->the_post();
+      ?>
+        <li class="c-card" data-aos="fade-up" data-aos-delay="<?php echo $front_service_index * 300; ?>">
+          <a href="<?php the_permalink(); ?>" class="c-card__link">
             <div class="c-card__txt-wrap">
               <h3 class="c-card__ttl">
                 <span class="c-card__ttl-en">For Students</span>
-                <span class="c-card__ttl-jp">ビジネススクール</span>
+                <span class="c-card__ttl-jp"><?php the_title(); ?></span>
               </h3>
             </div>
+            <?php if(has_post_thumbnail()): ?>
             <figure class="c-card__img">
-              <img src="<?php echo $theme_uri; ?>/assets/images/front/front-service01.jpg" alt="">
+                <?php the_post_thumbnail('full'); ?>
             </figure>
+            <?php endif; ?>
           </a>
         </li>
-        <li class="c-card" data-aos="fade-up" data-aos-delay="1000">
-          <a href="" class="c-card__link">
-            <div class="c-card__txt-wrap">
-              <h3 class="c-card__ttl">
-                <span class="c-card__ttl-en">For Students</span>
-                <span class="c-card__ttl-jp">オープン講座</span>
-              </h3>
-            </div>
-            <figure class="c-card__img">
-              <img src="<?php echo $theme_uri; ?>/assets/images/front/front-service02.jpg" alt="">
-            </figure>
-          </a>
-        </li>
-        <li class="c-card" data-aos="fade-up" data-aos-delay="1400">
-          <a href="" class="c-card__link">
-            <div class="c-card__txt-wrap">
-              <h3 class="c-card__ttl">
-                <span class="c-card__ttl-en">For Companies</span>
-                <span class="c-card__ttl-jp">企業向け研修</span>
-              </h3>
-            </div>
-            <figure class="c-card__img">
-              <img src="<?php echo $theme_uri; ?>/assets/images/front/front-service03.jpg" alt="">
-            </figure>
-          </a>
-        </li>
-        <li class="c-card" data-aos="fade-up" data-aos-delay="1800">
-          <a href="" class="c-card__link">
-            <div class="c-card__txt-wrap">
-              <h3 class="c-card__ttl">
-                <span class="c-card__ttl-en">For Owners</span>
-                <span class="c-card__ttl-jp">業務支援</span>
-              </h3>
-            </div>
-            <figure class="c-card__img">
-              <img src="<?php echo $theme_uri; ?>/assets/images/front/front-service04.jpg" alt="">
-            </figure>
-          </a>
-        </li>
-
+      <?php
+        $front_service_index++;
+        endwhile;
+        wp_reset_postdata();
+      ?>
       </ul>
       <div class="c-btn __pc-right" data-aos="fade">
-        <a href="" class="c-btn__link">サービス一覧をみる</a>
+        <a href="<?php echo home_url('/service/'); ?>" class="c-btn__link">サービス一覧をみる</a>
       </div>
-    </div><!-- ./-inner -->
+    </div>
   </section>
 
   <section class="p-front-industry-news">
@@ -368,105 +192,32 @@
         </div>
         <div id="js-front-industry-news-swiper" class="p-front-industry-news__swiper c-overflow-swiper swiper" data-aos="fade">
           <ul class="p-front-industry-news__list swiper-wrapper">
+          <?php
+            $industry_news_args = [
+              'post_type' => 'industry-news',
+              'posts_per_page' => 10,
+              'post_status' => 'publish',
+              'orderby' => 'date',
+              'order' => 'DESC',
+            ];
+
+            $industry_news_query = new WP_Query($industry_news_args);
+            while($industry_news_query->have_posts()): 
+              $industry_news_query->the_post();
+          ?>
             <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.27</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                  タイトルが4行以上のサンプルTBSテレビ、旅行業に本格参入、インバウンド富裕層向け旅行を提供、海外で人気番組「SASUKE」など紹介
-                </h3>
+              <a href="<?php the_permalink(); ?>" class="p-front-industry-news__item-link">
+                <time class="p-front-industry-news__item-date" datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>"><?php the_time('Y.m.d'); ?></time>
+                <h3 class="p-front-industry-news__item-ttl"><?php the_title(); ?></h3>
               </a>
             </li>
-            <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.27</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                TBSテレビ、旅行業に本格参入、インバウンド富裕層向け旅行を提供、海外で人気番組「SASUKE」など紹介
-                </h3>
-              </a>
-            </li>
-            <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.27</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                TBSテレビ、旅行業に本格参入、インバウンド富裕層向け旅行を提供、海外で人気番組「SASUKE」など紹介
-                </h3>
-              </a>
-            </li>
-            <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.24</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                IHG日本法人CEO｢大阪に高級ホテル検討｣　IR視野に出店攻勢
-                </h3>
-              </a>
-            </li>
-            <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
-                </h3>
-              </a>
-            </li>
-            <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.23</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
-                </h3>
-              </a>
-            </li>
-            <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
-                </h3>
-              </a>
-            </li>
-            <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
-                </h3>
-              </a>
-            </li>
-            <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
-                </h3>
-              </a>
-            </li>
-            <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-27">2025.06.23</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
-                </h3>
-              </a>
-            </li>
-            <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
-                </h3>
-              </a>
-            </li>
-            <li class="p-front-industry-news__item swiper-slide">
-              <a href="" class="p-front-industry-news__item-link">
-                <time class="p-front-industry-news__item-date" datetime="2025-06-23">2025.06.23</time>
-                <h3 class="p-front-industry-news__item-ttl">
-                2026年度からの「観光立国推進基本計画」策定が本格化、分散化や満足度の測定にNPS（顧客推奨度）導入など、識者が提案
-                </h3>
-              </a>
-            </li>
+          <?php
+            endwhile;
+            wp_reset_postdata();
+          ?>
           </ul>
           <div class="c-btn">
-            <a href="<?php echo home_url(); ?>/industry-news/" class="c-btn__link">一覧へ</a>
+            <a href="<?php echo home_url('/industry-news/'); ?>" class="c-btn__link">一覧へ</a>
           </div>
         </div>
       </div>
@@ -480,115 +231,60 @@
       </h2>
       <div id="js-front-knowledge-swiper" class="c-overflow-swiper __pc-overflow-left-none swiper" data-aos="fade">
         <ul class="p-front-knowledge__swiper-wrapper swiper-wrapper">
+          <?php
+            $blog_args = [
+              'post_type' => 'post',
+              'posts_per_page' => 10,
+              'post_status' => 'publish',
+              'orderby' => 'date',
+              'order' => 'DESC',
+            ];
 
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">次世代のハウスキーピングマネジャーに必要な３つの重要な能力の高め方～清掃会社と二人三脚で『客室を完璧に仕上げる』技術</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>             
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="">
-              </figure>
-            </a>
-          </li>
+            $blog_query = new WP_Query($blog_args);
+          ?>
+          <?php
+            while($blog_query->have_posts()):
+              $blog_query->the_post();
+              $blog_cats = get_the_category();
+              $blog_cat_name = '';
 
+              if($blog_cats):
+                foreach($blog_cats as $blog_cat):
+                  if($blog_cat->slug !== 'uncategorized'):
+                    $blog_cat_name = $blog_cat->name;
+                    break;
+                  endif;
+                endforeach;
+              endif;
+          ?>
           <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
+            <a href="<?php the_permalink(); ?>" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>                          
+                <?php if($blog_cat_name): ?>
+                <span class="c-thumbnail-card__cat"><?php echo $blog_cat_name; ?></span>
+                <?php endif; ?>
+                <h3 class="c-thumbnail-card__ttl"><?php the_title(); ?></h3>
+                <div class="c-thumbnail-card__date"><time datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>"><?php the_time('Y.m.d'); ?></time></div>             
               </div>
+              <?php if(has_post_thumbnail()): ?>
               <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="">
+                <?php the_post_thumbnail('full'); ?>
               </figure>
+              <?php endif; ?>
             </a>
           </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">次世代のハウスキーピングマネジャーに必要な３つの重要な能力の高め方～清掃会社と二人三脚で『客室を完璧に仕上げる』技術</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>                        
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-knowledge03.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>                       
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv01.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">次世代のハウスキーピングマネジャーに必要な３つの重要な能力の高め方～清掃会社と二人三脚で『客室を完璧に仕上げる』技術</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>                      
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-knowledge03.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>             
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv01.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">次世代のハウスキーピングマネジャーに必要な３つの重要な能力の高め方～清掃会社と二人三脚で『客室を完璧に仕上げる』技術</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>                       
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-knowledge03.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-07-01">2025.07.01</time></div>             
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv01.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-
+          <?php
+            endwhile;
+            wp_reset_postdata();
+          ?>
         </ul>
-      </div><!-- .p-front-knowledge__swiper -->
-
-      <div class="c-swiper-controls" data-aos="fade">
+      </div><!-- /.swiper -->
+      <div class="c-swiper-controls">
         <div class="swiper-button-prev c-arrow-btn prev"></div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-next c-arrow-btn next"></div>
       </div>  
-
-    </div>
+    </div><!-- /.l-inner -->
   </section>
 
   <section class="p-front-voices bg-dark">
@@ -599,50 +295,32 @@
       </h2>
       <div id="js-voice-card-swiper" class="c-voice-card-swiper swiper" data-aos="fade">
         <ul class="c-voice-card-swiper__wrapper swiper-wrapper">
+          <?php
+            $voice_card_args = [
+              'post_type' => 'voice',
+              'posts_per_page' => 5,
+              'post_status' => 'publish',
+              'orderby' => 'date',
+              'order' => 'DESC',
+            ];
+
+            $voice_query = new WP_Query($voice_card_args);
+
+            while($voice_query->have_posts()):
+              $voice_query->the_post();
+            ?>
           <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl">旅館経営者 / 50代</h3>
-              <p class="c-voice-card__txt">宿屋塾をパートナーに選んだことで、「三菱電機としてのリーダー」を作ることにこだわったプログラムを実施し、熱を伝えることができたように思います。 議論していく中で、三菱電機「らしさ」を理解した、三菱電機グループでやっていく覚悟をもった経営者を作ることの大切さを参加者に伝えられたように思います。 </p>
+              <h3 class="c-voice-card__ttl"><?php the_title(); ?></h3>
+              <div class="c-voice-card__txt-wrap"><?php the_content(); ?></div>
           </li>
-          <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
-              <p class="c-voice-card__txt">宿屋塾は答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
-          </li>
-          <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
-              <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
-          </li>
-          <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
-              <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
-          </li>
-          <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
-              <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
-          </li>
-          <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
-              <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
-          </li>
-          <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
-              <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
-          </li>
-          <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
-              <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
-          </li>
-          <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
-              <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
-          </li>
-          <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl">ホテルマネージャー / 40代</h3>
-              <p class="c-voice-card__txt">グロービス・キャピタル・パートナーズは答えのない新規市場で戦う我々にひらめきを与えてくれます。事業成長資金はもちろん、ビジネスアイディア、組織づくり、コンプライアンスに至るまで全方位で事業成長を支援してくれる最高のパートナーです。</p>
-          </li>
+          <?php
+            endwhile;
+            wp_reset_postdata();
+          ?>
         </ul>
       </div>
 
-      <div id="js-voice-card-swiper-controls" class="c-swiper-controls" data-aos="fade">
+      <div id="js-voice-card-swiper-controls" class="c-swiper-controls">
         <div class="swiper-button-prev c-arrow-btn prev"></div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-next c-arrow-btn next"></div>
@@ -656,40 +334,33 @@
         <span class="p-front-ttl__en">information</span>
         <span class="p-front-ttl__ja">お知らせ</span>
       </h2>
-      
       <ul class="p-front-news__list" data-aos="fade">
+        <?php
+          $news_args = [
+            'post_type' => 'news',
+            'posts_per_page' => 5,
+            'post_status' => 'publish',
+            'orderby' => 'date',
+            'order' => 'DESC',
+          ];
+
+          $news_query = new WP_Query($news_args);
+
+          while($news_query->have_posts()):
+            $news_query->the_post();
+        ?>
         <li class="p-front-news__item">
           <a href="" class="p-front-news__item-link">
-            <time class="p-front-news__item-date" datetime="2025-03-06">2025.03.06</time>
-            <h3 class="p-front-news__item-ttl">流通科学大学主催「キャリアアップセミナー　ホテル・旅館」に宿屋大学 代表の近藤寛和が登壇しました</h3>
+            <time class="p-front-news__item-date" datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>"><?php the_time('Y.m.d'); ?></time>
+            <h3 class="p-front-news__item-ttl"><?php the_title(); ?></h3>
           </a>
         </li>
-        <li class="p-front-news__item">
-          <a href="" class="p-front-news__item-link">
-            <time class="p-front-news__item-date">2025.03.06</time>
-            <h3 class="p-front-news__item-ttl">(一社)全日本ホテル連盟 経営者セミナーに宿屋大学 代表の近藤寛和が登壇し、ファシリテーターを務めました</h3>
-          </a>
-        </li>
-        <li class="p-front-news__item">
-          <a href="" class="p-front-news__item-link">
-            <time class="p-front-news__item-date">2025.03.06</time>
-            <h3 class="p-front-news__item-ttl">熊本県主催 観光経営塾に宿屋大学 代表の近藤寛和が登壇いたしました</h3>
-          </a>
-        </li>
-        <li class="p-front-news__item">
-          <a href="" class="p-front-news__item-link">
-            <time class="p-front-news__item-date">2025.03.06</time>
-            <h3 class="p-front-news__item-ttl">【株式会社 宿屋塾】エグゼクティブディレクターに、坂下雅行が就任</h3>
-          </a>
-        </li>
-        <li class="p-front-news__item">
-          <a href="" class="p-front-news__item-link">
-            <time class="p-front-news__item-date">2025.03.06</time>
-            <h3 class="p-front-news__item-ttl">文字数多い時のサンプルになります。流通科学大学主催「キャリアアップセミナー　ホテル・旅館」に宿屋大学 代表の近藤寛和が登壇しました流通科学大学主催「キャリアアップセミナー　ホテル・旅館」に宿屋大学 代表の近藤寛和が登壇しました</h3>
-          </a>
-        </li>
+        <?php
+          endwhile;
+          wp_reset_postdata();
+        ?>
       </ul>
-      <div class="c-btn __pc-right" data-aos="fade">
+      <div class="c-btn __pc-right">
         <a href="" class="c-btn__link">お知らせ一覧へ</a>
       </div>
     </div>

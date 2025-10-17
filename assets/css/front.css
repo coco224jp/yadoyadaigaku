@@ -53,6 +53,11 @@
     padding: 1.5rem 2rem;
   }
 }
+@media screen and (width >= 768px) {
+  .swiper-slide-active .p-front-mv__swiper-slide-body {
+    padding: 1.5rem 2rem 1.5rem 1.29rem;
+  }
+}
 .p-front-mv__swiper-slide-title {
   display: grid;
   grid-template-columns: 4.4rem 1fr;
@@ -60,13 +65,13 @@
 }
 @media screen and (width >= 768px) {
   .p-front-mv__swiper-slide-title {
-    grid-template-columns: 5.2rem 1fr;
-    gap: 0 1.67rem;
+    grid-template-columns: 5.4rem 1fr;
+    gap: 0 1.4rem;
   }
 }
 @media screen and (width >= 768px) {
   .p-front-mv__swiper-slide.swiper-slide-active .p-front-mv__swiper-slide-title {
-    grid-template-columns: 5.4rem 1fr;
+    grid-template-columns: 6.82rem 1fr;
     gap: 0 1.8rem;
   }
 }
@@ -111,7 +116,7 @@
   }
 }
 @media screen and (width >= 768px) {
-  .p-front-mv__swiper-slide.swiper-slide-active .p-front-mv__swiper-slide-date-wrap {
+  .swiper-slide-active .p-front-mv__swiper-slide-date-wrap {
     min-height: 5.25rem;
   }
 }
@@ -125,15 +130,14 @@
   width: 0.136rem;
   height: 2.327rem;
   background-color: #000;
-  rotate: 45deg;
+  rotate: 47deg;
   top: 0.25rem;
   left: 45%;
 }
 @media screen and (width >= 768px) {
   .p-front-mv__swiper-slide-date-wrap::before {
     height: 2.737rem;
-    top: 0.6rem;
-    left: 45%;
+    top: 0.5rem;
   }
 }
 @media screen and (width >= 768px) {
@@ -148,32 +152,42 @@
 }
 @media screen and (width >= 768px) {
   .p-front-mv__swiper-slide-date-wrap .month {
-    left: 0.5rem;
+    left: 0.6rem;
   }
 }
+.p-front-mv__swiper-slide-date-wrap .month.double {
+  left: 0;
+}
 @media screen and (width >= 768px) {
-  .p-front-mv__swiper-slide.swiper-slide-active .p-front-mv__swiper-slide-date-wrap .month {
+  .swiper-slide-active .p-front-mv__swiper-slide-date-wrap .month {
     font-size: 2.4rem;
-    left: 0.37rem;
   }
 }
 .p-front-mv__swiper-slide-date-wrap .date {
   font-size: 1.87rem;
   bottom: -0.25em;
-  right: 0.25rem;
+  right: 0.82rem;
 }
 @media screen and (width >= 768px) {
   .p-front-mv__swiper-slide-date-wrap .date {
     font-size: 2.2rem;
-    right: 0.27rem;
+    right: 0.97rem;
   }
 }
+.p-front-mv__swiper-slide-date-wrap .date.double {
+  right: 0;
+}
 @media screen and (width >= 768px) {
-  .p-front-mv__swiper-slide.swiper-slide-active .p-front-mv__swiper-slide-date-wrap .date {
+  .swiper-slide-active .p-front-mv__swiper-slide-date-wrap .date {
     font-size: 2.8rem;
     bottom: unset;
     top: 2.45rem;
-    right: 0.1rem;
+    right: 1.4rem;
+  }
+}
+@media screen and (width >= 768px) {
+  .swiper-slide-active .p-front-mv__swiper-slide-date-wrap .date.double {
+    right: 0;
   }
 }
 .p-front-mv__swiper-slide-date-txt {
@@ -208,6 +222,7 @@
 }
 .p-front-mv__swiper-slide-img {
   order: 1;
+  position: relative;
   height: 16.8rem;
 }
 @media screen and (width >= 768px) {
@@ -224,6 +239,18 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.p-front-mv__swiper-slide__cat {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.935rem;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 600;
+  padding: 0.68rem 1.275rem;
+  border-radius: 100vmax;
+  background: #7862F1;
 }
 .p-front-mv .p-pagination-progress-circle {
   position: static;
@@ -360,11 +387,19 @@
 }
 .p-front-feature__card {
   position: relative;
-  display: flex;
+  display: grid;
   flex-direction: column;
   gap: 1.4rem 0;
   align-items: center;
   text-align: center;
+}
+@media screen and (width >= 768px) {
+  .p-front-feature__card {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    justify-items: center;
+  }
 }
 .p-front-feature__card::before {
   position: absolute;
@@ -385,6 +420,9 @@
 }
 .p-front-feature__card-img {
   width: 11.2rem;
+}
+.p-front-feature__card-img > img {
+  width: 100%;
 }
 .p-front-feature__card-ttl {
   font-size: 2rem;
@@ -410,7 +448,7 @@
   .p-front-service__list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0 2rem;
+    gap: 2rem;
   }
 }
 .p-front-service .c-card + .c-card {
@@ -496,6 +534,11 @@
   background-size: 10px 1px;
   background-position: left bottom; /* 背景の開始位置を指定 */
   background-repeat: repeat-x;
+}
+@media screen and (width <= 767px) {
+  .p-front-industry-news__item:nth-child(n+6) {
+    display: none;
+  }
 }
 @media screen and (width >= 768px) {
   .p-front-industry-news__item {
@@ -588,10 +631,12 @@
   padding-top: 6rem;
 }
 .p-front-knowledge .c-thumbnail-card__img {
+  aspect-ratio: 268.05/166.91;
   border-radius: 0.46rem;
 }
 @media screen and (width >= 768px) {
   .p-front-knowledge .c-thumbnail-card__img {
+    aspect-ratio: 371.25/231.17;
     border-radius: 0.88rem;
   }
 }
@@ -643,6 +688,12 @@
   font-family: var(--font-en);
   font-size: 1.2rem;
   line-height: normal;
+  transition: color 0.3s;
+}
+@media (any-hover: hover) and (min-width: 768px) {
+  .p-front-news__item-link:hover .p-front-news__item-date {
+    color: var(--color-logo);
+  }
 }
 .p-front-news__item-ttl {
   margin-top: 1rem;
@@ -652,7 +703,7 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 1;
 }
 @media screen and (width >= 768px) {
   .p-front-news__item-ttl {

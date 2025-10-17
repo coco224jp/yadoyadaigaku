@@ -58,6 +58,12 @@
     @include mq() {
       padding: 1.5rem 2rem;
     }
+
+    .swiper-slide-active & {
+      @include mq {
+        padding: 1.5rem 2rem 1.5rem 1.29rem;
+      }
+    }
   }
 
   &__swiper-slide-title {
@@ -66,12 +72,12 @@
     gap: 0 1.2rem;
 
     @include mq() {
-      grid-template-columns: 5.2rem 1fr;
-      gap: 0 1.67rem;
+      grid-template-columns: 5.4rem 1fr;
+      gap: 0 1.4rem;
     }
     .p-front-mv__swiper-slide.swiper-slide-active & {
       @include mq {
-        grid-template-columns: 5.4rem 1fr;
+        grid-template-columns: 6.82rem 1fr;
         gap: 0 1.8rem;
       }
     }
@@ -115,7 +121,7 @@
       font-size: 2rem;
       line-height: 1;
     }
-    .p-front-mv__swiper-slide.swiper-slide-active & {
+    .swiper-slide-active & {
       @include mq {
         min-height: 5.25rem;
       }
@@ -129,21 +135,16 @@
       content: "";
       display: inline-block;
       position: absolute;
-      // font-size: 1.87rem;
-      // font-size: 1.87rem;
-      // width: 1.36px;
-      // height: 1em;
       width: 0.136rem;
       height: 2.327rem;
       background-color: #000;
-      rotate: 45deg;
+      rotate: 47deg;
       top: 0.25rem;
       left: 45%;
 
       @include mq() {
         height: 2.737rem;
-        top: 0.6rem;
-        left: 45%;
+        top: 0.5rem;
       }
 
       .p-front-mv__swiper-slide.swiper-slide-active & {
@@ -159,13 +160,16 @@
       left: 0.42rem;
 
       @include mq {
-        left: 0.5rem;
+        left: 0.6rem;
       }
 
-      .p-front-mv__swiper-slide.swiper-slide-active & {
+      &.double {
+        left: 0;
+      }
+
+      .swiper-slide-active & {
         @include mq {
           font-size: 2.4rem;
-          left: 0.37rem;
         }
       }
     }
@@ -173,19 +177,29 @@
     .date {
       font-size: 1.87rem;
       bottom: -0.25em;
-      right: 0.25rem;
+      right: 0.82rem;
 
       @include mq() {
         font-size: 2.2rem;
-        right: 0.27rem;
+        right: 0.97rem;
       }
 
-      .p-front-mv__swiper-slide.swiper-slide-active & {
+      &.double {
+        right: 0;
+      }
+
+      .swiper-slide-active & {
         @include mq {
           font-size: 2.8rem;
           bottom: unset;
           top: 2.45rem;
-          right: 0.1rem;
+          right: 1.4rem;
+        }
+
+        &.double {
+          @include mq {
+            right: 0;
+          }
         }
       }
     }
@@ -223,6 +237,7 @@
   }
   &__swiper-slide-img {
     order: 1;
+    position: relative;
     height: 16.8rem;
 
     @include mq {
@@ -240,9 +255,19 @@
       height: 100%;
       object-fit: cover;
     }
+  }
 
-    @include mq() {
-    }
+  &__swiper-slide__cat {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.935rem;
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1;
+    font-weight: 600;
+    padding: 0.68rem 1.275rem;
+    border-radius: 100vmax;
+    background: #7862F1;
   }
 
   .p-pagination-progress-circle {
@@ -407,11 +432,18 @@
   }
   &__card {
     position: relative;
-    display: flex;
+    display: grid;
     flex-direction: column;
     gap: 1.4rem 0;
     align-items: center;
     text-align: center;
+
+    @include mq {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 4;
+      justify-items: center;
+    }
 
     &::before {
       position: absolute;
@@ -433,7 +465,9 @@
   }
   &__card-img {
     width: 11.2rem;
-    @include mq() {
+
+    > img {
+      width: 100%;
     }
   }
   &__card-ttl {
@@ -466,7 +500,7 @@
     @include mq {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 0 2rem;
+      gap: 2rem;
     }
   }
 
@@ -565,6 +599,12 @@
     background-size: 10px 1px;
     background-position: left bottom; /* 背景の開始位置を指定 */
     background-repeat: repeat-x;
+
+    &:nth-child(n+6) {
+      @include mq(sp) {
+        display: none;
+      }
+    }
 
     @include mq() {
       width: 30rem;
@@ -679,9 +719,11 @@
 
   .c-thumbnail-card {
     &__img {
+      aspect-ratio: 268.05 / 166.91;
       border-radius: 0.46rem;
 
       @include mq {
+        aspect-ratio: 371.25 / 231.17;
         border-radius: 0.88rem;
       }
     }
@@ -751,7 +793,12 @@
     font-family: var(--font-en);
     font-size: 1.2rem;
     line-height: normal;
-    @include mq() {
+    transition: color 0.3s;
+
+    @include hover {
+      .p-front-news__item-link:hover & {
+        color: var(--color-logo);
+      }
     }
   }
 
@@ -763,7 +810,7 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 1;
 
     @include mq() {
       font-size: 1.6rem;
