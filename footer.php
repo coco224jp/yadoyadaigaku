@@ -14,19 +14,19 @@
       こちらをご確認ください。</p>
       <ul class="l-footer-cta__btn-list">
         <li class="l-footer-cta__btn">
-          <a href="" class="l-footer-cta__btn-link">
+          <a href="#" class="l-footer-cta__btn-link">
             <span class="l-footer-cta__btn-text-en">Access</span>
             <span class="l-footer-cta__btn-text-ja">アクセス</span>
           </a>
         </li>
         <li class="l-footer-cta__btn">
-          <a href="" class="l-footer-cta__btn-link">
+          <a href="#" class="l-footer-cta__btn-link">
             <span class="l-footer-cta__btn-text-en">Seminar</span>
             <span class="l-footer-cta__btn-text-ja">講演依頼</span>
           </a>
         </li>
         <li class="l-footer-cta__btn">
-          <a href="" class="l-footer-cta__btn-link">
+          <a href="#" class="l-footer-cta__btn-link">
             <span class="l-footer-cta__btn-text-en">Contact</span>
             <span class="l-footer-cta__btn-text-ja">お問い合わせ</span>
           </a>
