@@ -34,7 +34,7 @@
     } elseif( is_singular('product') || is_post_type_archive('product') ){
       wp_enqueue_style('product-css', get_template_directory_uri().'/assets/css/product.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/product.css'));
     } elseif( is_singular('knowledge') || is_post_type_archive('knowledge') ){
-      wp_enqueue_style('blog-css', get_template_directory_uri().'/assets/css/blog.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/product.css'));
+      wp_enqueue_style('blog-css', get_template_directory_uri().'/assets/css/blog.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/blog.css'));
     }
 
     wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '0.0.0');
