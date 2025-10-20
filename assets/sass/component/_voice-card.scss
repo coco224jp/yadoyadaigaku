@@ -73,7 +73,7 @@
         font-size: 5.6rem;
       }
 
-      .c-voice-card__ttl.swiper-slide-active & {
+      .swiper-slide-active & {
         @include mq {
           font-size: 6.72rem;
         }

@@ -16,6 +16,18 @@
   h2 {
     font-size: 2.1rem;
     font-weight: bold;
+    background: var(--bg-color-deep);
+    padding: 1.56rem 1.6rem;
+
+    @include mq {
+      font-size: 2.8rem;
+      padding-block: 1.24rem;
+    }
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
 
     @include mq {
       font-size: 2.4rem;

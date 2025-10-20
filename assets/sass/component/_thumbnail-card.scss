@@ -19,6 +19,11 @@
     order: 1;
     border-radius: 0.8rem;
     overflow: hidden;
+    aspect-ratio: 268 / 124.65;
+
+    @include mq {
+      aspect-ratio: 387 / 180;
+    }
 
     > img {
       width: 100%;
