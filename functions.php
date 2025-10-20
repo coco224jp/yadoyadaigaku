@@ -33,11 +33,11 @@
         wp_enqueue_style('service-css', get_template_directory_uri().'/assets/css/service.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/service.css'));
     } elseif( is_singular('product') || is_post_type_archive('product') ){
       wp_enqueue_style('product-css', get_template_directory_uri().'/assets/css/product.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/product.css'));
-    } elseif( is_single() || is_home() ){
+    } elseif( is_singular('knowledge') || is_post_type_archive('knowledge') ){
       wp_enqueue_style('blog-css', get_template_directory_uri().'/assets/css/blog.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/product.css'));
     }
 
-    wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js', array(), '0.0.0');
+    wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '0.0.0');
     wp_enqueue_script('aos-js', 'https://unpkg.com/aos@2.3.1/dist/aos.js', array(), '0.0.0');
     wp_enqueue_script('jquery');
     wp_enqueue_script('script-js', get_template_directory_uri().'/assets/js/script.js', array('swiper-js','aos-js', 'jquery'), filemtime( $theme_path . '/assets/js/script.js'));
@@ -70,33 +70,6 @@
 
   add_action('after_setup_theme', 'theme_setup');
 
-  function change_post_menu_label() {
-    global $menu, $submenu;
-    $name = 'ホテルマネジメントの教科書';
-    $menu[5][0] = $name;
-    $submenu['edit.php'][5][0] = $name . '一覧';
-    $submenu['edit.php'][10][0] = '新しい' . $name;
-  }
-
-  function change_post_object_label() {
-    global $wp_post_types;
-    $name = 'ホテルマネジメントの教科書';
-    $labels = &$wp_post_types['post']->labels;
-    $labels->name = $name;
-    $labels->singular_name = $name;
-    $labels->add_new = '追加';
-    $labels->add_new_item = $name . 'の新規追加';
-    $labels->edit_item = $name . 'の編集';
-    $labels->new_item = '新規' . $name;
-    $labels->view_item = $name . 'を表示';
-    $labels->search_items = $name . 'を検索';
-    $labels->not_found = $name . 'が見つかりませんでした';
-    $labels->not_found_in_trash = 'ゴミ箱に' . $name . 'は見つかりませんでした';
-  }
-
-  add_action('init', 'change_post_object_label');
-  add_action('admin_menu', 'change_post_menu_label');
-
   // ホテルマネジメントの教科書一覧ページのページネーションのカスタマイズ
   add_filter( 'paginate_links_output', function( $output ) {
     // 前へボタンが無い場合に追加
@@ -114,4 +87,38 @@
     }
 
     return $output;
-});
+  });
+
+  /**
+   * すべてのACF関係フィールドで
+   * 左側リスト（未選択の投稿一覧）の並び順を「投稿日の新しい順」に並べ替える
+   */
+  add_filter('acf/fields/relationship/query', function($args, $field, $post_id) {
+    $args['orderby'] = 'date'; // 投稿日順
+    $args['order'] = 'DESC';   // 新しい順
+    return $args;
+  }, 10, 3);
+
+  /**
+   * すべてのACF関係フィールドで
+   * 選択済み投稿（右側）を「投稿日の新しい順」に並べ替える
+   */
+  add_filter('acf/load_value/type=relationship', 'acf_sort_relationship_by_date', 10, 3);
+  function acf_sort_relationship_by_date($value, $post_id, $field) {
+      if (empty($value) || !is_array($value)) {
+          return $value;
+      }
+
+      // 投稿オブジェクトを取得
+      $posts = array_map('get_post', $value);
+
+      // 投稿日（新しい順）でソート
+      usort($posts, function($a, $b) {
+          return strtotime($b->post_date) <=> strtotime($a->post_date);
+      });
+
+      // 並べ替えた投稿IDの配列を返す
+      return array_map(function($post) {
+          return $post->ID;
+      }, $posts);
+  }
