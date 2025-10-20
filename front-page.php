@@ -6,36 +6,69 @@
 
 <main>
   <section class="p-front-mv bg-light">
-    <div class="l-inner">
+    <div class="p-front-mv__inner l-inner">
       <div id="js-front-mv-swiper" class="p-front-mv__swiper c-overflow-swiper swiper">
         <ul class="p-front-mv__swiper-wrapper swiper-wrapper">
-          <!-- スライド最低11枚必要 -->
            <?php
             $mv_args = [
               'post_type' => 'product',
-              'posts_per_page' => -1,
+              'posts_per_page' => 5,
               'post_status' => 'publish',
+              'tax_query' => [
+                [
+                  'taxonomy' => 'product-cat',
+                  'field'    => 'slug',
+                  'terms'    => ['open-course', 'school'],
+                ]
+              ],
               'orderby' => 'date',
               'order' => 'DESC',
             ];
 
             $mv_query = new WP_Query($mv_args);
 
-            while($mv_query->have_posts()): $mv_query->the_post();
 
-            $date =  esc_html(get_the_date('j'));
-            $month = esc_html(get_the_date('n'));
-            $mv_terms = get_the_terms(get_the_ID(), 'product-cat');
-            $mv_term_name = '';
-
-            if($mv_terms):
-              foreach($mv_terms as $mv_term):
-                if($mv_term->slug !== 'uncategorized'):
-                  $mv_term_name = $mv_term->name;
-                  break;
-                endif;
-              endforeach;
-            endif;
+            $posts = $mv_query->posts; // 投稿オブジェクトの配列
+            $today = strtotime(date('Y-m-d'));
+            
+            // 投稿日との差分を計算して配列に格納
+            $posts_with_diff = [];
+            foreach ($posts as $p) {
+              $post_date = strtotime(get_the_date('Y-m-d', $p));
+              $diff = abs($today - $post_date); // 今日との差の絶対値
+              $posts_with_diff[] = [
+                'post' => $p,
+                'diff' => $diff,
+              ];
+            }
+            
+            // 投稿日が最も近い投稿を探す
+            usort($posts_with_diff, function($a, $b) {
+              return $a['diff'] - $b['diff'];
+            });
+            $closest_post = array_shift($posts_with_diff);
+            
+            // 残りをまとめて再構成（真ん中に$closest_postを配置）
+            $other_posts = array_column($posts_with_diff, 'post');
+            $middle_index = floor(count($other_posts) / 2);
+            array_splice($other_posts, $middle_index, 0, [$closest_post['post']]);
+            
+            // Swiper出力
+            foreach ($other_posts as $post) :
+              setup_postdata($post);
+              $date = esc_html(get_the_date('j'));
+              $month = esc_html(get_the_date('n'));
+              $mv_terms = get_the_terms(get_the_ID(), 'product-cat');
+              $mv_term_name = '';
+            
+              if ($mv_terms) :
+                foreach ($mv_terms as $mv_term) :
+                  if ($mv_term->slug !== 'uncategorized') :
+                    $mv_term_name = $mv_term->name;
+                    break;
+                  endif;
+                endforeach;
+              endif;
            ?>
           <li class="p-front-mv__swiper-slide swiper-slide">
             <a href="<?php the_permalink(); ?>" class="p-front-mv__swiper-slide-link">
@@ -68,7 +101,7 @@
             </a>
           </li>
           <?php
-            endwhile;
+            endforeach;
             wp_reset_postdata();
           ?>
         </ul><!-- /.p-front-mv__swiper-wrapper -->
@@ -109,22 +142,6 @@
         $front_feature_index++;
         endwhile; endif;
       ?>
-        <!-- <li class="p-front-feature__card" data-aos="fade-up" data-aos-delay="600">
-          <figure class="p-front-feature__card-img">
-            <img src="<?php echo $theme_uri; ?>/assets/images/front/front-feature02.svg" alt="">
-          </figure>
-          <h3 class="p-front-feature__card-ttl">ホテルマネジメントに<br>
-          特化した<span class="text-highlight">ビジネススクール</span></h3>
-          <p class="p-front-feature__card-txt">テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
-        </li>
-        <li class="p-front-feature__card" data-aos="fade-up" data-aos-delay="1000">
-          <figure class="p-front-feature__card-img">
-            <img src="<?php echo $theme_uri; ?>/assets/images/front/front-feature03.svg" alt="">
-          </figure>
-          <h3 class="p-front-feature__card-ttl"><span class="text-highlight">ホテルマネジメント</span>に<br>
-          特化したビジネススクール</h3>
-          <p class="p-front-feature__card-txt">テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
-        </li> -->
       </ul>
       <div class="c-btn __pc-right" data-aos="fade" data-aos-delay="1300">
         <a href="" class="c-btn__link">宿屋塾のビジョン</a>
@@ -141,38 +158,30 @@
       <p class="p-front-service__intro-txt" data-aos="fade">宿屋塾では、宿泊産業のビジネス力を高めるためのサービスを提供しています。</p>
       <ul class="p-front-service__list">
       <?php
-        $service_args = [
-          'post_type' => 'service',
-          'posts_per_page' => 5,
-          'post_status' => 'publish',
-          'orderby' => 'date',
-          'order' => 'DESC',
-        ];
-
-        $service_query = new WP_Query($service_args);
+        $front_services = get_field('front_service');
         $front_service_index = 0;
 
-        while($service_query->have_posts()): 
-          $service_query->the_post();
+        foreach($front_services as $service_post):
+          $service_en_ttl = get_field('service_en_ttl', $service_post->ID);
       ?>
         <li class="c-card" data-aos="fade-up" data-aos-delay="<?php echo $front_service_index * 300; ?>">
-          <a href="<?php the_permalink(); ?>" class="c-card__link">
+          <a href="<?php echo get_permalink($service_post->ID); ?>" class="c-card__link">
             <div class="c-card__txt-wrap">
               <h3 class="c-card__ttl">
-                <span class="c-card__ttl-en">For Students</span>
-                <span class="c-card__ttl-jp"><?php the_title(); ?></span>
+                <span class="c-card__ttl-en"><?php echo $service_en_ttl; ?></span>
+                <span class="c-card__ttl-jp"><?php echo get_the_title($service_post->ID); ?></span>
               </h3>
             </div>
-            <?php if(has_post_thumbnail()): ?>
+            <?php if(has_post_thumbnail($service_post->ID)): ?>
             <figure class="c-card__img">
-                <?php the_post_thumbnail('full'); ?>
+                <?php echo get_the_post_thumbnail($service_post->ID, 'full'); ?>
             </figure>
             <?php endif; ?>
           </a>
         </li>
       <?php
         $front_service_index++;
-        endwhile;
+        endforeach;
         wp_reset_postdata();
       ?>
       </ul>
@@ -233,7 +242,7 @@
         <ul class="p-front-knowledge__swiper-wrapper swiper-wrapper">
           <?php
             $blog_args = [
-              'post_type' => 'post',
+              'post_type' => 'knowledge',
               'posts_per_page' => 10,
               'post_status' => 'publish',
               'orderby' => 'date',
@@ -245,7 +254,7 @@
           <?php
             while($blog_query->have_posts()):
               $blog_query->the_post();
-              $blog_cats = get_the_category();
+              $blog_cats = get_the_terms(get_the_ID(), 'knowledge-cat');
               $blog_cat_name = '';
 
               if($blog_cats):
@@ -296,25 +305,18 @@
       <div id="js-voice-card-swiper" class="c-voice-card-swiper swiper" data-aos="fade">
         <ul class="c-voice-card-swiper__wrapper swiper-wrapper">
           <?php
-            $voice_card_args = [
-              'post_type' => 'voice',
-              'posts_per_page' => 5,
-              'post_status' => 'publish',
-              'orderby' => 'date',
-              'order' => 'DESC',
-            ];
-
-            $voice_query = new WP_Query($voice_card_args);
-
-            while($voice_query->have_posts()):
-              $voice_query->the_post();
-            ?>
+            $front_voices = get_field('front_voice', $post->ID);
+            
+            foreach($front_voices as $voice_post):
+              setup_postdata($voice_post);
+              $voice_role = get_field('voice_role', $voice_post->ID)
+          ?>
           <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl"><?php the_title(); ?></h3>
+              <h3 class="c-voice-card__ttl"><?php echo $voice_role; ?></h3>
               <div class="c-voice-card__txt-wrap"><?php the_content(); ?></div>
           </li>
           <?php
-            endwhile;
+            endforeach;
             wp_reset_postdata();
           ?>
         </ul>

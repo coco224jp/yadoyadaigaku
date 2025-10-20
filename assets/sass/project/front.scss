@@ -12,6 +12,12 @@
     padding-bottom: 5.15rem;
   }
 
+  &__inner {
+    @include mq {
+      width: min(203rem, 100%);
+    }
+  }
+
   &__swiper {
     margin-top: 1.5rem;
 
@@ -433,15 +439,13 @@
   &__card {
     position: relative;
     display: grid;
-    flex-direction: column;
     gap: 1.4rem 0;
-    align-items: center;
+    justify-items: center;
     text-align: center;
 
     @include mq {
-      display: grid;
       grid-template-rows: subgrid;
-      grid-row: span 4;
+      grid-row: span 3;
       justify-items: center;
     }
 
@@ -718,6 +722,12 @@
   }
 
   .c-thumbnail-card {
+    width: 26.8rem;
+
+    @include mq {
+      width: 37.125rem;
+    }
+
     &__img {
       aspect-ratio: 268.05 / 166.91;
       border-radius: 0.46rem;
