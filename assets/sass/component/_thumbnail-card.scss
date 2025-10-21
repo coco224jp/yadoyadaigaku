@@ -2,6 +2,13 @@
 @use "sass:map";
 
 .c-thumbnail-card {
+  .u-product-swiper & {
+    width: 26.8rem;
+
+    @include mq {
+      width: 38.7rem;
+    }
+  }
 
   &__inner{
     display: grid;

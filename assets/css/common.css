@@ -1394,6 +1394,14 @@ small {
   }
 }
 
+.u-product-swiper .c-thumbnail-card {
+  width: 26.8rem;
+}
+@media screen and (width >= 768px) {
+  .u-product-swiper .c-thumbnail-card {
+    width: 38.7rem;
+  }
+}
 .c-thumbnail-card__inner {
   display: grid;
   gap: 1.2rem 0;
