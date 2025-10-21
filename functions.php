@@ -29,7 +29,7 @@
 
     if(is_front_page()){
       wp_enqueue_style('front-css', get_template_directory_uri().'/assets/css/front.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/front.css'));
-    } elseif( is_singular('service') || is_page('service') ){
+    } elseif( is_singular('service') || is_post_type_archive('service') || is_page('service') ){
         wp_enqueue_style('service-css', get_template_directory_uri().'/assets/css/service.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/service.css'));
     } elseif( is_singular('product') || is_post_type_archive('product') ){
       wp_enqueue_style('product-css', get_template_directory_uri().'/assets/css/product.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/product.css'));
@@ -122,4 +122,47 @@
           return $post->ID;
       }, $posts);
   }
+
+/**
+ * イベントが締め切りかどうかを判定
+ *
+ * @param int|null $post_id 投稿ID（省略時は現在の投稿）
+ * @return bool true = 締め切り、false = 受付中
+ */
+function is_event_closed($post_id = null) {
+    // ACFのフィールド値取得
+    $deadline = get_field('締切日', $post_id);
+    $capacity = get_field('定員に達した', $post_id); // チェックボックス
+
+    // 今日の日付（Y-m-d形式）
+    $today = current_time('Y-m-d');
+
+    // 1. 締切日が設定されていて、今日より前なら締め切り
+    if ($deadline && $deadline < $today) {
+        return true;
+    }
+
+    // 2. チェックボックスがあり、「締め切る」が含まれていれば締め切り
+    if (is_array($capacity) && in_array('締め切る', $capacity)) {
+        return true;
+    }
+
+    // どちらにも当てはまらない場合は受付中
+    return false;
+}
+
+
+/* ========================================================
+// acf クラシックエディタのカスタム
+=========================================================*/
+
+add_filter( 'acf/fields/wysiwyg/toolbars' , 'my_toolbars'  );
+function my_toolbars( $toolbars )
+{
+    $toolbars['テーブル' ] = array();
+    $toolbars['テーブル' ][1] = array('table','link', 'unlink');
+
+    return $toolbars;
+}
+
 
