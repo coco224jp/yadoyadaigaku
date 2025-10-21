@@ -172,33 +172,33 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
-    const voiceCardSwiper = new Swiper('#js-voice-card-swiper', {
-      slidesPerView: 'auto',
-      spaceBetween: rem * 1.6,
-      centeredSlides: true,
-      initialSlide: 2,
-      slidesPerGroup: 1,
-      speed: 1500,
-      autoplay: {
-        delay: 3500
+  const voiceCardSwiper = new Swiper('#js-voice-card-swiper', {
+    slidesPerView: 'auto',
+    spaceBetween: rem * 1.6,
+    centeredSlides: true,
+    initialSlide: 2,
+    slidesPerGroup: 1,
+    speed: 1500,
+    autoplay: {
+      delay: 3500
+    },
+    navigation: {
+      nextEl: '#js-voice-card-swiper-controls .swiper-button-next',
+      prevEl: '#js-voice-card-swiper-controls .swiper-button-prev',
+    },
+    pagination: {
+      el: '#js-voice-card-swiper-controls .swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      768: {
+        spaceBetween: rem * 2,
       },
-      navigation: {
-        nextEl: '#js-voice-card-swiper-controls .swiper-button-next',
-        prevEl: '#js-voice-card-swiper-controls .swiper-button-prev',
-      },
-      pagination: {
-        el: '#js-voice-card-swiper-controls .swiper-pagination',
-        clickable: true,
-      },
-      breakpoints: {
-        768: {
-          spaceBetween: rem * 2,
-        },
-      },
-    });
+    },
+  });
 
   const productSwiper = new Swiper('#js-product-swiper', {
-    slidesPerView: '1.375',
+    slidesPerView: 'auto',
     speed: 2000,
     spaceBetween: rem * 1.6,
     centeredSlides: true,
@@ -219,7 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
     breakpoints: {
       // when window width is >= 768px
       768: {
-        slidesPerView: 3.3,
         spaceBetween: rem * 2,
         centeredSlides: false,
         initialSlide: 0,
