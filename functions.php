@@ -29,7 +29,7 @@
 
     if(is_front_page()){
       wp_enqueue_style('front-css', get_template_directory_uri().'/assets/css/front.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/front.css'));
-    } elseif( is_singular('service') || is_post_type_archive('service') ){
+    } elseif( is_singular('service') || is_page('service') ){
         wp_enqueue_style('service-css', get_template_directory_uri().'/assets/css/service.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/service.css'));
     } elseif( is_singular('product') || is_post_type_archive('product') ){
       wp_enqueue_style('product-css', get_template_directory_uri().'/assets/css/product.css', array('google-fonts', 'swiper-css', 'common-css'), filemtime( $theme_path . '/assets/css/product.css'));
@@ -122,3 +122,4 @@
           return $post->ID;
       }, $posts);
   }
+

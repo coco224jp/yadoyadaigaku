@@ -305,7 +305,7 @@
       <div id="js-voice-card-swiper" class="c-voice-card-swiper swiper" data-aos="fade">
         <ul class="c-voice-card-swiper__wrapper swiper-wrapper">
           <?php
-            $front_voices = get_field('front_voice', $post->ID);
+            $front_voices = get_field('front_voice');
             
             foreach($front_voices as $voice_post):
               setup_postdata($voice_post);

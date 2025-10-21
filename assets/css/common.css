@@ -833,24 +833,42 @@ small {
   }
 }
 .l-footer-cta__btn-link {
+  position: relative;
   display: block;
   padding: 2rem;
   height: 19rem;
-  background: no-repeat center center/cover;
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: end;
   gap: 0.8rem 0;
+  overflow: hidden;
 }
-.l-footer-cta__btn:first-child .l-footer-cta__btn-link {
+.l-footer-cta__btn-link::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: no-repeat center center/cover;
+  z-index: -1;
+  transition: scale 0.3s ease-in-out;
+}
+.l-footer-cta__btn:first-child .l-footer-cta__btn-link::before {
   background-image: url("../images/common/cta-sec01.jpg");
 }
-.l-footer-cta__btn:nth-child(2) .l-footer-cta__btn-link {
+.l-footer-cta__btn:nth-child(2) .l-footer-cta__btn-link::before {
   background-image: url("../images/common/cta-sec02.jpg");
 }
-.l-footer-cta__btn:last-child .l-footer-cta__btn-link {
+.l-footer-cta__btn:last-child .l-footer-cta__btn-link::before {
   background-image: url("../images/common/cta-sec03.jpg");
+}
+@media (any-hover: hover) {
+  .l-footer-cta__btn-link:hover::before {
+    scale: 1.1;
+  }
 }
 .l-footer-cta__btn-text-en {
   font-family: var(--font-en);
@@ -1134,7 +1152,7 @@ small {
   border-radius: 50%;
   transition: translate 0.3s;
 }
-@media (any-hover: hover) and (min-width: 768px) {
+@media (any-hover: hover) {
   .l-wp-block-content .wp-block-button__link:hover::after {
     translate: 100% 0;
   }
@@ -1300,7 +1318,7 @@ small {
     min-width: 31.9rem;
   }
 }
-@media (any-hover: hover) and (min-width: 768px) {
+@media (any-hover: hover) {
   .c-btn__link:not(.__disabled .c-btn__link):hover::after {
     translate: 100% 0;
   }
@@ -1356,6 +1374,12 @@ small {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+@media (any-hover: hover) {
+  .c-card__link:hover .c-card__img > img {
+    transform: scale(1.1);
+  }
 }
 .c-card__ttl-en {
   font-family: var(--font-en);
@@ -1429,6 +1453,12 @@ small {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+@media (any-hover: hover) {
+  .c-thumbnail-card__inner:hover .c-thumbnail-card__img > img {
+    transform: scale(1.1);
+  }
 }
 .c-thumbnail-card__cat {
   display: block;

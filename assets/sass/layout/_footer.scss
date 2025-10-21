@@ -132,24 +132,44 @@
   }
 
   &__btn-link {
+    position: relative;
     display: block;
     padding: 2rem;
     height: 19rem;
-    background:  no-repeat center center / cover;
     color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: end;
     gap: 0.8rem 0;
+    overflow: hidden;
 
-    .l-footer-cta__btn:first-child & {
-      background-image: url("../images/common/cta-sec01.jpg");
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: no-repeat center center / cover;
+      z-index: -1;
+      transition: scale 0.3s ease-in-out;
+
+      .l-footer-cta__btn:first-child & {
+        background-image: url("../images/common/cta-sec01.jpg");
+      }
+      .l-footer-cta__btn:nth-child(2) & {
+        background-image: url("../images/common/cta-sec02.jpg");
+      }
+      .l-footer-cta__btn:last-child & {
+        background-image: url("../images/common/cta-sec03.jpg");
+      }
     }
-    .l-footer-cta__btn:nth-child(2) & {
-      background-image: url("../images/common/cta-sec02.jpg");
-    }
-    .l-footer-cta__btn:last-child & {
-      background-image: url("../images/common/cta-sec03.jpg");
+    
+    &:hover::before {
+      @include hover {
+        scale: 1.1;
+      }
     }
   }
 
