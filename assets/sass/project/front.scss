@@ -256,6 +256,30 @@
       }
     }
 
+    &::after{
+      content: '';
+      display: none;
+      position: absolute;
+      width: calc(125 / 380 * 100%);
+      aspect-ratio: 1 / 1;
+      clip-path: polygon(0 0, 0 100%, 100% 0);
+      top: 0;
+      left: 0;
+      background: var(--color-text);
+      padding: 1.3rem 0 0 1.5rem;
+      white-space: pre;
+      color: #fff;
+      font-size: 2rem;
+      line-height: 1.2;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+
+      .p-front-mv__swiper-slide.__invalid & {
+        content: '募集\A終了';
+        display: block;
+      }
+    }
+
     > img {
       width: 100%;
       height: 100%;
@@ -273,7 +297,14 @@
     font-weight: 600;
     padding: 0.68rem 1.275rem;
     border-radius: 100vmax;
-    background: #7862F1;
+
+    &.school {
+      background: #558BE6;
+    }
+
+    &.open-course {
+      background: #7862F1;
+    }
   }
 
   .p-pagination-progress-circle {

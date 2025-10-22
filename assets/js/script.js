@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     autoplay: {
       delay: frontMvSwiperDuration,
-      disableOnInteraction: false
+      disableOnInteraction: true
     },
 
     on: {

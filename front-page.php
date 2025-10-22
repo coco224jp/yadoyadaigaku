@@ -29,7 +29,8 @@
 
 
             $posts = $mv_query->posts; // 投稿オブジェクトの配列
-            $today = strtotime(date('Y-m-d'));
+            $today = date('Y-m-d'); //「現在の時刻」を「指定したフォーマット」で出力
+            $today = strtotime($today);//「現在」を基準とした、「第1引数の日時」のタイムスタンプを出力
             
             // 投稿日との差分を計算して配列に格納
             $posts_with_diff = [];
@@ -60,16 +61,17 @@
               $month = esc_html(get_the_date('n'));
               $mv_terms = get_the_terms(get_the_ID(), 'product-cat');
               $mv_term_name = '';
+              $mv_term_slug = '';
             
               if ($mv_terms) :
                 foreach ($mv_terms as $mv_term) :
-                  if ($mv_term->slug !== 'uncategorized') :
-                    $mv_term_name = $mv_term->name;
-                    break;
-                  endif;
+                  $mv_term_name = $mv_term->name;
+                  $mv_term_slug = $mv_term->slug;
+                  break;
                 endforeach;
               endif;
            ?>
+           <!-- .p-front-mv__swiper-slideにクラス.__invalidが付くと募集終了が表示 -->
           <li class="p-front-mv__swiper-slide swiper-slide">
             <a href="<?php the_permalink(); ?>" class="p-front-mv__swiper-slide-link">
               <div class="p-front-mv__swiper-slide-body">
@@ -93,7 +95,7 @@
               <?php 
                 the_post_thumbnail('full'); 
                 if($mv_term_name !== ''):
-                  echo '<span class="p-front-mv__swiper-slide__cat">' . $mv_term_name . '</span>';
+                  echo '<span class="p-front-mv__swiper-slide__cat ' . $mv_term_slug . '">' . $mv_term_name . '</span>';
                 endif;
               ?>
               </figure>
@@ -169,7 +171,7 @@
             <div class="c-card__txt-wrap">
               <h3 class="c-card__ttl">
                 <span class="c-card__ttl-en"><?php echo $service_en_ttl; ?></span>
-                <span class="c-card__ttl-jp"><?php echo get_the_title($service_post->ID); ?></span>
+                <span class="c-card__ttl-jp"><?php echo esc_html(get_the_title($service_post->ID)); ?></span>
               </h3>
             </div>
             <?php if(has_post_thumbnail($service_post->ID)): ?>
@@ -182,7 +184,6 @@
       <?php
         $front_service_index++;
         endforeach;
-        wp_reset_postdata();
       ?>
       </ul>
       <div class="c-btn __pc-right" data-aos="fade">
@@ -308,16 +309,14 @@
             $front_voices = get_field('front_voice');
             
             foreach($front_voices as $voice_post):
-              setup_postdata($voice_post);
               $voice_role = get_field('voice_role', $voice_post->ID)
           ?>
           <li class="c-voice-card swiper-slide">
               <h3 class="c-voice-card__ttl"><?php echo $voice_role; ?></h3>
-              <div class="c-voice-card__txt-wrap"><?php the_content(); ?></div>
+              <div class="c-voice-card__txt-wrap"><?php echo get_the_content(null, false, $voice_post); ?></div>
           </li>
           <?php
             endforeach;
-            wp_reset_postdata();
           ?>
         </ul>
       </div>

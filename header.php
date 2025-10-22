@@ -16,7 +16,7 @@
   <div class="l-header__inner">
     <<?php echo is_front_page() ? 'h1' : 'div'; ?> class="l-header__logo">
       <a href="<?php echo home_url('/'); ?>">
-        <img src="<?php echo $theme_uri; ?>/assets/images/common/logo.png" alt="宿屋塾">
+        <img src="<?php echo $theme_uri; ?>/assets/images/common/logo.png" alt="株式会社宿屋塾｜宿屋大学" width="617" height="214">
       </a>
     <<?php echo is_front_page() ? '/h1' : '/div'; ?>>
     <div id="js-header-menu" class="l-header__sp-menu-bg">
