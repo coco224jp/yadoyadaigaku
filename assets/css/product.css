@@ -23,15 +23,6 @@
   margin-top: 1.2rem;
 }
 
-.archive-product .c-thumbnail-card__img,
-.single-product .c-thumbnail-card__img {
-  border-radius: 0.8rem;
-}
-
-.p-product-other .c-thumbnail-card__img {
-  aspect-ratio: 387/180;
-}
-
 .p-product-open {
   padding-bottom: 6.5rem;
 }
@@ -78,6 +69,11 @@
   display: flex;
   justify-content: center;
   gap: 0 2rem;
+}
+@media (any-hover: hover) {
+  .p-product-card:has(.p-product-card__info:hover) .c-thumbnail-card__img > img {
+    transform: scale(1.1);
+  }
 }
 
 .p-load-more {
