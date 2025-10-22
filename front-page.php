@@ -90,16 +90,19 @@
                   <span class="p-front-mv__swiper-slide-txt"><?php the_title(); ?></span>
                 </p>
               </div>
-              <?php if(has_post_thumbnail()): ?>
               <figure class="p-front-mv__swiper-slide-img">
               <?php 
-                the_post_thumbnail('full'); 
-                if($mv_term_name !== ''):
-                  echo '<span class="p-front-mv__swiper-slide__cat ' . $mv_term_slug . '">' . $mv_term_name . '</span>';
+                if(has_post_thumbnail()):
+                  the_post_thumbnail('full'); 
+                else:
+                  echo '<img src="' . $theme_uri . '/assets/images/common/no-image.png" alt="no image" width="330" height="222">';
                 endif;
+
+                  if($mv_term_name !== ''):
+                    echo '<span class="p-front-mv__swiper-slide__cat ' . $mv_term_slug . '">' . $mv_term_name . '</span>';
+                  endif;
               ?>
               </figure>
-              <?php endif; ?>
             </a>
           </li>
           <?php
