@@ -43,10 +43,10 @@
         <li class="c-card">
           <a href="<?php the_permalink(); ?>" class="c-card__link">
             <div class="c-card__txt-wrap">
-              <h3 class="c-card__ttl">
+              <h2 class="c-card__ttl">
                 <span class="c-card__ttl-en"><?php echo $service_en_ttl; ?></span>
                 <span class="c-card__ttl-jp"><?php the_title(); ?></span>
-              </h3>
+              </h2>
               <p class="c-card__txt"><?php echo $service_desc; ?></p>
             </div>
             <?php if(has_post_thumbnail()): ?>
