@@ -80,6 +80,9 @@
       transform: scale(1.05);
     }
   }
+  .c-card__link:focus-visible .c-card__img > img {
+    transform: scale(1.05);
+  }
   .c-card__txt-wrap {
     @include mq {
       padding: 2.4rem 3.2rem 4rem;

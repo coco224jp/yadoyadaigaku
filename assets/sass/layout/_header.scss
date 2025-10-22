@@ -40,6 +40,10 @@
 
   &__logo {
     grid-area: logo;
+
+    a {
+      display: block;
+    }
   }
 
   &__sp-menu-bg{

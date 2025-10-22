@@ -63,6 +63,18 @@ small {
   font-size: inherit;
 }
 
+:focus-visible {
+  outline: 2px solid $color-accent;
+}
+
+li:has(a:focus-visible) {
+  outline: 2px solid $color-accent;
+}
+li a:focus-visible {
+  outline: none;
+}
+
+
 @media screen and (min-width: 768px) {
   a[href^="tel:"] {
     cursor: default;

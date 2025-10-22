@@ -1,7 +1,37 @@
 .p-blog-archive__list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(38.6666666667rem, 100%), 1fr));
-  gap: 4rem 2rem;
+  gap: 4rem 0;
+}
+@media screen and (width >= 768px) {
+  .p-blog-archive__list {
+    gap: 0 2rem;
+  }
+}
+@media screen and (width >= 768px) {
+  .p-blog-archive__item {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 5;
+  }
+  .p-blog-archive__item:nth-child(n+4) {
+    margin-top: 4rem;
+  }
+}
+@media screen and (width >= 768px) {
+  .p-blog-archive .c-thumbnail-card__inner {
+    grid-template-rows: subgrid;
+    grid-row: span 5;
+    gap: 0;
+  }
+}
+@media screen and (width >= 768px) {
+  .p-blog-archive .c-thumbnail-card__body {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    margin-top: 2rem;
+  }
 }
 .p-blog-archive .c-thumbnail-card__ttl {
   font-size: 1.5rem;

@@ -5,7 +5,40 @@
   &__list{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(calc(1160 / 3 * 0.1rem), 100%), 1fr));
-    gap: 4rem 2rem;
+    gap: 4rem 0;
+
+    @include mq {
+      gap: 0 2rem;
+    }
+  }
+
+  &__item {
+    @include mq {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 5;
+
+      &:nth-child(n+4) {
+        margin-top: 4rem;
+      }
+    }
+  }
+
+  .c-thumbnail-card__inner {
+    @include mq {
+      grid-template-rows: subgrid;
+      grid-row: span 5;
+      gap: 0;
+    }
+  }
+
+  .c-thumbnail-card__body {
+    @include mq {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 4;
+      margin-top: 2rem;
+    }
   }
 
   .c-thumbnail-card__ttl {

@@ -171,6 +171,10 @@
         scale: 1.1;
       }
     }
+
+    &:focus-visible::before {
+      scale: 1.1;
+    }
   }
 
   &__btn-text-en {
@@ -213,6 +217,10 @@
       grid-area: logo;
       width: 15.1rem;
       margin-inline: 0;
+    }
+
+    a {
+      display: block;
     }
   }
 

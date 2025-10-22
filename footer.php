@@ -8,7 +8,7 @@
       <span class="l-footer-cta__ttl-en">Access / Contact</span>
       <span class="l-footer-cta__ttl-ja">アクセス・お問い合わせ</span>
     </h2>
-    <div class="l-footer-cta__wrapper">
+    <nav class="l-footer-cta__wrapper">
       <p class="l-footer-cta__txt">宿屋塾へのアクセスについてや、<br>
       お問い合せ・講演依頼・その他ご相談は<br>
       こちらをご確認ください。</p>
@@ -32,7 +32,7 @@
           </a>
         </li>
       </ul>
-    </div>
+    </nav>
   </div>
 </section>
 

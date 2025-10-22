@@ -436,6 +436,18 @@ small {
   font-size: inherit;
 }
 
+:focus-visible {
+  outline: 2px solid #C18E24;
+}
+
+li:has(a:focus-visible) {
+  outline: 2px solid #C18E24;
+}
+
+li a:focus-visible {
+  outline: none;
+}
+
 @media screen and (min-width: 768px) {
   a[href^="tel:"] {
     cursor: default;
@@ -482,6 +494,9 @@ small {
 }
 .l-header__logo {
   grid-area: logo;
+}
+.l-header__logo a {
+  display: block;
 }
 .l-header__sp-menu-bg {
   position: fixed;
@@ -870,6 +885,9 @@ small {
     scale: 1.1;
   }
 }
+.l-footer-cta__btn-link:focus-visible::before {
+  scale: 1.1;
+}
 .l-footer-cta__btn-text-en {
   font-family: var(--font-en);
   font-size: 1.2rem;
@@ -910,6 +928,9 @@ small {
     width: 15.1rem;
     margin-inline: 0;
   }
+}
+.l-footer__logo a {
+  display: block;
 }
 .l-footer__address-wrap {
   margin-top: 4rem;
@@ -1380,6 +1401,9 @@ small {
   .c-card__link:hover .c-card__img > img {
     transform: scale(1.1);
   }
+}
+.c-card__link:focus-visible .c-card__img > img {
+  transform: scale(1.1);
 }
 .c-card__ttl-en {
   font-family: var(--font-en);
