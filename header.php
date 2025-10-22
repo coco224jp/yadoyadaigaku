@@ -19,7 +19,7 @@
         <img src="<?php echo $theme_uri; ?>/assets/images/common/logo.png" alt="株式会社宿屋塾｜宿屋大学" width="617" height="214">
       </a>
     <<?php echo is_front_page() ? '/h1' : '/div'; ?>>
-    <div id="js-header-menu" class="l-header__sp-menu-bg">
+    <div id="js-header-menu" class="l-header__sp-menu-bg" aria-hidden="true">
       <div class="l-header__sp-menu-inner">
         <?php
           wp_nav_menu( array( 
@@ -38,7 +38,7 @@
       </div><!-- .l-header__sp-menu-inner -->
     </div><!-- /.l-header__sp-menu -->
     <a href="#" class="l-header__contact-btn c-btn">お問い合わせ</a>
-    <button id="js-header-burger" class="l-header__burger">
+    <button id="js-header-burger" class="l-header__burger" aria-controls="js-header-menu" aria-expanded="false">
       <span class="l-header__burger-bar-wrap">
         <span class="l-header__burger-line"></span>
         <span class="l-header__burger-line"></span>

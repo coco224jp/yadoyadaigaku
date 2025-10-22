@@ -21,11 +21,14 @@ document.addEventListener('DOMContentLoaded', function() {
       body.style.setProperty('--scroll-y', `-${scrollPosition}px`);
       body.classList.add('is-fixed');
       burgerText.textContent = '閉じる';
+      burger.setAttribute('aria-expanded', 'true');
+      navMenu.setAttribute('aria-hidden', 'false');
     } else {
       body.classList.remove('is-fixed');
       window.scrollTo(0, scrollPosition);
       burgerText.textContent = 'メニュー';
-      
+      burger.setAttribute('aria-expanded', 'false');
+      navMenu.setAttribute('aria-hidden', 'true');
     }
   });
 
