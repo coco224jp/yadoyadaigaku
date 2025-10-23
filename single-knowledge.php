@@ -113,7 +113,9 @@
           <li class="c-thumbnail-card swiper-slide">
             <a href="<?php the_permalink(); ?>" class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat"><?php echo $post_cat_name; ?></span>
+                <div class="c-thumbnail-card__cat">
+                  <span class="u-term"><?php echo $post_cat_name; ?></span>
+                </div>
                 <h3 class="c-thumbnail-card__ttl"><?php the_title(); ?></h3>
                 <div class="c-thumbnail-card__date">
                   <time datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>"><?php the_time('Y.m.d(D)'); ?></time>

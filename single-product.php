@@ -98,7 +98,7 @@
   $img = (isset($img[0]))? $img[0] : "";
 
 ?>           
-        <figure class="p-product-fv__img">
+        <figure class="p-product-fv__img <?php echo $end ? '__disabled' : ''; ?>">
           <img src="<?php echo $img; ?>" alt="">
         </figure>
         </div>
@@ -130,7 +130,7 @@
         <a href="" class="c-btn__link">募集終了</a>
       </div>
       <?php }else{ ?>
-      <div class="p-product-recommend__btn c-btn __large __disabled">
+      <div class="p-product-recommend__btn c-btn __bg-gold __large">
         <a href="<?php echo get_field("申し込みページURL"); ?>" class="c-btn__link">受講お申し込みはこちら</a>
       </div>
       <?php } ?>
@@ -139,6 +139,12 @@
     </div>
   </section>
 
+  <?php 
+    if(have_posts()): while ( have_posts() ) :
+      the_post();
+      $content = get_the_content();
+      if ( trim( wp_strip_all_tags( $content ) ) !== '' ) :
+  ?>
   <section class="p-product-freeArea">
     <div class="l-inner __small">
       <div class="l-wp-block-content">
@@ -146,6 +152,10 @@
       </div>
     </div>
   </section>
+  <?php 
+      endif;
+    endwhile; endif; 
+  ?>
 
 <?php
   $mousikomi = '
@@ -168,7 +178,7 @@ if($end){
 ';
 }else{
   $mousikomi .= '
-      <div class="p-product-cta__btn c-btn __disabled">
+      <div class="p-product-cta__btn c-btn __bg-gold">
         <a href="'. get_field("申し込みページURL") .'" class="c-btn__link">受講お申し込みはこちら</a>
       </div>
 ';
@@ -418,10 +428,10 @@ if (is_array($dis_posi) && in_array("その他講座・ビジネススクール�
   $cat = get_the_terms($post->ID, "product-tag");
   if(is_array($cat)){
 ?> 
-              <div>
+              <div class="c-thumbnail-card__cat">
 <?php
     foreach ($cat as $key => $value) {
-      echo '<span class="c-thumbnail-card__cat">'.$value->name.'</span>';
+      echo '<span class="u-term">'.$value->name.'</span>';
     }
 ?>        
               </div>

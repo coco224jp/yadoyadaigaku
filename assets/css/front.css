@@ -251,15 +251,21 @@
   top: 0;
   left: 0;
   background: var(--color-text);
-  padding: 1.3rem 0 0 1.5rem;
+  padding: 1rem 0 0 1.2rem;
   white-space: pre;
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.4rem;
   line-height: 1.2;
   letter-spacing: 0.1em;
   font-weight: 600;
 }
-.p-front-mv__swiper-slide.__invalid .p-front-mv__swiper-slide-img::after {
+@media screen and (width >= 768px) {
+  .p-front-mv__swiper-slide-img::after {
+    padding: 1.3rem 0 0 1.5rem;
+    font-size: 2rem;
+  }
+}
+.p-front-mv__swiper-slide.__disabled .p-front-mv__swiper-slide-img::after {
   content: "募集\a終了";
   display: block;
 }

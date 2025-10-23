@@ -45,22 +45,7 @@
       }
     }
   }
-  &__cat{
-    display: block;
-    background: var(--color-text);
-    font-size: 1rem;
-    color: #fff;
-    line-height: 1;
-    font-weight: bold;
-    width: fit-content;
-    padding: 0.3rem 0.625rem;
-    border-radius: 100vmax;
 
-    @include mq {
-      font-size: 1.1rem; 
-      padding: 0.6rem 1.2rem;
-    }
-  }
   &__ttl{
     font-size: 1.6rem;
     font-weight: bold;

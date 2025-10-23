@@ -1484,24 +1484,6 @@ li a:focus-visible {
     transform: scale(1.1);
   }
 }
-.c-thumbnail-card__cat {
-  display: block;
-  background: var(--color-text);
-  font-size: 1rem;
-  color: #fff;
-  line-height: 1;
-  font-weight: bold;
-  width: -webkit-fit-content;
-  width: fit-content;
-  padding: 0.3rem 0.625rem;
-  border-radius: 100vmax;
-}
-@media screen and (width >= 768px) {
-  .c-thumbnail-card__cat {
-    font-size: 1.1rem;
-    padding: 0.6rem 1.2rem;
-  }
-}
 .c-thumbnail-card__ttl {
   font-size: 1.6rem;
   font-weight: bold;
@@ -1840,8 +1822,6 @@ li a:focus-visible {
   color: #fff;
   line-height: 1;
   font-weight: bold;
-  width: -webkit-fit-content;
-  width: fit-content;
   padding: 0.3rem 0.625rem;
   border-radius: 100vmax;
 }
