@@ -37,16 +37,16 @@
       <div class="p-product-fv__wrapper">
         <div class="p-product-fv__txt-wrap">
 <?php
-  $cat = get_the_terms($post->ID, "product-tag");
-  $cat_slug_array = array();
+  $tag = get_the_terms($post->ID, "product-tag");
+  $tag_slug_array = array();
 
-  if(is_array($cat)){
+  if(is_array($tag)){
 ?> 
-              <div class="p-product-fv__cats">
+              <div class="p-product-fv__tags">
 <?php
-    foreach ($cat as $key => $value) {
+    foreach ($tag as $key => $value) {
       echo '<span class="u-term">'.$value->name.'</span>';
-      $cat_slug_array[] = $value->slug;
+      $tag_slug_array[] = $value->slug;
     }
 ?>        
               </div>
@@ -387,8 +387,8 @@ if (is_array($dis_posi) && in_array("その他講座・ビジネススクール�
     , 'post__not_in'   => array($current_id), // ← 現在の記事を除外
   );
 
-  if($cat_slug_array){
-    $where['tax_query'] = array(array('operator' => 'IN','taxonomy' => 'product-tag','field' => "slug",'terms' => $cat_slug_array ));
+  if($tag_slug_array){
+    $where['tax_query'] = array(array('operator' => 'IN','taxonomy' => 'product-tag','field' => "slug",'terms' => $tag_slug_array ));
   }
 
   $loop = new WP_Query($where);
