@@ -79,8 +79,7 @@
 
 
 ?>
-           <!-- .p-front-mv__swiper-slideにクラス.__invalidが付くと募集終了が表示 -->
-          <li class="p-front-mv__swiper-slide swiper-slide">
+          <li class="p-front-mv__swiper-slide swiper-slide <?php echo $end ? '__disabled' : ''; ?>">
             <a href="<?php echo $link; ?>" <?php echo $link_target; ?> class="p-front-mv__swiper-slide-link">
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
