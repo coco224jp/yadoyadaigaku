@@ -10,103 +10,133 @@
       <div id="js-front-mv-swiper" class="p-front-mv__swiper c-overflow-swiper swiper">
         <ul class="p-front-mv__swiper-wrapper swiper-wrapper">
            <?php
-            $mv_args = [
-              'post_type' => 'product',
+
+            $today = current_time('Y-m-d');
+
+            $mv_args = array(
+              'post_type'      => 'product',
               'posts_per_page' => 5,
-              'post_status' => 'publish',
-              'tax_query' => [
-                [
-                  'taxonomy' => 'product-cat',
-                  'field'    => 'slug',
-                  'terms'    => ['open-course', 'school'],
-                ]
-              ],
-              'orderby' => 'date',
-              'order' => 'DESC',
-            ];
+              'meta_query'     => array(
+                'relation' => 'AND',
+                array(
+                  'key'     => '終了日',
+                  'value'   => $today,
+                  'compare' => '>=',
+                  'type'    => 'DATE',
+                ),
+                array(
+                  'key'     => '開催日',
+                  'compare' => 'EXISTS',
+                ),
+              ),
+              'meta_key'       => '開催日',
+              'orderby'        => 'meta_value',
+              'order'          => 'ASC',
+            );
 
             $mv_query = new WP_Query($mv_args);
 
+  // 開催日の曜日を日本語で取得する関数
+  function get_weekday_jp($date) {
+      $weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+      return $weekdays[$date->format('w')];
+  }
 
-            $posts = $mv_query->posts; // 投稿オブジェクトの配列
-            $today = date('Y-m-d'); //「現在の時刻」を「指定したフォーマット」で出力
-            $today = strtotime($today);//「現在」を基準とした、「第1引数の日時」のタイムスタンプを出力
-            
-            // 投稿日との差分を計算して配列に格納
-            $posts_with_diff = [];
-            foreach ($posts as $p) {
-              $post_date = strtotime(get_the_date('Y-m-d', $p));
-              $diff = abs($today - $post_date); // 今日との差の絶対値
-              $posts_with_diff[] = [
-                'post' => $p,
-                'diff' => $diff,
-              ];
-            }
-            
-            // 投稿日が最も近い投稿を探す
-            usort($posts_with_diff, function($a, $b) {
-              return $a['diff'] - $b['diff'];
-            });
-            $closest_post = array_shift($posts_with_diff);
-            
-            // 残りをまとめて再構成（真ん中に$closest_postを配置）
-            $other_posts = array_column($posts_with_diff, 'post');
-            $middle_index = floor(count($other_posts) / 2);
-            array_splice($other_posts, $middle_index, 0, [$closest_post['post']]);
-            
-            // Swiper出力
-            foreach ($other_posts as $post) :
-              setup_postdata($post);
-              $date = esc_html(get_the_date('j'));
-              $month = esc_html(get_the_date('n'));
-              $mv_terms = get_the_terms(get_the_ID(), 'product-cat');
-              $mv_term_name = '';
-              $mv_term_slug = '';
-            
-              if ($mv_terms) :
-                foreach ($mv_terms as $mv_term) :
-                  $mv_term_name = $mv_term->name;
-                  $mv_term_slug = $mv_term->slug;
-                  break;
-                endforeach;
-              endif;
-           ?>
+ if($mv_query->have_posts()){ 
+ while ( $mv_query->have_posts() ) : $mv_query->the_post(); 
+
+  $link        = get_permalink();
+  $link_target = '';
+
+  if(get_field("詳細ページURL")){
+    $link        = get_field("詳細ページURL");
+    $link_target = ' target="_blank" ';
+  }
+
+  //アイキャッチのID
+  $thumbnail_id = get_post_thumbnail_id();
+  $img = wp_get_attachment_image_src($thumbnail_id,'large');
+  $img = (isset($img[0]))? $img[0] : $theme_uri ."/assets/images/common/no-image.png";
+
+  //応募締切 終了=true
+  $end = is_event_closed($post->ID);
+
+  //カテゴリー
+  $cat = get_the_terms($post->ID, "product-cat");
+
+
+  // 開催日と終了日を取得
+  $start_date = get_field('開催日');
+  $end_date   = get_field('終了日');
+
+  // 今日の日付（Y-m-d形式）
+  $today = current_time('Y-m-d');
+
+  // 開催日をDateTime型に変換
+  $start = new DateTime($start_date);
+  $end   = new DateTime($end_date);
+  $now   = new DateTime($today);
+
+
+?>
            <!-- .p-front-mv__swiper-slideにクラス.__invalidが付くと募集終了が表示 -->
           <li class="p-front-mv__swiper-slide swiper-slide">
-            <a href="<?php the_permalink(); ?>" class="p-front-mv__swiper-slide-link">
+            <a href="<?php echo $link; ?>" <?php echo $link_target; ?> class="p-front-mv__swiper-slide-link">
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
                   <span class="p-front-mv__swiper-slide-date-info">
-                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="<?php echo esc_attr( get_the_date('Y-m-d') ); ?>">
-                      <span class="month <?php echo ($month >= 10) ? 'double' : ''; ?>">
-                        <?php echo $month; ?>
-                      </span>
-                      <span class="date <?php echo ($date >= 10) ? 'double' : ''; ?>">
-                        <?php echo $date; ?>
-                      </span>
+
+<?php
+
+  $youbi        = "";
+  $v_date       = $start_date;
+  $v_date_array = explode('-', $v_date);
+
+  $v_date_mm    = $v_date_array[1];
+  $v_date_dd    = $v_date_array[2];
+
+  if ($now < $start) {
+      // 開催日前 → 開催日と曜日を表示
+      $weekday = get_weekday_jp($start);
+      $youbi = $weekday ."曜日";
+
+  } elseif ($now >= $start && $now <= $end) {
+      // 開催期間中 → 本日開催
+      $youbi = "本日開催";      
+
+      $v_date       = current_time('Y-m-d');
+      $v_date_mm    = current_time('m');
+      $v_date_dd    = current_time('d');           
+  }
+?>
+
+                    <time class="p-front-mv__swiper-slide-date-wrap" datetime="<?php echo $v_date; ?>">
+                      <span class="month <?php echo ($v_date_mm >= 10) ? 'double' : ''; ?>"><?php echo $v_date_mm; ?></span>
+                      <span class="date <?php echo ($v_date_dd >= 10) ? 'double' : ''; ?>"><?php echo $v_date_dd; ?></span>
                     </time>
-                    <span class="p-front-mv__swiper-slide-date-txt"><?php echo esc_html( get_the_date('l') ); ?></span>
+                    <span class="p-front-mv__swiper-slide-date-txt"><?php echo $youbi; ?></span>
                   </span><!-- /.p-front-mv__swiper-slide-date-info -->
                   <span class="p-front-mv__swiper-slide-txt"><?php the_title(); ?></span>
                 </p>
               </div>
               <figure class="p-front-mv__swiper-slide-img">
-              <?php 
-                if(has_post_thumbnail()):
-                  the_post_thumbnail('full'); 
-                else:
-                  echo '<img src="' . $theme_uri . '/assets/images/common/no-image.png" alt="no image" width="330" height="222">';
-                endif;
+              <img src="<?php echo $img; ?>" alt="">
 
-                  if($mv_term_name !== ''):
-                    echo '<span class="p-front-mv__swiper-slide__cat ' . $mv_term_slug . '">' . $mv_term_name . '</span>';
-                  endif;
-              ?>
-              </figure>
+<?php
+  if(is_array($cat)){
+    foreach ($cat as $key => $value) {
+echo '      <span class="p-front-mv__swiper-slide__cat '.$value->slug .'">'.$value->name .'</span>';
+    }
+  }
+?>              
+
+            </figure>
             </a>
           </li>
-          <?php
-            endforeach;
+
+<?php
+ endwhile; 
+ }
             wp_reset_postdata();
           ?>
         </ul><!-- /.p-front-mv__swiper-wrapper -->
@@ -312,11 +342,10 @@
             $front_voices = get_field('front_voice');
             
             foreach($front_voices as $voice_post):
-              $voice_role = get_field('voice_role', $voice_post->ID)
           ?>
           <li class="c-voice-card swiper-slide">
-              <h3 class="c-voice-card__ttl"><?php echo $voice_role; ?></h3>
-              <div class="c-voice-card__txt-wrap"><?php echo get_the_content(null, false, $voice_post); ?></div>
+              <h3 class="c-voice-card__ttl"><?php echo get_field('voice_age', $voice_post->ID); ?></h3>
+              <div class="c-voice-card__txt-wrap"><?php echo get_field('voice_detail', $voice_post->ID); ?></div>
           </li>
           <?php
             endforeach;

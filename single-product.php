@@ -17,6 +17,9 @@
     $ttl_en = 'Schools';
   } 
 
+  //応募締切 終了=true
+  $end = is_event_closed($post->ID);
+
   get_header();
 ?>
 <main class="single-product">
@@ -33,34 +36,70 @@
     <div class="l-inner">
       <div class="p-product-fv__wrapper">
         <div class="p-product-fv__txt-wrap">
-          <div class="p-product-fv__cats">
-            <span class="u-term">カテゴリ</span>
-            <span class="u-term">カテゴリ</span>
-            <span class="u-term">カテゴリ</span>
-            <span class="u-term">カテゴリ</span>
-          </div>
-          <h1 class="p-product-fv__ttl">「次世代」のハウスキーピングマネジャー養成講座～ホテルブランド価値向上への寄与！</h1>
-          <p class="p-product-fv__subttl">
-            魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。
-          </p>
+<?php
+  $cat = get_the_terms($post->ID, "product-tag");
+  $cat_slug_array = array();
+
+  if(is_array($cat)){
+?> 
+              <div class="p-product-fv__cats">
+<?php
+    foreach ($cat as $key => $value) {
+      echo '<span class="u-term">'.$value->name.'</span>';
+      $cat_slug_array[] = $value->slug;
+    }
+?>        
+              </div>
+<?php } ?>
+
+
+          <h1 class="p-product-fv__ttl"><?php echo get_the_title(); ?></h1>
+          <p class="p-product-fv__subttl"><?php echo get_field("サブタイトル"); ?></p>
+<?php if(have_rows('講師リスト')): ?>
+<?php while(have_rows('講師リスト')): the_row(); ?>
           <div class="p-product-fv__instructor">
+
+<?php $img = get_sub_field("画像"); ?>
+<?php $img = (isset($img["sizes"]["thumbnail"]))? $img["sizes"]["thumbnail"] : ""; ?>
+         
             <figure class="p-product-fv__instructor-img">
-              <img src="<?php echo $theme_uri; ?>/assets/images/product/instructor.jpg" alt="">
+              <img src="<?php echo $img; ?>" alt="">
             </figure>
+
             <div class="p-product-fv__instructor-txt">
-              株式会社クリーンネクスト 代表取締役<br>
-              西山 貴代(にしやま・きよ)氏 
+              <?php echo get_sub_field("役職名"); ?><br>
+              <?php echo get_sub_field("名前"); ?>(<?php echo get_sub_field("ふりがな"); ?>)氏 
             </div>
           </div>
+<?php break; ?>
+<?php endwhile; ?>
+<?php endif; ?>   
+
           <dl class="p-product-fv__date-place">
-            <dt class="p-product-fv__date-place-ttl ">日時</dt>
-            <dd class="p-product-fv__date-place-txt font-en">2025.5～2025.7（全6回）</dd>
+<?php if(get_field("日程")){ ?>
+            <dt class="p-product-fv__date-place-ttl ">日程</dt>
+            <dd class="p-product-fv__date-place-txt font-en"><?php echo get_field("日程"); ?></dd>
+<?php } ?>
+<?php if(get_field("会場")){ ?>
             <dt class="p-product-fv__date-place-ttl">会場</dt>
-            <dd class="p-product-fv__date-place-txt">ZOOMによるオンラインと都内でのオフライン</dd>
+            <dd class="p-product-fv__date-place-txt"><?php echo get_field("会場"); ?></dd>
+<?php } ?>
+<?php if(get_field("締め切り")){ ?>
+            <dt class="p-product-fv__date-place-ttl">締切</dt>
+            <dd class="p-product-fv__date-place-txt"><?php echo get_field("締め切り"); ?></dd>
+<?php } ?>
           </dl>
         </div>
+
+<?php
+  //アイキャッチのID
+  $thumbnail_id = get_post_thumbnail_id();
+  $img = wp_get_attachment_image_src($thumbnail_id,'large');
+  $img = (isset($img[0]))? $img[0] : "";
+
+?>           
         <figure class="p-product-fv__img">
-          <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv01.jpg" alt="">
+          <img src="<?php echo $img; ?>" alt="">
         </figure>
         </div>
       </div>
@@ -69,431 +108,336 @@
 
   <section class="p-product-recommend bg-light pb-0">
     <div class="l-inner __small">
+<?php if(have_rows('おすすめ内容')): ?>      
       <h2 class="p-product-recommend__ttl c-subpage-ttl __small">こんな方におすすめ</h2>
       <ul class="p-product-recommend__list">
+
+<?php while(have_rows('おすすめ内容')): the_row(); /* <span class="text-highlight">ホテルオーナー、支配人など</span> */ ?>
+
         <li class="p-product-recommend__item">
           <h2 class="p-product-recommend__item-txt">
-            ホテルのハウスキーピング部門の<br>
-            <span class="text-highlight">マネジャー、マネジャー候補生</span>
+            <?php echo get_sub_field("内容"); ?>
           </h2>
         </li>
-        <li class="p-product-recommend__item">
-          <h2 class="p-product-recommend__item-txt">
-            フルサービス型ホテルに限らず、<br>
-            <span class="text-highlight">宿泊主体型ホテルの方も</span>歓迎<br>
-          </h2>
-        </li>
-        <li class="p-product-recommend__item">
-          <h2 class="p-product-recommend__item-txt">
-            <span class="text-highlight">ホテルオーナー、支配人など</span>清掃会社<br>
-            とのミーティングや交渉をする方
-          </h2>
-        </li>
+
+<?php endwhile; ?>
       </ul>
+<?php endif; ?>     
+
+
+      <?php if($end){ ?>
       <div class="p-product-recommend__btn c-btn __large __disabled">
         <a href="" class="c-btn__link">募集終了</a>
       </div>
+      <?php }else{ ?>
+      <div class="p-product-recommend__btn c-btn __large __disabled">
+        <a href="<?php echo get_field("申し込みページURL"); ?>" class="c-btn__link">受講お申し込みはこちら</a>
+      </div>
+      <?php } ?>
+
+
     </div>
   </section>
 
   <section class="p-product-freeArea">
     <div class="l-inner __small">
-      <h2 class="p-product-freeArea__ttl c-subpage-ttl __small text-center">魅力的なコンセプトをハードと<br class="only-sp">ソフトの両面から築き、<br>
-      ずっと愛されるホテルを<br class="only-sp">創れる人を育成します。</h2>
-      <p class="p-product-freeArea__txt">
-        ところが、ポストコロナで急速に回復した宿泊需要や、乱立する新規ホテル建設ラッシュによって、ホテル清掃にあたる人材は大いに不足しています。この難しい状況において、「客室を期待通り、時間通りに完璧に仕上げる」を、どうコントロールするかが、ホテル運営に求められる命題です。そして、アウトソーシングしている清掃会社 の方とコミュニケーションし、マネジメントする仕事はプロフェッショナルな仕事だと考えています。ホテルにとって、最も重要な商品である「客室」。<br>
-        その清掃の品質が劣化すると 途端にコンプレやクレームが発生し、口コミ評価スコアが下がります。客室が清潔に、ゴミひとつなく清掃されていることはゲストが最低限望む期待だからです。つまり、期待通りに客室が仕上がり、そしてそれが時間通りに完了されるという
-      </p>
-      <div class="p-product-freeArea__iframe-wrap">
-        <iframe src="https://www.youtube.com/embed/wDchsz8nmbo?si=qFOwVKZ6kGw8Rp2u" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <div class="l-wp-block-content">
+        <?php the_content(); ?>
       </div>
-      <p class="p-product-freeArea__txt">
-        ところが、ポストコロナで急速に回復した宿泊需要や、乱立する新規ホテル建設ラッシュによって、ホテル清掃にあたる人材は大いに不足しています。この難しい状況において、「客室を期待通り、時間通りに完璧に仕上げる」を、どうコントロールするかが、ホテル運営に求められる命題です。そして、アウトソーシングしている清掃会社 の方とコミュニケーションし、マネジメントする仕事はプロフェッショナルな仕事だと考えています。ホテルにとって、最も重要な商品である「客室」。<br>
-        その清掃の品質が劣化すると 途端にコンプレやクレームが発生し、口コミ評価スコアが下がります。客室が清潔に、ゴミひとつなく清掃されていることはゲストが最低限望む期待だからです。つまり、期待通りに客室が仕上がり、そしてそれが時間通りに完了されるという
-      </p>
     </div>
   </section>
 
+<?php
+  $mousikomi = '
   <section class="p-product-cta bg-light text-center">
     <div class="l-inner">
-      <h2 class="p-product-cta__ttl c-subpage-ttl __small">ホテル経営の課題を<br class="only-sp">乗り越えるヒントがここに</h2>
-      <p class="p-product-cta__txt">ホテル経営研究会では、全国の経営者と共に学び、実践に活かす貴重な機会を提供します。</p>
+      <h2 class="p-product-cta__ttl c-subpage-ttl __small">'.get_field("お申し込み見出し").'</h2>
+';
+
+if(get_field("お申し込みメッセージ")){
+  $mousikomi .= '
+      <p class="p-product-cta__txt">'.get_field("お申し込みメッセージ").'</p>
+';
+}
+
+if($end){
+  $mousikomi .= '
       <div class="p-product-cta__btn c-btn __disabled">
-        <a href="" class="c-btn__link">詳細を見る</a>
+        <a href="" class="c-btn__link">募集終了</a>
       </div>
+';
+}else{
+  $mousikomi .= '
+      <div class="p-product-cta__btn c-btn __disabled">
+        <a href="'. get_field("申し込みページURL") .'" class="c-btn__link">受講お申し込みはこちら</a>
+      </div>
+';
+}
+
+
+  $mousikomi .= '
     </div>
   </section>
+';
+$dis_posi = get_field("表示位置"); 
+?>
+
+<?php
+if (is_array($dis_posi) && in_array("参加者の声の上", $dis_posi)) {
+  echo $mousikomi;
+}
+?>
+
+<?php 
+  $posts = get_field('参加者');
+  if( $posts ):
+?>
 
   <section class="p-product-voice bg-dark">
     <div class="l-inner __small">
       <h2 class="c-subpage-ttl __small text-center">参加者の声</h2>
+
+
+
       <ul class="p-product-voice__list">
+
+  <?php foreach( $posts as $view ): ?>
+
+<?php
+   //アイキャッチのID
+    $thumbnail_id = get_post_thumbnail_id($view->ID);
+    $img = wp_get_attachment_image_src($thumbnail_id,'thumbnail');
+    $img = (isset($img[0]))? $img[0] : "";
+?>
+
+
         <li class="p-product-voice__item">
             <figure class="p-product-voice__item-img">
-              <img src="<?php echo $theme_uri; ?>/assets/images/product/voice.jpg" alt="">
+              <img src="<?php echo $img; ?>" alt="">
             </figure>
-            <h3 class="p-product-voice__item-catch">ホテル経営者に<br>とって多様な価値を<br>られる場所</h3>
+            <h3 class="p-product-voice__item-catch"><?php echo get_field("voice_subttl", $view->ID); ?></h3>
             <p class="p-product-voice__item-info">
-              <span class="p-product-voice__item-company">JR九州ホテルズアンドリゾーツ株式会社</span><br>
-              <span class="p-product-voice__item-role">代表取締役社長執行役員</span>
+              <span class="p-product-voice__item-company"><?php echo get_field("voice_company", $view->ID); ?></span><br>
+              <span class="p-product-voice__item-role"><?php echo get_field("voice_role", $view->ID); ?></span>
             </p>
-            <span class="p-product-voice__item-name">角谷 英彦 氏</span>
+            <span class="p-product-voice__item-name"><?php echo get_the_title($view->ID); ?> 氏</span>
             <p class="p-product-voice__item-txt">
-              マネージメントに必要な、オーナーやオペレーション本部、地域の行政機関など、広域なステークホルダーと関わるための考え方を身に着けられました。<br>
-              普段では体験できないマネージメントを講義で疑似体験することで“新たな引き出し”が増えました。
+              <?php echo get_field("voice_detail", $view->ID); ?>
             </p>
         </li>
-        <li class="p-product-voice__item">
-            <figure class="p-product-voice__item-img">
-              <img src="<?php echo $theme_uri; ?>/assets/images/product/voice.jpg" alt="">
-            </figure>
-            <h3 class="p-product-voice__item-catch">ホテル経営者に<br>とって多様な価値を<br>られる場所</h3>
-            <p class="p-product-voice__item-info">
-              <span class="p-product-voice__item-company">JR九州ホテルズアンドリゾーツ株式会社</span><br>
-              <span class="p-product-voice__item-role">代表取締役社長執行役員</span>
-            </p>
-            <span class="p-product-voice__item-name">角谷 英彦 氏</span>
-            <p class="p-product-voice__item-txt">
-              マネージメントに必要な、オーナーやオペレーション本部、地域の行政機関など、広域なステークホルダーと関わるための考え方を身に着けられました。<br>
-              普段では体験できないマネージメントを講義で疑似体験することで“新たな引き出し”が増えました。
-            </p>
-        </li>
-        <li class="p-product-voice__item">
-            <figure class="p-product-voice__item-img">
-              <img src="<?php echo $theme_uri; ?>/assets/images/product/voice.jpg" alt="">
-            </figure>
-            <h3 class="p-product-voice__item-catch">ホテル経営者に<br>とって多様な価値を<br>られる場所</h3>
-            <p class="p-product-voice__item-info">
-              <span class="p-product-voice__item-company">JR九州ホテルズアンドリゾーツ株式会社</span><br>
-              <span class="p-product-voice__item-role">代表取締役社長執行役員</span>
-            </p>
-            <span class="p-product-voice__item-name">角谷 英彦 氏</span>
-            <p class="p-product-voice__item-txt">
-              マネージメントに必要な、オーナーやオペレーション本部、地域の行政機関など、広域なステークホルダーと関わるための考え方を身に着けられました。<br>
-              普段では体験できないマネージメントを講義で疑似体験することで“新たな引き出し”が増えました。
-            </p>
-        </li>
+
+  <?php endforeach; ?>
+
       </ul>
     </div>
   </section>
+<?php endif; ?>
+
+<?php
+if (is_array($dis_posi) && in_array("スケジュールの上", $dis_posi)) {
+  echo $mousikomi;
+}
+?>
+
+<?php if(get_field("スケジュール")){ ?>
 
   <section class="p-product-schedule">
     <div class="l-inner __small">
       <h2 class="c-subpage-ttl __small text-center">スケジュール</h2>
       <div class="p-product-schedule__table-wrap">
-        <table class="p-product-schedule__table">
-          <thead class="p-product-schedule__thead">
-            <tr class="p-product-schedule__tr">
-              <th colspan="2">内容</th>
-              <th>日程</th>
-              <th>会場</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-            <tr class="p-product-schedule__tr">
-              <td>Day1</td>
-              <td>ホテルビジネスと<br>
-                プロフェッショナルマネージャー
-              </td>
-              <td>2025.5.10(土) 10:00-17:00</td>
-              <td>オフライン (東京都内)</td>
-            </tr>
-          </tbody>
-        </table>
+
+
+<?php
+$table = get_field("スケジュール"); 
+$table = str_replace('<table', '<table class="p-product-schedule__table"', $table);
+echo $table;
+?>      
       </div>
+
+<?php if(get_field("講座内容の詳細URL")){ ?>      
       <div class="p-product-schedule__btn c-btn">
-        <a href="" class="c-btn__link">講座内容の詳細</a>
+        <a href="<?php echo get_field("講座内容の詳細URL"); ?>" class="c-btn__link">講座内容の詳細</a>
       </div>
+<?php } ?>
+
     </div>
   </section>
+<?php } ?>
+
+<?php
+if (is_array($dis_posi) && in_array("開催概要の上", $dis_posi)) {
+  echo $mousikomi;
+}
+?>
 
   <section class="p-product-overview bg-light">
     <div class="l-inner __small">
       <h2 class="p-product-overview__ttl c-subpage-ttl">開催概要</h2>
       <dl class="p-product-overview__dl">
-        <div class="p-product-overview__item">
-          <dt class="p-product-overview__dt text-last-justify">日時</dt>
+
+<?php
+$gaiyou = array(
+   array("name" => "日程","class1" => "text-last-justify","class2" => "")
+  ,array("name" => "会場","class1" => "text-last-justify","class2" => "")
+  ,array("name" => "定員","class1" => "text-last-justify","class2" => "")
+  ,array("name" => "受講料","class1" => "","class2" => "")
+  ,array("name" => "締め切り","class1" => "","class2" => "deadline")
+  ,array("name" => "対象者","class1" => "","class2" => "")
+  ,array("name" => "特典","class1" => "text-last-justify","class2" => "")
+  ,array("name" => "参加資格","class1" => "","class2" => "deadline")
+  ,array("name" => "会費","class1" => "text-last-justify","class2" => "")
+  ,array("name" => "備考","class1" => "text-last-justify","class2" => "")
+);
+
+foreach ($gaiyou as $key => $value) {
+?>
+
+
+<?php if(get_field($value["name"])){ ?>
+        <div class="p-product-overview__item <?php echo $value["class2"]; ?>">
+          <dt class="p-product-overview__dt <?php echo $value["class1"]; ?>"><?php echo $value["name"]; ?></dt>
           <dd class="p-product-overview__dd">
-            <div class="p-product-overview__dd-txt">2025.02～2025.07(12回)</div>
-            <div class="p-product-overview__note">
-              <small>※都内でのリアル集合研修３回、オンライン研修７回、フィールドワーク２回</small>
-              <small>※都合が合わず欠席となった場合、後日動画で視聴することが可能です</small>
-            </div>
+            <p class="p-product-overview__dd-txt"><?php echo get_field($value["name"]); ?></p>
+            <?php if(get_field($value["name"]."の注釈")){ ?>
+            <p class="p-product-overview__note">
+              <?php echo get_field($value["name"]."の注釈"); ?>
+            </p>
+            <?php } ?>                    
           </dd>
         </div>
-        <div class="p-product-overview__item">
-          <dt class="p-product-overview__dt text-last-justify">会場</dt>
-          <dd class="p-product-overview__dd">
-            <div class="p-product-overview__dd-txt">ZOOMによるオンラインと都内にてオフライン開催</div>
-            <div class="p-product-overview__note"><small>※都内でのリアル集合研修３回、オンライン研修７回、フィールドワーク２回</small></div>
-          </dd>
-        </div>
-        <div class="p-product-overview__item __pd-block-large">
-          <dt class="p-product-overview__dt text-last-justify">定員</dt>
-          <dd class="p-product-overview__dd">
-            <div class="p-product-overview__dd-txt">8人 (最少催行ざ人員4人)</div>
-          </dd>
-        </div>
-        <div class="p-product-overview__item">
-          <dt class="p-product-overview__dt">受講料</dt>
-          <dd class="p-product-overview__dd">
-            <div class="p-product-overview__dd-txt">650,000円(税別)</div>
-            <div class="p-product-overview__note"><small class="">※フィールドワークにかかる費用は別途必要になります。</small></div>
-          </dd>
-        </div>
-        <div class="p-product-overview__item deadline __pd-block-large">
-          <dt class="p-product-overview__dt">締め切り</dt>
-          <dd class="p-product-overview__dd">
-            <div class="p-product-overview__dd-txt">2025.02.07(金)</div>
-          </dd>
-        </div>
+<?php } ?>        
+<?php } ?>        
+
       </dl>
     </div>
   </section>
 
+
+<?php
+if (is_array($dis_posi) && in_array("講師プロフィールの上", $dis_posi)) {
+  echo $mousikomi;
+}
+?>
+
   <section class="p-product-profile">
     <div class="l-inner __small">
       <h2 class="c-subpage-ttl">講師プロフィール</h2>
+
+
+
+<?php reset_rows('講師リスト'); ?>
+<?php if(have_rows('講師リスト')): ?>
       <ul class="p-product-profile__list">
+<?php while(have_rows('講師リスト')): the_row(); ?>
+
+<?php $img = get_sub_field("画像"); ?>
+<?php $img = (isset($img["sizes"]["thumbnail"]))? $img["sizes"]["medium"] : ""; ?>
+
         <li class="p-product-profile__item">
           <figure class="p-product-profile__item-img">
-            <img src="<?php echo $theme_uri; ?>/assets/images/product/instructor.jpg" alt="">
+            <img src="<?php echo $img; ?>" alt="">
           </figure>
           <p class="p-product-profile__item-txt">
-            <span class="p-product-profile__role">株式会社クリーンネクスト 代表取締役 </span>
-            <span class="p-product-profile__name">西山 貴代 氏</span>
-            <span class="p-product-profile__furigana">(にしやま・きよ)</span>
+            <span class="p-product-profile__role"><?php echo get_sub_field("役職名"); ?></span>
+            <span class="p-product-profile__name"><?php echo get_sub_field("名前"); ?> 氏</span>
+            <span class="p-product-profile__furigana">(<?php echo get_sub_field("ふりがな"); ?>)</span>
           </p>
           <div class="p-product-profile__btn c-btn __height-short">
             <a href="" class="c-btn__link">詳細をみる</a>
           </div>
+<!--
+<?php echo get_sub_field("詳細"); ?>
+-->
+
         </li>
-        <li class="p-product-profile__item">
-          <figure class="p-product-profile__item-img">
-            <img src="<?php echo $theme_uri; ?>/assets/images/product/instructor.jpg" alt="">
-          </figure>
-          <p class="p-product-profile__item-txt">
-            <span class="p-product-profile__role">株式会社クリーンネクスト 代表取締役 </span>
-            <span class="p-product-profile__name">西山 貴代 氏</span>
-            <span class="p-product-profile__furigana">(にしやま・きよ)</span>
-          </p>
-          <div class="p-product-profile__btn c-btn __height-short">
-            <a href="" class="c-btn__link">詳細をみる</a>
-          </div>
-        </li>
-        <li class="p-product-profile__item">
-          <figure class="p-product-profile__item-img">
-            <img src="<?php echo $theme_uri; ?>/assets/images/product/instructor.jpg" alt="">
-          </figure>
-          <p class="p-product-profile__item-txt">
-            <span class="p-product-profile__role">株式会社クリーンネクスト 代表取締役 </span>
-            <span class="p-product-profile__name">西山 貴代 氏</span>
-            <span class="p-product-profile__furigana">(にしやま・きよ)</span>
-          </p>
-          <div class="p-product-profile__btn c-btn __height-short">
-            <a href="" class="c-btn__link">詳細をみる</a>
-          </div>
-        </li>
-        <li class="p-product-profile__item">
-          <figure class="p-product-profile__item-img">
-            <img src="<?php echo $theme_uri; ?>/assets/images/product/instructor.jpg" alt="">
-          </figure>
-          <p class="p-product-profile__item-txt">
-            <span class="p-product-profile__role">株式会社クリーンネクスト 代表取締役 </span>
-            <span class="p-product-profile__name">西山 貴代 氏</span>
-            <span class="p-product-profile__furigana">(にしやま・きよ)</span>
-          </p>
-          <div class="p-product-profile__btn c-btn __height-short">
-            <a href="" class="c-btn__link">詳細をみる</a>
-          </div>
-        </li>
+<?php endwhile; ?>
+
       </ul>
+<?php endif; ?>
+
     </div>
   </section>
+
+
+<?php
+if (is_array($dis_posi) && in_array("その他講座・ビジネススクールの上", $dis_posi)) {
+  echo $mousikomi;
+}
+?>
+
+
+<?php
+  
+  $current_id = get_the_ID(); // 現在表示中の記事IDを取得
+
+  $where = array(
+      'post_status' => 'publish'
+    , 'post_type' => 'product'
+    , 'posts_per_page' => "10"
+    , 'post__not_in'   => array($current_id), // ← 現在の記事を除外
+  );
+
+  if($cat_slug_array){
+    $where['tax_query'] = array(array('operator' => 'IN','taxonomy' => 'product-tag','field' => "slug",'terms' => $cat_slug_array ));
+  }
+
+  $loop = new WP_Query($where);
+
+?>
+<?php if($loop->have_posts()){ ?>
 
   <section class="p-product-other">
     <div class="l-inner __small">
       <h2 class="c-subpage-ttl">その他講座・ビジネススクール</h2>
       <div id="js-product-swiper" class="u-product-swiper swiper">
         <ul class="swiper-wrapper">
+<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
+<?php
+
+  $link        = get_permalink();
+  $link_target = '';
+
+  if(get_field("詳細ページURL")){
+    $link        = get_field("詳細ページURL");
+    $link_target = ' target="_blank" ';
+  }
+
+  //アイキャッチのID
+  $thumbnail_id = get_post_thumbnail_id();
+  $img = wp_get_attachment_image_src($thumbnail_id,'large');
+  $img = (isset($img[0]))? $img[0] : "";
+
+  //応募締切 終了=true
+  $end = is_event_closed($post->ID);
+
+?>  
           <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
+            <a href="<?php echo $link; ?>" <?php echo $link_target; ?> class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">講座</span>
-                <h3 class="c-thumbnail-card__ttl">第3回 ホテル経営会</h3>
+<?php
+  $cat = get_the_terms($post->ID, "product-tag");
+  if(is_array($cat)){
+?> 
+              <div>
+<?php
+    foreach ($cat as $key => $value) {
+      echo '<span class="c-thumbnail-card__cat">'.$value->name.'</span>';
+    }
+?>        
+              </div>
+<?php } ?>
+                <h3 class="c-thumbnail-card__ttl"><?php echo get_the_title(); ?></h3>
                 <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.5</time>-<time datetime="2026-03-31">2026.03</time>
-                  締切：<time datetime="2025-05-01">2025.05.01(木)</time>
+                  日時：<span><?php echo get_field("日程"); ?></span>
+                  締切：<span class="p-service-block-products__deadline"><?php echo get_field("締め切り"); ?></span>
                 </div>
               </div>
               <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card01.jpg" alt="">
+                <img src="<?php echo $img; ?>" alt="">
               </figure>
             </a>
           </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">セミナー</span>
-                <h3 class="c-thumbnail-card__ttl">次世代のハウスキーピングマネジャーに必要な３つの重要な能力の高め方～清掃会社と二人三脚で『客室を完璧に仕上げる』技術</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.5</time>-<time datetime="2026-03-31">2026.03</time>
-                  締切：<time datetime="2025-05-01">2025.05.01(木)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card-other02.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">スクール</span>
-                <h3 class="c-thumbnail-card__ttl">「ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！」</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.5</time>-<time datetime="2026-03-31">2026.03</time>
-                  締切：<time datetime="2025-05-01">2025.05.01(木)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card03.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">講座</span>
-                <h3 class="c-thumbnail-card__ttl">第3回 ホテル経営会</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.5</time>-<time datetime="2026-03-31">2026.03</time>
-                  締切：<time datetime="2025-05-01">2025.05.01(木)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card01.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">セミナー</span>
-                <h3 class="c-thumbnail-card__ttl">次世代のハウスキーピングマネジャーに必要な３つの重要な能力の高め方～清掃会社と二人三脚で『客室を完璧に仕上げる』技術</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.5</time>-<time datetime="2026-03-31">2026.03</time>
-                  締切：<time datetime="2025-05-01">2025.05.01(木)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card-other02.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">スクール</span>
-                <h3 class="c-thumbnail-card__ttl">「ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！」</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.5</time>-<time datetime="2026-03-31">2026.03</time>
-                  締切：<time datetime="2025-05-01">2025.05.01(木)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card03.jpg" alt="">
-              </figure>
-            </a>
-          </li>
+<?php endwhile; ?>
 
         </ul>
       </div>
@@ -504,5 +448,8 @@
       </div> 
     </div>
   </section>
+<?php } ?>
+
+
 </main>
 <?php get_footer(); ?>

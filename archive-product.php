@@ -18,121 +18,60 @@
         <span class="p-product-archive-ttl__ja">ビジネススクール</span>
       </h2>
 
+
+<?php
+  $loop = new WP_Query(
+    array(
+        'post_status' => 'publish'
+      , 'post_type' => 'product'
+      , 'tax_query' => array(array('taxonomy' => 'product-cat','field' => "slug",'terms' => "school" ))
+      , 'posts_per_page' => "-1"
+    )
+  );
+?>
+
+<?php if($loop->have_posts()){ ?>
       <div id="js-product-swiper" class="u-product-swiper swiper">
         <ul class="swiper-wrapper">
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <h3 class="c-thumbnail-card__ttl">第3回 ホテル経営会</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.5</time>-<time datetime="2026-03-31">2026.03</time>
-                  締切：<time class="p-service-block-products__deadline" datetime="2025-05-01">2025.05.01(木)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card02.jpg" alt="">
-              </figure>
-            </a>
-          </li>
 
+
+<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
+
+<?php
+
+  $link        = get_permalink();
+  $link_target = '';
+
+  if(get_field("詳細ページURL")){
+    $link        = get_field("詳細ページURL");
+    $link_target = ' target="_blank" ';
+  }
+
+  //アイキャッチのID
+  $thumbnail_id = get_post_thumbnail_id();
+  $img = wp_get_attachment_image_src($thumbnail_id,'large');
+  $img = (isset($img[0]))? $img[0] : "";
+
+  //応募締切 終了=true
+  $end = is_event_closed($post->ID);
+
+?>
           <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
+            <a href="<?php echo $link; ?>" <?php echo $link_target; ?> class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
-                <h3 class="c-thumbnail-card__ttl">次世代のハウスキーピングマネジャーに必要な３つの重要な能力の高め方～清掃会社と二人三脚で『客室を完璧に仕上げる』技術</h3>
+                <h3 class="c-thumbnail-card__ttl"><?php echo get_the_title(); ?></h3>
                 <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.02.26(水)</time>　
-                  締切：<time class="p-service-block-products__deadline" datetime="2025-05-01">2025.02.25(火)</time>
+                  日程：<span><?php echo get_field("日程"); ?></span>
+                  締切：<span class="p-service-block-products__deadline"><?php echo get_field("締め切り"); ?></span>
                 </div>
               </div>
               <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card02.jpg" alt="">
+                <img src="<?php echo $img; ?>" alt="">
               </figure>
             </a>
           </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <h3 class="c-thumbnail-card__ttl">「ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！」</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.02.26(水)</time>　
-                  締切：<time class="p-service-block-products__deadline" datetime="2025-05-01">2025.02.25(火)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card03.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <h3 class="c-thumbnail-card__ttl">「ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！」</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.02.26(水)</time>　
-                  締切：<time class="p-service-block-products__deadline" datetime="2025-05-01">2025.02.25(火)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card02.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <h3 class="c-thumbnail-card__ttl">「ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！」</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.02.26(水)</time>　
-                  締切：<time class="p-service-block-products__deadline" datetime="2025-05-01">2025.02.25(火)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card02.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <h3 class="c-thumbnail-card__ttl">「ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！」</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.02.26(水)</time>　
-                  締切：<time class="p-service-block-products__deadline" datetime="2025-05-01">2025.02.25(火)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card03.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <h3 class="c-thumbnail-card__ttl">「ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！」</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.02.26(水)</time>　
-                  締切：<time class="p-service-block-products__deadline" datetime="2025-05-01">2025.02.25(火)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card01.jpg" alt="">
-              </figure>
-            </a>
-          </li>
-          <li class="c-thumbnail-card swiper-slide">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <h3 class="c-thumbnail-card__ttl">「ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！」</h3>
-                <div class="c-thumbnail-card__date">
-                  日時：<time datetime="2025-05-01">2025.02.26(水)</time>　
-                  締切：<time class="p-service-block-products__deadline" datetime="2025-05-01">2025.02.25(火)</time>
-                </div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/product/product-card02.jpg" alt="">
-              </figure>
-            </a>
-          </li>
+<?php endwhile; ?>          
+
         </ul>
       </div>
       <div id="js-product-swiper-controls" class="c-swiper-controls">
@@ -140,6 +79,8 @@
         <div class="swiper-pagination"></div>
         <div class="swiper-button-next c-arrow-btn next"></div>
       </div> 
+<?php } ?>
+
     </div>
   </section>
 
@@ -152,143 +93,17 @@
       <p class="p-product-open__intro-txt">
         各業界のスペシャリストをお招きして開催しているオープン講座です。2,000年に始まり、過去の500回以上開催している宿泊ビジネス・観光業に関する講演会。基本月一回、平日の18時～19時30分に開講しています。
       </p>
+
+
+
+
+
       <ul class="p-product-open__list">
-        <li class="p-product-card">
-          <div class="c-thumbnail-card">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-02-26T18:00/2025-02-26T19:30">2025.02.26(水) 18:00-19:30</time></div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="">
-              </figure>
-            </a>
-          </div>
-          <a class="p-product-card__info">
-            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </a>
-          <div class="p-product-card__double-btn">
-            <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
-            <div class="c-btn __height-short __bg-gold"><a href="" class="c-btn__link">お申し込み</a></div>
-          </div>
-        </li>
-        <li class="p-product-card">
-          <div class="c-thumbnail-card">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-02-26T18:00/2025-02-26T19:30">2025.02.26(水) 18:00-19:30</time></div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv03.jpg" alt="">
-              </figure>
-            </a>
-          </div>
-          <a class="p-product-card__info">
-            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </a>
-          <div class="p-product-card__double-btn">
-            <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
-            <div class="c-btn __height-short __bg-gold"><a href="" class="c-btn__link">お申し込み</a></div>
-          </div>
-        </li>
-        <li class="p-product-card">
-          <div class="c-thumbnail-card">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-02-26T18:00/2025-02-26T19:30">2025.02.26(水) 18:00-19:30</time></div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-knowledge03.jpg" alt="">
-              </figure>
-            </a>
-          </div>
-          <a class="p-product-card__info">
-            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </a>
-          <div class="p-product-card__double-btn">
-            <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
-            <div class="c-btn __height-short __disabled"><a href="" class="c-btn__link">お申し込み</a></div>
-          </div>
-        </li>
-        <li class="p-product-card">
-          <div class="c-thumbnail-card">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-02-26T18:00/2025-02-26T19:30">2025.02.26(水) 18:00-19:30</time></div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv02.jpg" alt="">
-              </figure>
-            </a>
-          </div>
-          <a class="p-product-card__info">
-            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </a>
-          <div class="p-product-card__double-btn">
-            <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
-            <div class="c-btn __height-short __bg-gold"><a href="" class="c-btn__link">お申し込み</a></div>
-          </div>
-        </li>
-        <li class="p-product-card">
-          <div class="c-thumbnail-card">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-02-26T18:00/2025-02-26T19:30">2025.02.26(水) 18:00-19:30</time></div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-mv03.jpg" alt="">
-              </figure>
-            </a>
-          </div>
-          <a class="p-product-card__info">
-            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </a>
-          <div class="p-product-card__double-btn">
-            <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
-            <div class="c-btn __height-short __bg-gold"><a href="" class="c-btn__link">お申し込み</a></div>
-          </div>
-        </li>
-        <li class="p-product-card">
-          <div class="c-thumbnail-card">
-            <a href="" class="c-thumbnail-card__inner">
-              <div class="c-thumbnail-card__body">
-                <span class="c-thumbnail-card__cat">カテゴリ</span>
-                <h3 class="c-thumbnail-card__ttl">ゲストの期待を超える自立型組織を築くリーダーシップとマネジメント ～Operational Excellenceな現場を創る！</h3>
-                <div class="c-thumbnail-card__date"><time datetime="2025-02-26T18:00/2025-02-26T19:30">2025.02.26(水) 18:00-19:30</time></div>
-              </div>
-              <figure class="c-thumbnail-card__img">
-                <img src="<?php echo $theme_uri; ?>/assets/images/front/front-knowledge03.jpg" alt="">
-              </figure>
-            </a>
-          </div>
-          <a class="p-product-card__info">
-            <span class="p-product-card__instructor">株式会社宿屋塾 エグゼクティブ ディレクター  坂下雅行氏</span>
-            <p class="p-product-card__subttl">魅力的なコンセプトをハードとソフトの両面から築き、ずっと愛されるホテルを創れる人を育成します。</p>
-          </a>
-          <div class="p-product-card__double-btn">
-            <div class="c-btn __height-short"><a href="" class="c-btn__link">詳細を見る</a></div>
-            <div class="c-btn __height-short __bg-gold"><a href="" class="c-btn__link">お申し込み</a></div>
-          </div>
-        </li>
       </ul>
 
+
       <div class="p-load-more">
-        <button class="p-load-more__btn">
+        <button class="p-load-more__btn js-load-more">
           もっと見る
         </button>
       </div>
@@ -296,4 +111,5 @@
   </section>
 
 </main>
+<script type="text/javascript" src="<?php echo $theme_uri; ?>/assets/js/product-load.js"></script>
 <?php get_footer(); ?>
