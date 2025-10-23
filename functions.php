@@ -100,27 +100,32 @@
   }, 10, 3);
 
   /**
-   * すべてのACF関係フィールドで
-   * 選択済み投稿（右側）を「投稿日の新しい順」に並べ替える
+   * ACF関係フィールドの選択済み投稿（右側）の並べ替え
    */
-  add_filter('acf/load_value/type=relationship', 'acf_sort_relationship_by_date', 10, 3);
-  function acf_sort_relationship_by_date($value, $post_id, $field) {
-      if (empty($value) || !is_array($value)) {
-          return $value;
-      }
+  add_filter('acf/load_value/type=relationship', 'acf_custom_sort_relationship_fields', 10, 3);
+  function acf_custom_sort_relationship_fields($value, $post_id, $field) {
+    if (empty($value) || !is_array($value)) {
+      return $value;
+    }
 
-      // 投稿オブジェクトを取得
-      $posts = array_map('get_post', $value);
+    // ★管理画面での表示順に表示するフィールド名
+    $keep_order_fields = ['front_service', 'front_voice', '参加者'];
 
-      // 投稿日（新しい順）でソート
-      usort($posts, function($a, $b) {
-          return strtotime($b->post_date) <=> strtotime($a->post_date);
-      });
+    // フィールド名が一致する場合は「管理画面での表示順序」を維持
+    if (in_array($field['name'], $keep_order_fields, true)) {
+        return $value;
+    }
 
-      // 並べ替えた投稿IDの配列を返す
-      return array_map(function($post) {
-          return $post->ID;
-      }, $posts);
+    // それ以外のフィールドは投稿日（新しい順）でソート
+    $posts = array_map('get_post', $value);
+
+    usort($posts, function($a, $b) {
+        return strtotime($b->post_date) <=> strtotime($a->post_date);
+    });
+
+    return array_map(function($post) {
+        return $post->ID;
+    }, $posts);
   }
 
 /**
