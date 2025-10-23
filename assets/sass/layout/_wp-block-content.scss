@@ -2,7 +2,9 @@
 @use "sass:map";
 
 .l-wp-block-content {
-  margin-top: 4rem;
+  * {
+    line-height: 1;
+  }
 
   *:not(li, .wp-block-column ) + *:not(li, .wp-block-column ) {
     margin-top: calc(var(--leading-trim) + 4rem);

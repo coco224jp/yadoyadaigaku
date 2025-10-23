@@ -54,7 +54,7 @@ while ( $loop->have_posts() ) : $loop->the_post();
 
 
 $list .='        <li class="p-product-card">';
-$list .='          <div class="c-thumbnail-card">';
+$list .='          <div class="c-thumbnail-card ' . ($end ? '__closed' : '') . '">';
 $list .='            <a href="'. $link .'" '. $link_target .' class="c-thumbnail-card__inner">';
 $list .='              <div class="c-thumbnail-card__body">';
 

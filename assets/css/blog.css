@@ -172,6 +172,9 @@
   height: 100%;
   object-fit: cover;
 }
+.p-blog-single .l-wp-block-content {
+  margin-top: 4rem;
+}
 .p-blog-single__navi-wrap {
   margin-top: 3rem;
   padding-block: 2rem;

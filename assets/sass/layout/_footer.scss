@@ -142,6 +142,7 @@
     justify-content: end;
     gap: 0.8rem 0;
     overflow: hidden;
+    z-index: 0;
 
     &::before {
       content: '';

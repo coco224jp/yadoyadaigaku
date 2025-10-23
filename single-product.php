@@ -86,7 +86,7 @@
 <?php } ?>
 <?php if(get_field("締め切り")){ ?>
             <dt class="p-product-fv__date-place-ttl">締切</dt>
-            <dd class="p-product-fv__date-place-txt"><?php echo get_field("締め切り"); ?></dd>
+            <dd class="p-product-fv__date-place-txt font-en"><?php echo get_field("締め切り"); ?></dd>
 <?php } ?>
           </dl>
         </div>
@@ -98,7 +98,7 @@
   $img = (isset($img[0]))? $img[0] : "";
 
 ?>           
-        <figure class="p-product-fv__img <?php echo $end ? '__disabled' : ''; ?>">
+        <figure class="p-product-fv__img <?php echo $end ? '__closed' : ''; ?>">
           <img src="<?php echo $img; ?>" alt="">
         </figure>
         </div>
@@ -421,7 +421,7 @@ if (is_array($dis_posi) && in_array("その他講座・ビジネススクール�
   $end = is_event_closed($post->ID);
 
 ?>  
-          <li class="c-thumbnail-card swiper-slide">
+          <li class="c-thumbnail-card swiper-slide <?php echo $end ? '__closed' : ''; ?>">
             <a href="<?php echo $link; ?>" <?php echo $link_target; ?> class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
 <?php

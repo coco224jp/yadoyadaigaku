@@ -858,6 +858,7 @@ li a:focus-visible {
   justify-content: end;
   gap: 0.8rem 0;
   overflow: hidden;
+  z-index: 0;
 }
 .l-footer-cta__btn-link::before {
   content: "";
@@ -1096,8 +1097,8 @@ li a:focus-visible {
   }
 }
 
-.l-wp-block-content {
-  margin-top: 4rem;
+.l-wp-block-content * {
+  line-height: 1;
 }
 .l-wp-block-content *:not(li, .wp-block-column) + *:not(li, .wp-block-column) {
   margin-top: calc(var(--leading-trim) + 4rem);
@@ -1463,6 +1464,7 @@ li a:focus-visible {
   order: 2;
 }
 .c-thumbnail-card__img {
+  position: relative;
   order: 1;
   border-radius: 0.8rem;
   overflow: hidden;
@@ -1482,6 +1484,31 @@ li a:focus-visible {
 @media (any-hover: hover) {
   .c-thumbnail-card__inner:hover .c-thumbnail-card__img > img {
     transform: scale(1.1);
+  }
+}
+.c-thumbnail-card.__closed .c-thumbnail-card__img::after {
+  position: absolute;
+  content: "募集\a終了";
+  display: block;
+  width: 32.8947368421%;
+  aspect-ratio: 1/1;
+  -webkit-clip-path: polygon(0 0, 0 100%, 100% 0);
+  clip-path: polygon(0 0, 0 100%, 100% 0);
+  top: 0;
+  left: 0;
+  background: var(--color-text);
+  padding: 1rem 0 0 1.2rem;
+  white-space: pre;
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+@media screen and (width >= 768px) {
+  .c-thumbnail-card.__closed .c-thumbnail-card__img::after {
+    padding: 1.3rem 0 0 1.5rem;
+    font-size: 2rem;
   }
 }
 .c-thumbnail-card__ttl {

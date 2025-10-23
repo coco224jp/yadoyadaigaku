@@ -56,7 +56,7 @@
   $end = is_event_closed($post->ID);
 
 ?>
-          <li class="c-thumbnail-card swiper-slide">
+          <li class="c-thumbnail-card swiper-slide <?php echo $end ? '__closed' : ''; ?>">
             <a href="<?php echo $link; ?>" <?php echo $link_target; ?> class="c-thumbnail-card__inner">
               <div class="c-thumbnail-card__body">
                 <h3 class="c-thumbnail-card__ttl"><?php echo get_the_title(); ?></h3>

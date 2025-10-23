@@ -76,6 +76,12 @@
   }
 }
 
+@media screen and (width >= 768px) {
+  .c-thumbnail-card.__closed .c-thumbnail-card__img::after {
+    font-size: 1.8rem;
+  }
+}
+
 .p-load-more {
   margin-top: 4rem;
   text-align: center;
@@ -114,9 +120,36 @@
   }
 }
 .p-product-fv__img {
+  position: relative;
   aspect-ratio: 345/214;
   border-radius: 0.8rem;
   overflow: hidden;
+}
+.p-product-fv__img.__closed::after {
+  content: "募集\a終了";
+  position: absolute;
+  display: block;
+  width: 32.8947368421%;
+  aspect-ratio: 1/1;
+  -webkit-clip-path: polygon(0 0, 0 100%, 100% 0);
+  clip-path: polygon(0 0, 0 100%, 100% 0);
+  top: 0;
+  left: 0;
+  background: var(--color-text);
+  padding: 1rem 0 0 1.2rem;
+  white-space: pre;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+@media screen and (width >= 768px) {
+  .p-product-fv__img.__closed::after {
+    content: "募集終了";
+    padding: 3rem 0 0 2.25rem;
+    font-size: 2rem;
+  }
 }
 .p-product-fv__img > img {
   width: 100%;
@@ -288,31 +321,19 @@
   background: var(--color-logo) url("../images/product/icon-check.svg") no-repeat center center/17px 13px;
 }
 
-.p-product-freeArea__ttl {
+.p-product-freeArea .l-wp-block-content h2 {
   line-height: 1.5;
   letter-spacing: 0.05em;
+  font-weight: bold;
+  background: none;
+  padding: 0;
+  text-align: center;
 }
 @media screen and (width >= 768px) {
-  .p-product-freeArea__ttl {
+  .p-product-freeArea .l-wp-block-content h2 {
     line-height: 1.4;
     letter-spacing: 0;
   }
-}
-.p-product-freeArea__txt {
-  line-height: 1.7;
-}
-.p-product-freeArea__ttl + * {
-  margin-top: 0;
-}
-.p-product-freeArea__ttl + * ~ * {
-  margin-top: 4rem;
-}
-.p-product-freeArea__iframe-wrap {
-  aspect-ratio: 1000/575;
-}
-.p-product-freeArea iframe {
-  width: 100%;
-  height: 100%;
 }
 
 .p-product-cta__ttl {
@@ -423,9 +444,6 @@
     margin-right: 0;
   }
 }
-.p-product-schedule thead {
-  background: var(--bg-color-light);
-}
 .p-product-schedule th, .p-product-schedule td {
   text-align: center;
   vertical-align: middle;
@@ -433,8 +451,11 @@
 .p-product-schedule th {
   padding-block: 1.95rem;
 }
+.p-product-schedule thead th {
+  background: var(--bg-color-light);
+}
 .p-product-schedule td {
-  padding-block: 1rem;
+  padding: 1rem;
   border: 1px solid #D9D9D9;
 }
 .p-product-schedule td:first-child, .p-product-schedule td:nth-child(2) {
@@ -540,23 +561,13 @@
   margin-block: var(--leading-trim);
 }
 .p-product-overview__note {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-@media screen and (width >= 768px) {
-  .p-product-overview__note {
-    flex-direction: row;
-  }
-}
-.p-product-overview__note > small {
   font-size: 1.1rem;
   line-height: 1.5;
   font-weight: light;
   margin-block: var(--leading-trim);
 }
 @media screen and (width >= 768px) {
-  .p-product-overview__note > small {
+  .p-product-overview__note {
     font-size: 1.2rem;
   }
 }
