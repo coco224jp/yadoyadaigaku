@@ -279,7 +279,7 @@
         font-size: 2rem;
       }
 
-      .p-front-mv__swiper-slide.__disabled & {
+      .p-front-mv__swiper-slide.__closed & {
         content: '募集\A終了';
         display: block;
       }

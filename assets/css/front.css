@@ -265,7 +265,7 @@
     font-size: 2rem;
   }
 }
-.p-front-mv__swiper-slide.__disabled .p-front-mv__swiper-slide-img::after {
+.p-front-mv__swiper-slide.__closed .p-front-mv__swiper-slide-img::after {
   content: "募集\a終了";
   display: block;
 }

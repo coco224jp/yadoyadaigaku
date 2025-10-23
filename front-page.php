@@ -79,7 +79,7 @@
 
 
 ?>
-          <li class="p-front-mv__swiper-slide swiper-slide <?php echo $end ? '__disabled' : ''; ?>">
+          <li class="p-front-mv__swiper-slide swiper-slide <?php echo $end ? '__closed' : ''; ?>">
             <a href="<?php echo $link; ?>" <?php echo $link_target; ?> class="p-front-mv__swiper-slide-link">
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
