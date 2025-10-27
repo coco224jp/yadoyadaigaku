@@ -343,7 +343,7 @@ if (is_array($dis_posi) && in_array("講師プロフィールの上", $dis_posi)
 <?php $img = get_sub_field("画像"); ?>
 <?php $img = (isset($img["sizes"]["thumbnail"]))? $img["sizes"]["medium"] : ""; ?>
 
-        <li class="p-product-profile__item">
+        <li class="p-product-profile__item js-dialog-parent">
           <figure class="p-product-profile__item-img">
             <img src="<?php echo $img; ?>" alt="">
           </figure>
@@ -353,12 +353,25 @@ if (is_array($dis_posi) && in_array("講師プロフィールの上", $dis_posi)
             <span class="p-product-profile__furigana">(<?php echo get_sub_field("ふりがな"); ?>)</span>
           </p>
           <div class="p-product-profile__btn c-btn __height-short">
-            <a href="" class="c-btn__link">詳細をみる</a>
+            <button class="c-btn__link js-dialog-open-btn">詳細をみる</button>
           </div>
-<!--
-<?php echo get_sub_field("詳細"); ?>
--->
-
+          <!-- モーダルダイアログ -->
+          <dialog class="p-product-profile__dialog js-dialog" closedby="any" autofocus>
+            <div class="p-product-profile__dialog-inner">
+              <figure class="p-product-profile__item-img">
+                <img src="<?php echo $img; ?>" alt="">
+              </figure>
+              <p class="p-product-profile__item-txt">
+                <span class="p-product-profile__role"><?php echo get_sub_field("役職名"); ?></span>
+                <span class="p-product-profile__name"><?php echo get_sub_field("名前"); ?> 氏</span>
+                <span class="p-product-profile__furigana">(<?php echo get_sub_field("ふりがな"); ?>)</span>
+              </p>
+              <div class="l-wp-block-content"><?php echo get_sub_field("詳細"); ?></div>
+              <div class="p-product-profile__dialog-close-btn c-btn">
+                <button class="c-btn__link js-dialog-close-btn">閉じる</button>
+              </div>
+            </div>
+          </dialog>
         </li>
 <?php endwhile; ?>
 

@@ -48,7 +48,6 @@
 
   &__sp-menu-bg{
     position: fixed;
-    // inset: 0;
     top: 0;
     left: 0;
     width: 100%;
@@ -62,6 +61,7 @@
     transition: opacity 0.3s ease-out;
     z-index: 2;
     padding-bottom: env(safe-area-inset-bottom);
+    overscroll-behavior: contain;
 
     &.active {
       visibility: visible;

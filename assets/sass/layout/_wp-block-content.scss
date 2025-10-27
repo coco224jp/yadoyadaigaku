@@ -6,7 +6,7 @@
     line-height: 1;
   }
 
-  *:not(li, .wp-block-column ) + *:not(li, .wp-block-column ) {
+  :where(*:not(li, .wp-block-column )) + :where(*:not(li, .wp-block-column )) {
     margin-top: calc(var(--leading-trim) + 4rem);
     margin-bottom: var(--leading-trim);
   }
@@ -41,20 +41,18 @@
   }
 
   a {
+    margin-top: 0;
     line-height: inherit;
     color: #0B75FF;
     text-decoration: underline;
 
     &[target="_blank"] {
-      display: inline-flex;
-      align-items: center;
-      gap: 0 0.4rem;
-
       &::after {
         content: '';
         display: inline-block;
         width: 12px;
         aspect-ratio: 12 / 9.6;
+        margin-left: 0.4rem;
         background: url("../images/common/icon-window.svg") no-repeat center center / contain;
       }
     }

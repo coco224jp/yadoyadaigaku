@@ -666,8 +666,9 @@
   }
 
   &__item-img {
+    //モーダル内の同要素のsafariのバグ回避のため、aspect-ratioは使用しない
     width: 10rem;
-    aspect-ratio: 1 / 1;
+    height: 10rem;
     border-radius: 50%;
     overflow: hidden;
 
@@ -675,6 +676,13 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    @include mq {
+      .p-product-profile__dialog & {
+        width: 15rem;
+        height: 15rem;
+      }
     }
   }
 
@@ -710,7 +718,71 @@
     margin-bottom: var(--leading-trim);
   }
 
-  .c-btn {
+  &__btn {
     margin-top: 0;
+  }
+
+  &__dialog {
+    width: min(80rem, calc(100vw - 4rem));
+    max-height: calc(70dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    overflow-y: auto;
+    padding: 2.5rem 2rem;
+    // autofocus属性でフォーカスされるためoutlineを非表示
+    outline: none;
+    overscroll-behavior: contain;
+    transform-origin: center;
+    transition: 
+      transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1),
+      opacity 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &[open] {
+      opacity: 1;
+      transform: scale(1);
+
+      @starting-style {
+        opacity: 0;
+        transform: scale(0);
+      }
+    }
+  }  
+
+  ::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  &__dialog-inner {
+    max-width: 70rem;
+    margin-inline: auto;
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 2rem 0;
+    text-align: justify;
+  }
+
+  .l-wp-block-content {
+    padding-top: 2rem;
+    margin-block: var(--leading-trim);
+
+    h2 {
+      letter-spacing: 0.05em;
+      font-weight: bold;
+      background: none;
+      padding: 0;
+      text-align: center;
+
+      @include mq {
+        line-height: 1.4;
+      }
+    }
+
+    p {
+      line-height: 1.6;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  &__dialog-close-btn {
+    margin-top: 4rem 0;
   }
 }

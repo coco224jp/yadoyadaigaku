@@ -230,4 +230,56 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // 講師プロフィールのモーダルダイアログ
+  const dialogs = document.querySelectorAll('.js-dialog');
+  const dialogOpenBtns = document.querySelectorAll('.js-dialog-open-btn');
+  const dialogCloseBtns = document.querySelectorAll('.js-dialog-close-btn');
+
+  dialogOpenBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.js-dialog-parent');
+      if(!item) return;
+
+      const dialog = item.querySelector('.js-dialog');
+      if (!dialog) return;
+
+      scrollPosition = window.pageYOffset;
+      body.style.setProperty('--scroll-y', `-${scrollPosition}px`);
+      body.classList.add('is-fixed');   
+
+      dialog.showModal();
+    });
+  });
+
+  dialogCloseBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.js-dialog').close();
+    });
+  });
+
+  dialogs.forEach(dialog => {
+    dialog.addEventListener('close', () => {
+        body.classList.remove('is-fixed');
+        window.scrollTo(0, scrollPosition);
+    });
+  });
+
+  // モーダルダイアログの背景クリックで閉じる処理。SafariとFirefoxでdialogタグのclosedby="any"属性が効かないため、記載
+  dialogs.forEach(dialog => {
+    // backdropクリックで閉じる
+    dialog.addEventListener('click', e => {
+      const rect = dialog.getBoundingClientRect();
+      const isClickedInDialog =
+        rect.top <= e.clientY &&
+        e.clientY <= rect.bottom &&
+        rect.left <= e.clientX &&
+        e.clientX <= rect.right;
+      if (!isClickedInDialog) {
+        dialog.close();
+        document.body.classList.remove('is-fixed');
+        window.scrollTo(0, scrollPosition);
+      }
+    });
+  });
+
 });
