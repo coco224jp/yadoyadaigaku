@@ -6,11 +6,13 @@
   width: 26.8rem;
   padding: 2.55rem 2.55rem 2.975rem;
   border-radius: 0.68rem;
+  margin-left: 1.6rem;
 
   @include mq {
     width: 38.5rem;
     padding: 3rem 3rem 3.6rem;
     border-radius: 0.8rem;
+    margin-left: 2rem;
   }
 
   &.swiper-slide-active {
@@ -30,13 +32,14 @@
     @include mq {
       font-size: 1.3rem;
     }
+
     .swiper-slide-active & {
       @include mq {
         font-size: 1.56rem;
       }
     }
-
   }
+
   &__txt-wrap{
     position: relative;
     font-size: 1.4rem;
@@ -46,9 +49,11 @@
     text-align: justify;
 
     @include mq {
+      font-size: 1.5rem;
       margin-top: 2.5rem; 
       font-size: 1.5rem;
       line-height: 1.6;
+      min-height: 7lh;
     }
 
     .swiper-slide-active & {
@@ -58,7 +63,6 @@
         padding-inline: 2.4rem;
       }
     }
-
 
     &::before,
     &::after {
@@ -79,8 +83,6 @@
         }
       }
     }
-
-
 
     &::before {
       content: '“';

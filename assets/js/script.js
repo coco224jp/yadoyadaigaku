@@ -177,7 +177,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const voiceCardSwiper = new Swiper('#js-voice-card-swiper', {
     slidesPerView: 'auto',
-    spaceBetween: rem * 1.6,
     centeredSlides: true,
     initialSlide: 2,
     slidesPerGroup: 1,
@@ -192,11 +191,6 @@ document.addEventListener('DOMContentLoaded', function() {
     pagination: {
       el: '#js-voice-card-swiper-controls .swiper-pagination',
       clickable: true,
-    },
-    breakpoints: {
-      768: {
-        spaceBetween: rem * 2,
-      },
     },
   });
 
@@ -225,7 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
         spaceBetween: rem * 2,
         centeredSlides: false,
         initialSlide: 0,
-   
       },
     }
   });

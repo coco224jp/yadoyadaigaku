@@ -1547,12 +1547,14 @@ li a:focus-visible {
   width: 26.8rem;
   padding: 2.55rem 2.55rem 2.975rem;
   border-radius: 0.68rem;
+  margin-left: 1.6rem;
 }
 @media screen and (width >= 768px) {
   .c-voice-card {
     width: 38.5rem;
     padding: 3rem 3rem 3.6rem;
     border-radius: 0.8rem;
+    margin-left: 2rem;
   }
 }
 @media screen and (width >= 768px) {
@@ -1588,9 +1590,11 @@ li a:focus-visible {
 }
 @media screen and (width >= 768px) {
   .c-voice-card__txt-wrap {
+    font-size: 1.5rem;
     margin-top: 2.5rem;
     font-size: 1.5rem;
     line-height: 1.6;
+    min-height: 7lh;
   }
 }
 @media screen and (width >= 768px) {
