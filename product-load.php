@@ -1,11 +1,11 @@
 <?php 
+date_default_timezone_set('Asia/Tokyo');
 
 require $_SERVER['DOCUMENT_ROOT'].'/wp-load.php';
 
 ini_set("default_charset"             , "UTF-8");
 ini_set("mbstring.internal_encoding"  , "UTF-8");
 ini_set("mbstring.http_output"        , "UTF-8");
-date_default_timezone_set('Asia/Tokyo');
 header('content-type: application/json; charset=utf-8');
 
 
