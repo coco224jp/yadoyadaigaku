@@ -109,7 +109,7 @@
     }
 
     // ★管理画面での表示順に表示するフィールド名
-    $keep_order_fields = ['front_service', 'front_voice', '参加者'];
+    $keep_order_fields = ['front_service', 'front_voice', '参加者', 'service_voices'];
 
     // フィールド名が一致する場合は「管理画面での表示順序」を維持
     if (in_array($field['name'], $keep_order_fields, true)) {
