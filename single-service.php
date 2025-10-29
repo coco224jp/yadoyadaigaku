@@ -121,8 +121,8 @@
         <ul class="c-voice-card-swiper__wrapper swiper-wrapper">
           <?php
             foreach($service_voices as $voice_post):
-              $voice_post_role = get_field('voice_role', $voice_post->ID);
-              $voice_post_txt = get_the_content(null, false, $voice_post->ID);
+              $voice_post_role = get_field('voice_age', $voice_post->ID);
+              $voice_post_txt = get_field('voice_detail', $voice_post->ID);
           ?>
           <li class="c-voice-card swiper-slide">
               <h3 class="c-voice-card__ttl"><?php echo $voice_post_role; ?></h3>
