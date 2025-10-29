@@ -260,6 +260,22 @@ if (is_array($dis_posi) && in_array("スケジュールの上", $dis_posi)) {
 <?php
 $table = get_field("スケジュール"); 
 $table = str_replace('<table', '<table class="p-product-schedule__table"', $table);
+
+// 不要なインラインstyle削除
+$table = preg_replace('/(<(?:td|th|tr|table)[^>]*?)style="[^"]*"(.*?>)/i', '$1$2', $table);
+
+// tbodyの前にtheadを挿入
+$thead = '
+<thead>
+  <tr>
+    <th colspan="2">内容</th>
+    <th>日程</th>
+    <th>会場</th>
+  </tr>
+</thead>';
+
+$table = preg_replace('/<tbody>/', $thead . '<tbody>', $table, 1);
+
 echo $table;
 ?>      
       </div>
