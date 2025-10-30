@@ -91,8 +91,8 @@
   $v_date       = $start_date;
   $v_date_array = explode('-', $v_date);
 
-  $v_date_mm    = $v_date_array[1];
-  $v_date_dd    = $v_date_array[2];
+  $v_date_mm    = ltrim($v_date_array[1], '0');
+  $v_date_dd    = ltrim($v_date_array[2], '0');
 
   if ($now < $start) {
       // 開催日前 → 開催日と曜日を表示
@@ -104,14 +104,14 @@
       $youbi = "本日開催";      
 
       $v_date       = current_time('Y-m-d');
-      $v_date_mm    = current_time('m');
-      $v_date_dd    = current_time('d');           
+      $v_date_mm    = current_time('n');
+      $v_date_dd    = current_time('j');           
   }
 ?>
 
                     <time class="p-front-mv__swiper-slide-date-wrap" datetime="<?php echo $v_date; ?>">
-                      <span class="month <?php echo ($v_date_mm >= 10) ? 'double' : ''; ?>"><?php echo $v_date_mm; ?></span>
-                      <span class="date <?php echo ($v_date_dd >= 10) ? 'double' : ''; ?>"><?php echo $v_date_dd; ?></span>
+                      <span class="month <?php echo ((int)$v_date_mm >= 10) ? 'double' : ''; ?>"><?php echo $v_date_mm; ?></span>
+                      <span class="date <?php echo ((int)$v_date_dd >= 10) ? 'double' : ''; ?>"><?php echo $v_date_dd; ?></span>
                     </time>
                     <span class="p-front-mv__swiper-slide-date-txt"><?php echo $youbi; ?></span>
                   </span><!-- /.p-front-mv__swiper-slide-date-info -->
@@ -177,7 +177,7 @@ echo '      <span class="p-front-mv__swiper-slide__cat '.$value->slug .'">'.$val
         endwhile; endif;
       ?>
       </ul>
-      <div class="c-btn __pc-right" data-aos="fade" data-aos-delay="1300">
+      <div class="c-btn __pc-right" data-aos="fade" data-aos-delay="200">
         <a href="" class="c-btn__link">宿屋塾のビジョン</a>
       </div>
     </div><!-- ./-inner -->
@@ -218,7 +218,7 @@ echo '      <span class="p-front-mv__swiper-slide__cat '.$value->slug .'">'.$val
         endforeach;
       ?>
       </ul>
-      <div class="c-btn __pc-right" data-aos="fade">
+      <div class="c-btn __pc-right" data-aos="fade" data-aos-delay="200">
         <a href="<?php echo home_url('/service/'); ?>" class="c-btn__link">サービス一覧をみる</a>
       </div>
     </div>
@@ -323,7 +323,7 @@ echo '      <span class="p-front-mv__swiper-slide__cat '.$value->slug .'">'.$val
           ?>
         </ul>
       </div><!-- /.swiper -->
-      <div class="c-swiper-controls">
+      <div class="c-swiper-controls" data-aos="fade" data-aos-delay="100">
         <div class="swiper-button-prev c-arrow-btn prev"></div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-next c-arrow-btn next"></div>
@@ -354,7 +354,7 @@ echo '      <span class="p-front-mv__swiper-slide__cat '.$value->slug .'">'.$val
         </ul>
       </div>
 
-      <div id="js-voice-card-swiper-controls" class="c-swiper-controls">
+      <div id="js-voice-card-swiper-controls" class="c-swiper-controls" data-aos="fade" data-aos-delay="100">
         <div class="swiper-button-prev c-arrow-btn prev"></div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-next c-arrow-btn next"></div>
@@ -394,7 +394,7 @@ echo '      <span class="p-front-mv__swiper-slide__cat '.$value->slug .'">'.$val
           wp_reset_postdata();
         ?>
       </ul>
-      <div class="c-btn __pc-right">
+      <div class="c-btn __pc-right" data-aos="fade" data-aos-delay="200">
         <a href="" class="c-btn__link">お知らせ一覧へ</a>
       </div>
     </div>
