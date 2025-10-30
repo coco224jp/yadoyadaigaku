@@ -4,17 +4,31 @@
   $terms = get_the_terms( $post_id, 'product-cat' );
   $ttl_jp = '';
   $ttl_en = '';
+  $single_product_bg_pc = '';
+  $single_product_bg_sp = '';
   
   if ( $terms && ! is_wp_error( $terms ) ) {
     foreach ( $terms as $term ) {
       $ttl_jp = esc_html( $term->name );
-    }
-  }
+      $ttl_en = get_field('product_cat_en_ttl', 'product-cat_' . $term->term_id);
 
-  if(str_contains($ttl_jp, 'オープン')) {
-    $ttl_en = 'Open Courses';
-  } elseif(str_contains($ttl_jp, 'スクール')) {
-    $ttl_en = 'Schools';
+      // ▼ 同スラッグを持つ service投稿を取得
+      $related_service_post = get_posts([
+        'post_type'      => 'service',
+        'name'           => $term->slug,
+        'posts_per_page' => 1,
+        'post_status'    => 'publish',
+      ]);
+
+      if( !empty($related_service_post) ) {
+        $related_service_post = $related_service_post[0];
+
+        $single_product_bg_pc = get_field('service_bg_pc', $related_service_post->ID);
+        $single_product_bg_sp = get_field('service_bg_sp', $related_service_post->ID);
+      }
+
+      break;
+    }
   } 
 
   //応募締切 終了=true
@@ -26,7 +40,9 @@
   <?php 
     $args = [
       'ttl_jp' => $ttl_jp,
-      'ttl_en' => $ttl_en 
+      'ttl_en' => $ttl_en,
+      'single_product_bg_pc' => $single_product_bg_pc,
+      'single_product_bg_sp' => $single_product_bg_sp
     ];
 
     get_template_part('template-parts/subpage-mv', null, $args); 
@@ -35,7 +51,7 @@
   <section class="p-product-fv">
     <div class="l-inner">
       <div class="p-product-fv__wrapper">
-        <div class="p-product-fv__txt-wrap">
+        <div class="p-product-fv__txt-wrap" data-aos="fade">
 <?php
   $tag = get_the_terms($post->ID, "product-tag");
   $tag_slug_array = array();
@@ -98,7 +114,7 @@
   $img = (isset($img[0]))? $img[0] : "";
 
 ?>           
-        <figure class="p-product-fv__img <?php echo $end ? '__closed' : ''; ?>">
+        <figure class="p-product-fv__img <?php echo $end ? '__closed' : ''; ?>" data-aos="fade">
           <img src="<?php echo $img; ?>" alt="">
         </figure>
         </div>
@@ -109,14 +125,19 @@
   <section class="p-product-recommend bg-light pb-0">
     <div class="l-inner __small">
 <?php if(have_rows('おすすめ内容')): ?>      
-      <h2 class="p-product-recommend__ttl c-subpage-ttl __small">こんな方におすすめ</h2>
+      <h2 class="p-product-recommend__ttl c-subpage-ttl __small" data-aos="fade">こんな方におすすめ</h2>
       <ul class="p-product-recommend__list">
 
-<?php while(have_rows('おすすめ内容')): the_row(); /* <span class="text-highlight">ホテルオーナー、支配人など</span> */ ?>
+<?php while(have_rows('おすすめ内容')): the_row(); ?>
 
-        <li class="p-product-recommend__item">
+        <li class="p-product-recommend__item" data-aos="fade">
           <h2 class="p-product-recommend__item-txt">
-            <?php echo get_sub_field("内容"); ?>
+            <?php 
+              $product_recommend_txt = get_sub_field("内容");
+              $product_recommend_txt = preg_replace('/\{(.+?)\}/', '<span class="text-highlight">$1</span>', $product_recommend_txt);
+
+              echo $product_recommend_txt; 
+            ?>
           </h2>
         </li>
 
@@ -126,11 +147,11 @@
 
 
       <?php if($end){ ?>
-      <div class="p-product-recommend__btn c-btn __large __disabled">
+      <div class="p-product-recommend__btn c-btn __large __disabled" data-aos="fade">
         <a href="" class="c-btn__link">募集終了</a>
       </div>
       <?php }else{ ?>
-      <div class="p-product-recommend__btn c-btn __bg-gold __large">
+      <div class="p-product-recommend__btn c-btn __bg-gold __large" data-aos="fade">
         <a href="<?php echo get_field("申し込みページURL"); ?>" class="c-btn__link">受講お申し込みはこちら</a>
       </div>
       <?php } ?>
@@ -147,7 +168,7 @@
   ?>
   <section class="p-product-freeArea">
     <div class="l-inner __small">
-      <div class="l-wp-block-content">
+      <div class="l-wp-block-content" data-aos="fade">
         <?php the_content(); ?>
       </div>
     </div>
@@ -159,26 +180,26 @@
 
 <?php
   $mousikomi = '
-  <section class="p-product-cta bg-light text-center">
+  <section class="p-product-cta text-center">
     <div class="l-inner">
-      <h2 class="p-product-cta__ttl c-subpage-ttl __small">'.get_field("お申し込み見出し").'</h2>
+      <h2 class="p-product-cta__ttl c-subpage-ttl __small" data-aos="fade">'.get_field("お申し込み見出し").'</h2>
 ';
 
 if(get_field("お申し込みメッセージ")){
   $mousikomi .= '
-      <p class="p-product-cta__txt">'.get_field("お申し込みメッセージ").'</p>
+      <p class="p-product-cta__txt" data-aos="fade">'.get_field("お申し込みメッセージ").'</p>
 ';
 }
 
 if($end){
   $mousikomi .= '
-      <div class="p-product-cta__btn c-btn __disabled">
+      <div class="p-product-cta__btn c-btn __disabled" data-aos="fade">
         <a href="" class="c-btn__link">募集終了</a>
       </div>
 ';
 }else{
   $mousikomi .= '
-      <div class="p-product-cta__btn c-btn __bg-gold">
+      <div class="p-product-cta__btn c-btn __bg-gold" data-aos="fade">
         <a href="'. get_field("申し込みページURL") .'" class="c-btn__link">受講お申し込みはこちら</a>
       </div>
 ';
@@ -221,7 +242,7 @@ if (is_array($dis_posi) && in_array("参加者の声の上", $dis_posi)) {
 ?>
 
 
-        <li class="p-product-voice__item">
+        <li class="p-product-voice__item" data-aos="fade">
             <figure class="p-product-voice__item-img">
               <img src="<?php echo $img; ?>" alt="">
             </figure>
@@ -253,8 +274,8 @@ if (is_array($dis_posi) && in_array("スケジュールの上", $dis_posi)) {
 
   <section class="p-product-schedule">
     <div class="l-inner __small">
-      <h2 class="c-subpage-ttl __small text-center">スケジュール</h2>
-      <div class="p-product-schedule__table-wrap">
+      <h2 class="c-subpage-ttl __small text-center" data-aos="fade">スケジュール</h2>
+      <div class="p-product-schedule__table-wrap" data-aos="fade">
 
 
 <?php
@@ -264,24 +285,12 @@ $table = str_replace('<table', '<table class="p-product-schedule__table"', $tabl
 // 不要なインラインstyle削除
 $table = preg_replace('/(<(?:td|th|tr|table)[^>]*?)style="[^"]*"(.*?>)/i', '$1$2', $table);
 
-// tbodyの前にtheadを挿入
-$thead = '
-<thead>
-  <tr>
-    <th colspan="2">内容</th>
-    <th>日程</th>
-    <th>会場</th>
-  </tr>
-</thead>';
-
-$table = preg_replace('/<tbody>/', $thead . '<tbody>', $table, 1);
-
 echo $table;
 ?>      
       </div>
 
 <?php if(get_field("講座内容の詳細URL")){ ?>      
-      <div class="p-product-schedule__btn c-btn">
+      <div class="p-product-schedule__btn c-btn" data-aos="fade">
         <a href="<?php echo get_field("講座内容の詳細URL"); ?>" class="c-btn__link">講座内容の詳細</a>
       </div>
 <?php } ?>
@@ -298,8 +307,8 @@ if (is_array($dis_posi) && in_array("開催概要の上", $dis_posi)) {
 
   <section class="p-product-overview bg-light">
     <div class="l-inner __small">
-      <h2 class="p-product-overview__ttl c-subpage-ttl">開催概要</h2>
-      <dl class="p-product-overview__dl">
+      <h2 class="p-product-overview__ttl c-subpage-ttl" data-aos="fade">開催概要</h2>
+      <dl class="p-product-overview__dl" data-aos="fade">
 
 <?php
 $gaiyou = array(
@@ -347,7 +356,7 @@ if (is_array($dis_posi) && in_array("講師プロフィールの上", $dis_posi)
 
   <section class="p-product-profile">
     <div class="l-inner __small">
-      <h2 class="c-subpage-ttl">講師プロフィール</h2>
+      <h2 class="c-subpage-ttl" data-aos="fade">講師プロフィール</h2>
 
 
 
@@ -359,7 +368,7 @@ if (is_array($dis_posi) && in_array("講師プロフィールの上", $dis_posi)
 <?php $img = get_sub_field("画像"); ?>
 <?php $img = (isset($img["sizes"]["thumbnail"]))? $img["sizes"]["medium"] : ""; ?>
 
-        <li class="p-product-profile__item js-dialog-parent">
+        <li class="p-product-profile__item js-dialog-parent" data-aos="fade">
           <figure class="p-product-profile__item-img">
             <img src="<?php echo $img; ?>" alt="">
           </figure>
@@ -427,8 +436,8 @@ if (is_array($dis_posi) && in_array("その他講座・ビジネススクール�
 
   <section class="p-product-other">
     <div class="l-inner __small">
-      <h2 class="c-subpage-ttl">その他講座・ビジネススクール</h2>
-      <div id="js-product-swiper" class="u-product-swiper swiper">
+      <h2 class="c-subpage-ttl" data-aos="fade">その他講座・ビジネススクール</h2>
+      <div id="js-product-swiper" class="u-product-swiper swiper" data-aos="fade">
         <ul class="swiper-wrapper">
 <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
 <?php
@@ -480,7 +489,7 @@ if (is_array($dis_posi) && in_array("その他講座・ビジネススクール�
 
         </ul>
       </div>
-      <div id="js-product-swiper-controls" class="c-swiper-controls">
+      <div id="js-product-swiper-controls" class="c-swiper-controls" data-aos="fade" data-aos-delay="100">
         <div class="swiper-button-prev c-arrow-btn prev"></div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-next c-arrow-btn next"></div>

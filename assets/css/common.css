@@ -1680,13 +1680,15 @@ li a:focus-visible {
 }
 
 .c-subpage-mv {
+  position: relative;
   height: 30rem;
   padding-block: 14.7rem 0;
   background-color: var(--bg-color-light);
   display: flex;
   justify-content: center;
   align-items: start;
-  background: no-repeat center center/cover;
+  background-color: var(--bg-color-light);
+  z-index: 1;
 }
 @media screen and (width >= 768px) {
   .c-subpage-mv {
@@ -1694,21 +1696,39 @@ li a:focus-visible {
     padding-top: 17rem;
   }
 }
-.c-subpage-mv.singular {
+.c-subpage-mv.__has-bg {
   background: url("../images/common/singular-common-mv_sp.jpg") no-repeat center center/cover;
   color: #fff;
 }
 @media screen and (width >= 768px) {
-  .c-subpage-mv.singular {
+  .c-subpage-mv.__has-bg {
     background-image: url("../images/common/singular-common-mv.jpg");
   }
 }
-.c-subpage-mv.archive {
-  background-color: var(--bg-color-light);
+.c-subpage-mv:has(.c-subpage-mv__bg-img) {
+  color: #fff;
+}
+.c-subpage-mv:has(.c-subpage-mv__bg-img)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(51, 51, 51, 0.4);
+  z-index: 1;
+}
+.c-subpage-mv__bg-img {
+  position: absolute;
+  inset: 0;
+}
+.c-subpage-mv__bg-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .c-subpage-mv__ttl {
+  position: relative;
   text-align: center;
   font-weight: bold;
+  z-index: 2;
 }
 .c-subpage-mv__ttl-en {
   font-family: var(--font-en);

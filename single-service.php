@@ -3,27 +3,27 @@
 
   $queried_object = get_queried_object();
   $ttl_jp = esc_html( get_the_title( $queried_object->ID ) );
-  $ttl_en = '';
-  
-  if(str_contains($ttl_jp, 'スクール') || str_contains($ttl_jp, 'オープン')) {
-    $ttl_en = 'For Students';
-  } elseif(str_contains($ttl_jp, '研修')) {
-    $ttl_en = 'For Companies';
-  } elseif(str_contains($ttl_jp, '業務支援') || str_contains($ttl_jp, 'サポート')) {
-    $ttl_en = 'For Owners';
-  }
+  $ttl_en = get_field('service_en_ttl', $queried_object->ID);
+  $service_bg_pc = get_field('service_bg_pc', $queried_object->ID);
+  $service_bg_sp = get_field('service_bg_sp', $queried_object->ID);
 
   get_header();
 ?>
 
 <main class="single-service">
   <?php 
-    get_template_part('template-parts/subpage-mv', null, ['ttl_jp' => $ttl_jp, 'ttl_en' => $ttl_en]); 
+    $args = [
+      'ttl_jp' => $ttl_jp,
+      'ttl_en' => $ttl_en,
+      'service_bg_pc' => $service_bg_pc,
+      'service_bg_sp' => $service_bg_sp
+    ];
+    get_template_part('template-parts/subpage-mv', null, $args); 
 
     while ( have_posts() ) : the_post();
   ?>
 
-  <section class="p-service-introSec">
+  <section class="p-service-introSec" data-aos="fade">
     <div class="l-inner">
     <?php
         the_content();
@@ -40,19 +40,21 @@
   ?>
   <section class="p-service-features bg-light">
     <div class="l-inner">
-      <h2 class="c-subpage-ttl">宿屋塾の研修サービスの特徴</h2>
+      <h2 class="c-subpage-ttl" data-aos="fade">宿屋塾の研修サービスの特徴</h2>
       <ul class="p-service-features__list">
         <?php
+          $service_feature_index = 1;
           while(have_rows('service_features')): the_row();
             $service_feature_ttl = get_sub_field('service_feature_ttl');
             $service_feature_ttl = preg_replace('/\{(.+?)\}/', '<span class="text-highlight">$1</span>', $service_feature_ttl);
             $service_feature_txt = get_sub_field('service_feature_txt');
         ?>
-        <li class="p-service-features__item">
+        <li class="p-service-features__item" data-aos="fade-up" data-aos-delay="<?php echo $service_feature_index * 200; ?>">
           <h3 class="p-service-features__item-ttl"><?php echo $service_feature_ttl; ?></h3>
           <p class="p-service-features__item-txt"><?php echo $service_feature_txt; ?></p>
         </li>
         <?php
+          $service_feature_index++;
           endwhile;
         ?>
       </ul>
@@ -69,7 +71,7 @@
   ?>
   <section class="p-service-products">
     <div class="l-inner">
-      <h2 class="c-subpage-ttl">研修サービス一覧</h2>
+      <h2 class="c-subpage-ttl" data-aos="fade">研修サービス一覧</h2>
       <ul class="p-service-products__list">
         <?php
           foreach($service_products as $product_post):
@@ -80,7 +82,7 @@
             $product_duration = get_field('日程', $product_post->ID);
             $product_deadline = get_field('締め切り', $product_post->ID);
         ?>
-        <li class="p-service-products__item">
+        <li class="p-service-products__item" data-aos="fade">
           <a href="<?php echo esc_attr($product_permalink); ?>" class="p-service-products__item-link">
             <div class="p-service-products__item-body">
               <h3 class="p-service-products__item-ttl"><?php echo esc_html($product_ttl); ?></h3>
@@ -116,8 +118,8 @@
   ?>
   <section class="p-service-voices bg-light">
     <div class="l-inner">
-      <h2 class="c-subpage-ttl">お客様からの声</h2>
-      <div id="js-voice-card-swiper" class="c-voice-card-swiper swiper">
+      <h2 class="c-subpage-ttl" data-aos="fade">お客様からの声</h2>
+      <div id="js-voice-card-swiper" class="c-voice-card-swiper swiper" data-aos="fade">
         <ul class="c-voice-card-swiper__wrapper swiper-wrapper">
           <?php
             foreach($service_voices as $voice_post):
@@ -134,7 +136,7 @@
         </ul>
       </div>
 
-      <div id="js-voice-card-swiper-controls" class="c-swiper-controls">
+      <div id="js-voice-card-swiper-controls" class="c-swiper-controls" data-aos="fade" data-aos-delay="100">
         <div class="swiper-button-prev c-arrow-btn prev"></div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-next c-arrow-btn next"></div>
