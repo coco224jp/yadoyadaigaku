@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
   AOS.init({
-    duration: 800,
+    duration: 1200,
+    easing: 'ease',
     once: true
   });
 
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  const frontMvSwiperDuration = 3000;
+  const frontMvSwiperDuration = 2750;
   const frontMvSwiperDelay = 500;
   const frontMvCenterSlide = 2;
 
@@ -40,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
     slidesPerView: 'auto',
     speed: frontMvSwiperDelay,
     slidesPerGroup: 1,
-    centeredSlides: true,
     initialSlide: frontMvCenterSlide,
 
     pagination: {
@@ -50,7 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     autoplay: {
       delay: frontMvSwiperDuration,
-      disableOnInteraction: true
+      disableOnInteraction: false,
+    },
+    breakpoints: {
+      768: {
+        centeredSlides: true,
+      },
     },
 
     on: {
