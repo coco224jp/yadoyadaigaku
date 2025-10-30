@@ -1,6 +1,5 @@
 <?php
   $theme_uri = get_template_directory_uri();
-  $post_id = get_the_ID();
 
   get_header();
 

@@ -11,7 +11,7 @@
 <main class="archive-service">
   <?php get_template_part('template-parts/subpage-mv', null, $args); ?>
 
-  <section class="p-service-introSec">
+  <section class="p-service-introSec" data-aos="fade">
     <div class="l-inner">
       <?php
         if(have_posts()):
@@ -40,7 +40,7 @@
             $service_en_ttl = get_field('service_en_ttl');
             $service_desc = get_field('service_desc');
         ?>
-        <li class="c-card">
+        <li class="c-card" data-aos="fade">
           <a href="<?php the_permalink(); ?>" class="c-card__link">
             <div class="c-card__txt-wrap">
               <h2 class="c-card__ttl">

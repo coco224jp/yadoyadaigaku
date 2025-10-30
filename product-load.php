@@ -53,18 +53,18 @@ while ( $loop->have_posts() ) : $loop->the_post();
 
 
 
-$list .='        <li class="p-product-card">';
+$list .='        <li class="p-product-card" data-aos="fade">';
 $list .='          <div class="c-thumbnail-card ' . ($end ? '__closed' : '') . '">';
 $list .='            <a href="'. $link .'" '. $link_target .' class="c-thumbnail-card__inner">';
 $list .='              <div class="c-thumbnail-card__body">';
 
-  $cat = get_the_terms($post->ID, "product-tag");
-  if(is_array($cat)){
+  $tag = get_the_terms($post->ID, "product-tag");
+  if(is_array($tag)){
 
-$list .='              <div>';
+$list .='              <div class="c-thumbnail-card__cat">';
 
-    foreach ($cat as $key => $value) {
-$list .='      <span class="c-thumbnail-card__cat">'.$value->name .'</span>';
+    foreach ($tag as $key => $value) {
+$list .='      <span class="u-term">'.$value->name .'</span>';
     }
         
 $list .='              </div>';

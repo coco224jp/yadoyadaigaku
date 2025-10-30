@@ -13,7 +13,7 @@
 
   <section class="p-product-school">
     <div class="l-inner">
-      <h2 class="p-product-archive-ttl">
+      <h2 class="p-product-archive-ttl" data-aos="fade">
         <span class="p-product-archive-ttl__en">For Students</span>
         <span class="p-product-archive-ttl__ja">ビジネススクール</span>
       </h2>
@@ -31,7 +31,7 @@
 ?>
 
 <?php if($loop->have_posts()){ ?>
-      <div id="js-product-swiper" class="u-product-swiper swiper">
+      <div id="js-product-swiper" class="u-product-swiper swiper" data-aos="fade">
         <ul class="swiper-wrapper">
 
 
@@ -86,11 +86,11 @@
 
   <section class="p-product-open pt-0">
     <div class="l-inner">
-      <h2 class="p-product-archive-ttl">
+      <h2 class="p-product-archive-ttl" data-aos="fade">
         <span class="p-product-archive-ttl__en">For Students</span>
         <span class="p-product-archive-ttl__ja">オープン講座</span>
       </h2>
-      <p class="p-product-open__intro-txt">
+      <p class="p-product-open__intro-txt" data-aos="fade">
         各業界のスペシャリストをお招きして開催しているオープン講座です。2,000年に始まり、過去の500回以上開催している宿泊ビジネス・観光業に関する講演会。基本月一回、平日の18時～19時30分に開講しています。
       </p>
 
