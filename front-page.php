@@ -59,7 +59,7 @@
   $img = (isset($img[0]))? $img[0] : $theme_uri ."/assets/images/common/no-image.png";
 
   //応募締切 終了=true
-  $end = is_event_closed($post->ID);
+  $end_flag = is_event_closed($post->ID);
 
   //カテゴリー
   $cat = get_the_terms($post->ID, "product-cat");
@@ -79,7 +79,7 @@
 
 
 ?>
-          <li class="p-front-mv__swiper-slide swiper-slide <?php echo $end ? '__closed' : ''; ?>">
+          <li class="p-front-mv__swiper-slide swiper-slide <?php echo $end_flag ? '__closed' : ''; ?>">
             <a href="<?php echo $link; ?>" <?php echo $link_target; ?> class="p-front-mv__swiper-slide-link">
               <div class="p-front-mv__swiper-slide-body">
                 <p class="p-front-mv__swiper-slide-title">
