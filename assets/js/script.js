@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     slidesPerView: 'auto',
     speed: frontMvSwiperDelay,
     slidesPerGroup: 1,
+    centeredSlides: window.innerWidth >= 768,
     initialSlide: frontMvCenterSlide,
 
     pagination: {
@@ -51,11 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
     autoplay: {
       delay: frontMvSwiperDuration,
       disableOnInteraction: false,
-    },
-    breakpoints: {
-      768: {
-        centeredSlides: true,
-      },
     },
 
     on: {
@@ -91,9 +87,23 @@ document.addEventListener('DOMContentLoaded', function() {
             //カスタムプロパティにスライドの表示時間を登録
             document.documentElement.style.setProperty("--duration-filling", `${frontMvSwiperDuration}ms`);
         });
+
+        requestAnimationFrame(() => {
+          this.update();
+          if (!this.autoplay.running) {
+            this.autoplay.start();
+          } 
+        });  
       }
     }
   });
+
+  // Swiper 初期化後
+  setTimeout(() => {
+    // 念のため、まだ停止していたら再スタート
+    frontMvSwiper.autoplay.start();  
+  }, 1000);
+
 
   let isFirst = true;
 
@@ -117,7 +127,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const activeBullet = document.querySelector(".swiper-pagination-bullet-active");
-    activeBullet.classList.add("slide-change-active");
+    if (activeBullet) {
+      // ★ 一度再描画を挟むことでアニメーション再トリガー
+      void activeBullet.offsetWidth; // ← 再フローで強制リセット
+      activeBullet.classList.add("slide-change-active");
+    }
   });
   // frontMvSwiperここまで
 
